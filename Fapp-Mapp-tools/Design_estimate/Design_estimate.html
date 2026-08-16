@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <a href="../index.html" class="home-btn">トップへ</a>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>制作費見積もり</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f1f4f6;
+  --surface: #ffffff;
+  --surface2: #f5f7f9;
+  --border: #d9dee3;
+  --accent: #005aff;
+  --accent2: #ff3c1e;
+  --accent3: #303030;
+  --text: #303030;
+  --text-muted: #9f9f9f;
+  --text-light: #b0b0b0;
+  --green: #1f8a54;
+  --green-bg: #e9f5f0;
+  --radius: 12px;
+  --shadow: 0 1px 12px rgba(48,48,48,0.06);
+  --shadow-lg: 0 6px 36px rgba(48,48,48,0.10);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 24px 16px 80px;
+}
+.page-header {
+  max-width: 980px;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.header-left h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; color: var(--accent); }
+.header-left .sub { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+.badge { background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 4px; letter-spacing: 0.5px; }
+.layout {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 310px;
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 760px) { .layout { grid-template-columns: 1fr; } 
+}
+.home-btn {
+  display: inline-block;
+  padding: 3px 9px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* Tabs */
+.tabs-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 16px; overflow: hidden; }
+.tabs-label { padding: 12px 16px 0; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 14px 14px; }
+.tab-btn { border: 1.5px solid var(--border); background: var(--surface2); border-radius: 8px; padding: 7px 13px; cursor: pointer; font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: 500; color: var(--text-muted); transition: all 0.15s; user-select: none; white-space: nowrap; }
+.tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+.tab-btn.active { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+/* Cards */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 14px; }
+.card-header { padding: 13px 18px 12px; border-bottom: 1px solid var(--border); background: var(--surface2); display: flex; align-items: center; gap: 9px; }
+.card-mark { width: 10px; height: 10px; border-radius: 3px; background: #ff3c1e; flex-shrink: 0; }
+.card-header h2 { font-size: 13px; font-weight: 700; color: var(--accent); }
+.card-body { padding: 16px 18px; }
+
+.section-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; margin-top: 16px; }
+.section-label:first-child { margin-top: 0; }
+
+/* Select */
+.styled-select { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: 9px 32px 9px 12px; font-family: 'Noto Sans JP', sans-serif; font-size: 13px; background: var(--surface); color: var(--text); outline: none; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239f9f9f' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; transition: border-color 0.15s; }
+.styled-select:focus { border-color: var(--accent); }
+
+/* Size buttons */
+.size-grid { display: flex; gap: 8px; flex-wrap: wrap; }
+.size-btn { border: 1.5px solid var(--border); background: var(--surface); border-radius: 8px; padding: 8px 14px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: var(--text-muted); transition: all 0.15s; user-select: none; }
+.size-btn:hover { border-color: var(--accent); color: var(--accent); }
+.size-btn.active { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+/* Level radio */
+.level-list { display: flex; flex-direction: column; gap: 7px; }
+.level-item { border: 1.5px solid var(--border); border-radius: 9px; padding: 11px 14px; cursor: pointer; display: flex; align-items: center; gap: 11px; transition: all 0.15s; user-select: none; }
+.level-item:hover { border-color: #aaa; }
+.level-item.active { border-color: var(--accent); background: #eaf1ff; }
+.level-radio { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.level-item.active .level-radio { border-color: var(--accent); background: var(--accent); }
+.level-item.active .level-radio::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+.level-name { font-size: 13px; font-weight: 500; color: var(--text); flex: 1; }
+.level-price { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: var(--text-muted); }
+
+/* Number input */
+.num-input { width: 72px; border: 1.5px solid var(--border); border-radius: 8px; padding: 7px 10px; font-family: 'Montserrat', sans-serif; font-size: 13px; text-align: center; background: var(--surface); color: var(--text); outline: none; transition: border-color 0.15s; }
+.num-input:focus { border-color: var(--accent); }
+
+/* Option rows */
+.option-row { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 9px; background: var(--surface); margin-bottom: 8px; flex-wrap: wrap; }
+.option-row:last-child { margin-bottom: 0; }
+.opt-label { font-size: 12px; font-weight: 600; min-width: 95px; color: var(--text); }
+.opt-unit { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+.opt-select { border: 1.5px solid var(--border); border-radius: 7px; padding: 5px 26px 5px 9px; font-family: 'Noto Sans JP', sans-serif; font-size: 12px; background: var(--surface2); color: var(--text); outline: none; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%239f9f9f' d='M1 1l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 9px center; flex-shrink: 0; transition: border-color 0.15s; }
+.opt-select:focus { border-color: var(--accent); }
+.opt-qty { width: 56px; border: 1.5px solid var(--border); border-radius: 7px; padding: 5px 8px; font-family: 'Montserrat', sans-serif; font-size: 12px; text-align: center; background: var(--surface2); color: var(--text); outline: none; transition: border-color 0.15s; }
+.opt-qty:focus { border-color: var(--accent); }
+
+/* Revision */
+.revision-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 9px; background: var(--surface); }
+.revision-label { font-size: 13px; flex: 1; }
+.revision-hint { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+/* Express */
+.express-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 9px; background: var(--surface); transition: all 0.15s; }
+.express-row.active { border-color: var(--accent2); background: #fef5f1; }
+.express-toggle { width: 38px; height: 22px; background: var(--border); border-radius: 11px; position: relative; transition: background 0.2s; flex-shrink: 0; cursor: pointer; }
+.express-toggle.on { background: var(--accent2); }
+.express-toggle::after { content: ''; position: absolute; left: 3px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); transition: transform 0.2s; }
+.express-toggle.on::after { transform: translateX(16px); }
+.express-text { font-size: 13px; font-weight: 500; flex: 1; cursor: pointer; }
+
+/* Summary */
+.summary-card { position: sticky; top: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-lg); overflow: hidden; }
+.summary-header { background: var(--accent); padding: 18px 20px 16px; color: #fff; }
+.sum-media { font-size: 11px; opacity: 0.6; margin-bottom: 4px; }
+.summary-header h2 { font-size: 12px; font-weight: 500; opacity: 0.75; margin-bottom: 6px; }
+.total-amount { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 500; letter-spacing: -1px; color: #fff; }
+.total-label { font-size: 10px; opacity: 0.55; margin-top: 3px; }
+.summary-body { padding: 14px 18px; }
+.bd-item { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px dashed var(--border); font-size: 12px; }
+.bd-item:last-child { border-bottom: none; }
+.bd-name { color: var(--text-muted); }
+.bd-val { font-family: 'Montserrat', sans-serif; font-weight: 500; color: var(--text); }
+.bd-val.zero { color: var(--text-light); }
+.bd-divider { height: 1px; background: var(--border); margin: 4px 0; }
+.tax-row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 2px solid var(--accent); }
+.tax-label { font-size: 12px; font-weight: 700; color: var(--accent); }
+.tax-val { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent); }
+.express-indicator { display: none; background: #fef5f1; border: 1px solid #f8d5c8; border-radius: 7px; padding: 7px 11px; margin-top: 10px; font-size: 11px; color: var(--accent2); font-weight: 600; }
+.express-indicator.show { display: block; }
+.notice { margin-top: 12px; padding: 9px 13px; background: var(--green-bg); border-radius: 8px; font-size: 11px; color: var(--green); line-height: 1.6; font-weight: 500; }
+.sub-note { font-size: 11px; color: var(--text-muted); margin-top: 6px; padding-left: 4px; line-height: 1.6; }
+.a4-note { font-size: 11px; color: var(--accent2); font-weight: 600; margin-bottom: 12px; padding: 6px 10px; background: #fef5f1; border-radius: 6px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 480px) { .two-col { grid-template-columns: 1fr; } }
+.field-wrap { display: flex; flex-direction: column; gap: 5px; }
+.field-label { font-size: 11px; color: var(--text-muted); font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+.panel { display: none; }
+.panel.active { display: block; }
+.warn-note { font-size: 11px; color: var(--accent2); font-weight: 600; margin-top: 6px; display: none; }
+.warn-note.show { display: block; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-left">
+    <div class="sub">営業用ツール</div>
+    <h1>制作費見積もり</h1>
+  </div>
+  <span class="badge">DESIGN &amp; PRODUCTION ONLY</span>
+</div>
+
+<div class="layout">
+<div>
+
+<!-- 媒体タブ -->
+<div class="tabs-wrap">
+  <div class="tabs-label">制作媒体を選択</div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('meishi',this)">名刺・ショップカード</button>
+    <button class="tab-btn" onclick="switchTab('chirashi',this)">チラシ</button>
+    <button class="tab-btn" onclick="switchTab('pamphlet',this)">折パンフレット</button>
+    <button class="tab-btn" onclick="switchTab('booklet',this)">冊子</button>
+    <button class="tab-btn" onclick="switchTab('logo',this)">ロゴ制作</button>
+  </div>
+</div>
+
+<!-- ===== 名刺・ショップカード ===== -->
+<div id="panel-meishi" class="panel active">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-mark"></div>
+      <h2>名刺・ショップカード　制作内容</h2>
+    </div>
+    <div class="card-body">
+      <div class="section-label">サイズ</div>
+      <div class="size-grid">
+        <button class="size-btn active" data-add="0" onclick="clickSizeBtn(this,'meishi-sizes')">55×91mm</button>
+        <button class="size-btn" data-add="5000" onclick="clickSizeBtn(this,'meishi-sizes')">変形（+¥5,000）</button>
+      </div>
+      <div class="section-label" style="margin-top:18px;">制作レベル</div>
+      <div class="level-list">
+        <div class="level-item active" data-price="20000" onclick="clickLevelItem(this,'meishi-levels')">
+          <div class="level-radio"></div>
+          <span class="level-name">ベース</span>
+          <span class="level-price">¥20,000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== チラシ ===== -->
+<div id="panel-chirashi" class="panel">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-mark"></div>
+      <h2>チラシ　制作内容</h2>
+    </div>
+    <div class="card-body">
+      <div class="two-col">
+        <div class="field-wrap">
+          <div class="field-label">サイズ</div>
+          <select class="styled-select" id="chirashi-size" onchange="calc()">
+            <option>A5</option><option selected>A4</option><option>A3</option>
+            <option>B5</option><option>B4</option><option>B3</option>
+          </select>
+        </div>
+        <div class="field-wrap">
+          <div class="field-label">制作レベル</div>
+          <select class="styled-select" id="chirashi-level" onchange="calc()">
+            <option value="30000">片面 シンプル　¥30,000</option>
+            <option value="35000">片面 スタンダード　¥35,000</option>
+            <option value="40000">片面 プレミアA　¥40,000</option>
+            <option value="50000">片面 プレミアB　¥50,000</option>
+            <option value="35000">両面 シンプル　¥35,000</option>
+            <option value="50000">両面 スタンダード　¥50,000</option>
+            <option value="60000">両面 プレミアA　¥60,000</option>
+            <option value="70000">両面 プレミアB　¥70,000</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 折パンフレット ===== -->
+<div id="panel-pamphlet" class="panel">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-mark"></div>
+      <h2>折パンフレット（素材支給）　制作内容</h2>
+    </div>
+    <div class="card-body">
+      <div class="a4-note">※価格はA4サイズの場合の目安です</div>
+      <div class="field-wrap" style="margin-bottom:16px;">
+        <div class="field-label">サイズ</div>
+        <select class="styled-select" id="pamphlet-size" onchange="calc()">
+          <option>A5</option><option selected>A4</option><option>A3</option>
+          <option>B5</option><option>B4</option><option>B3</option>
+        </select>
+      </div>
+      <div class="field-wrap" style="margin-bottom:12px;">
+        <div class="field-label">2つ折り</div>
+        <select class="styled-select" id="pamphlet-2ori" onchange="pamphletCheck()">
+          <option value="0">選択しない</option>
+          <option value="80000">シンプル　¥80,000</option>
+          <option value="100000">スタンダード　¥100,000</option>
+          <option value="120000">プレミア　¥120,000</option>
+        </select>
+      </div>
+      <div class="field-wrap">
+        <div class="field-label">3つ折り</div>
+        <select class="styled-select" id="pamphlet-3ori" onchange="pamphletCheck()">
+          <option value="0">選択しない</option>
+          <option value="90000">シンプル　¥90,000</option>
+          <option value="110000">スタンダード　¥110,000</option>
+          <option value="130000">プレミア　¥130,000</option>
+        </select>
+      </div>
+      <div class="warn-note" id="pamphlet-warn">⚠ 2つ折りと3つ折りが同時に選択されています。ご確認ください。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 冊子 ===== -->
+<div id="panel-booklet" class="panel">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-mark"></div>
+      <h2>冊子（素材支給）　制作内容</h2>
+    </div>
+    <div class="card-body">
+      <div class="a4-note">※価格はA4サイズの場合の目安です</div>
+      <div class="two-col" style="margin-bottom:14px;">
+        <div class="field-wrap">
+          <div class="field-label">サイズ</div>
+          <select class="styled-select" id="booklet-size" onchange="calc()">
+            <option>A5</option><option selected>A4</option><option>A3</option>
+            <option>B5</option><option>B4</option><option>B3</option>
+          </select>
+        </div>
+        <div class="field-wrap">
+          <div class="field-label">ページ数</div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <input type="number" class="num-input" id="booklet-pages" min="1" value="8" oninput="calc()">
+            <span style="font-size:12px;color:var(--text-muted);">ページ</span>
+          </div>
+        </div>
+      </div>
+      <div class="field-wrap" style="margin-bottom:12px;">
+        <div class="field-label">本文ページ単価</div>
+        <select class="styled-select" id="booklet-level" onchange="calc()">
+          <option value="20000">シンプルA　¥20,000 / ページ</option>
+          <option value="25000">シンプルB　¥25,000 / ページ</option>
+          <option value="30000">スタンダード　¥30,000 / ページ</option>
+          <option value="40000">プレミアA　¥40,000 / ページ</option>
+          <option value="50000">プレミアB　¥50,000 / ページ</option>
+        </select>
+      </div>
+      <div class="field-wrap">
+        <div class="field-label">表紙デザイン費</div>
+        <select class="styled-select" id="booklet-cover" onchange="calc()">
+          <option value="0">なし</option>
+          <option value="40000">シンプル　¥40,000</option>
+          <option value="50000">スタンダード　¥50,000</option>
+          <option value="60000">プレミア　¥60,000</option>
+        </select>
+      </div>
+      <div class="sub-note" id="booklet-calc-note"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ロゴ ===== -->
+<div id="panel-logo" class="panel">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-mark"></div>
+      <h2>ロゴ制作　制作内容</h2>
+    </div>
+    <div class="card-body">
+      <div class="field-wrap" style="margin-bottom:14px;">
+        <div class="field-label">提案プラン</div>
+        <select class="styled-select" id="logo-plan" onchange="calc()">
+          <option value="30000">1点提案　¥30,000</option>
+          <option value="50000">2点提案　¥50,000</option>
+          <option value="60000">3案提案　¥60,000</option>
+        </select>
+      </div>
+      <div class="field-wrap">
+        <div class="field-label">追加提案（¥20,000 / 点）</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <input type="number" class="num-input" id="logo-extra" min="0" value="0" oninput="calc()">
+          <span style="font-size:12px;color:var(--text-muted);">点</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 追加作業（全媒体共通） ===== -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-mark"></div>
+    <h2>追加作業</h2>
+  </div>
+  <div class="card-body" style="padding-bottom:12px;">
+    <div class="option-row">
+      <span class="opt-label">画像補正</span>
+      <input type="number" class="opt-qty" id="img-qty" min="0" value="0" oninput="calc()" placeholder="0">
+      <span class="opt-unit">点</span>
+      <select class="opt-select" id="img-price" onchange="calc()">
+        <option value="3000">¥3,000/点</option>
+        <option value="5000">¥5,000/点</option>
+        <option value="7000">¥7,000/点</option>
+      </select>
+    </div>
+    <div class="option-row">
+      <span class="opt-label">地図作成</span>
+      <input type="number" class="opt-qty" id="map-qty" min="0" value="0" oninput="calc()" placeholder="0">
+      <span class="opt-unit">点</span>
+      <select class="opt-select" id="map-price" onchange="calc()">
+        <option value="5000">¥5,000/点</option>
+        <option value="7000">¥7,000/点</option>
+      </select>
+    </div>
+    <div class="option-row">
+      <span class="opt-label">ロゴトレース</span>
+      <input type="number" class="opt-qty" id="logo-qty" min="0" value="0" oninput="calc()" placeholder="0">
+      <span class="opt-unit">点</span>
+      <select class="opt-select" id="logo-price" onchange="calc()">
+        <option value="5000">¥5,000/点</option>
+        <option value="7000">¥7,000/点</option>
+      </select>
+    </div>
+    <div class="option-row">
+      <span class="opt-label">図表制作</span>
+      <input type="number" class="opt-qty" id="chart-qty" min="0" value="0" oninput="calc()" placeholder="0">
+      <span class="opt-unit">点</span>
+      <select class="opt-select" id="chart-price" onchange="calc()">
+        <option value="3000">¥3,000/点</option>
+        <option value="5000">¥5,000/点</option>
+        <option value="7000">¥7,000/点</option>
+      </select>
+    </div>
+    <div class="option-row">
+      <span class="opt-label">複雑レイアウト</span>
+      <input type="number" class="opt-qty" id="layout-qty" min="0" value="0" oninput="calc()" placeholder="0">
+      <span class="opt-unit">点</span>
+      <select class="opt-select" id="layout-price" onchange="calc()">
+        <option value="5000">+¥5,000/点</option>
+        <option value="7000">+¥7,000/点</option>
+        <option value="10000">+¥10,000/点</option>
+      </select>
+    </div>
+    <div class="option-row">
+      <span class="opt-label">印刷データ制作</span>
+      <input type="number" class="opt-qty" id="print-qty" min="0" value="0" oninput="calc()" placeholder="0">
+      <span class="opt-unit">点</span>
+      <select class="opt-select" id="print-price" onchange="calc()">
+        <option value="3000">¥3,000/点</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- 修正回数 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-mark"></div>
+    <h2>修正回数</h2>
+  </div>
+  <div class="card-body">
+    <div class="revision-row">
+      <div style="flex:1;">
+        <div class="revision-label">修正回数</div>
+        <div class="revision-hint">3回まで無料・4回目以降 +¥3,000/回</div>
+      </div>
+      <input type="number" class="num-input" id="revision-count" min="0" value="0" oninput="calc()">
+      <span style="font-size:12px;color:var(--text-muted);">回</span>
+    </div>
+    <div class="sub-note" id="revision-status"></div>
+  </div>
+</div>
+
+<!-- 特急対応 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-mark"></div>
+    <h2>特急対応</h2>
+  </div>
+  <div class="card-body">
+    <div class="express-row" id="express-row">
+      <div class="express-toggle" id="express-toggle" onclick="toggleExpress()"></div>
+      <span class="express-text" onclick="toggleExpress()">特急対応を追加する</span>
+      <select class="opt-select" id="express-rate" onchange="calc()" style="min-width:80px;">
+        <option value="0.2">+20%</option>
+        <option value="0.3">+30%</option>
+        <option value="0.4">+40%</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+</div><!-- end left col -->
+
+<!-- RIGHT: Summary -->
+<div>
+  <div class="summary-card">
+    <div class="summary-header">
+      <div class="sum-media" id="sum-media">名刺・ショップカード</div>
+      <h2>お見積もり金額</h2>
+      <div class="total-amount" id="total-amount">¥0</div>
+      <div class="total-label">税込（消費税10%）</div>
+    </div>
+    <div class="summary-body">
+      <div class="bd-item">
+        <span class="bd-name">制作費</span>
+        <span class="bd-val zero" id="bd-production">¥0</span>
+      </div>
+      <div class="bd-item" id="bd-cover-row" style="display:none;">
+        <span class="bd-name">表紙デザイン費</span>
+        <span class="bd-val zero" id="bd-cover">¥0</span>
+      </div>
+      <div class="bd-item">
+        <span class="bd-name">追加作業費</span>
+        <span class="bd-val zero" id="bd-options">¥0</span>
+      </div>
+      <div class="bd-item">
+        <span class="bd-name">修正費</span>
+        <span class="bd-val zero" id="bd-revision">¥0</span>
+      </div>
+      <div class="bd-item">
+        <span class="bd-name">特急料金</span>
+        <span class="bd-val zero" id="bd-express">¥0</span>
+      </div>
+      <div class="bd-divider"></div>
+      <div class="bd-item">
+        <span class="bd-name">小計（税抜）</span>
+        <span class="bd-val" id="bd-subtotal">¥0</span>
+      </div>
+      <div class="tax-row">
+        <span class="tax-label">消費税（10%）</span>
+        <span class="tax-val" id="bd-tax">¥0</span>
+      </div>
+      <div class="express-indicator" id="express-indicator"></div>
+      <div class="notice">※印刷費は仕様確定後に別途お見積もりいたします</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end layout -->
+
+<script>
+let currentTab = 'meishi';
+let expressOn = false;
+
+const mediaNames = {
+  meishi:'名刺・ショップカード', chirashi:'チラシ',
+  pamphlet:'折パンフレット（素材支給）', booklet:'冊子（素材支給）', logo:'ロゴ制作'
+};
+
+function switchTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+  document.getElementById('sum-media').textContent = mediaNames[tab];
+  document.getElementById('bd-cover-row').style.display = tab === 'booklet' ? '' : 'none';
+  calc();
+}
+
+function clickSizeBtn(btn, groupId) {
+  btn.closest('.size-grid').querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  calc();
+}
+
+function clickLevelItem(item, groupId) {
+  item.closest('.level-list').querySelectorAll('.level-item').forEach(i => i.classList.remove('active'));
+  item.classList.add('active');
+  calc();
+}
+
+function pamphletCheck() {
+  const v2 = parseInt(document.getElementById('pamphlet-2ori').value) || 0;
+  const v3 = parseInt(document.getElementById('pamphlet-3ori').value) || 0;
+  document.getElementById('pamphlet-warn').classList.toggle('show', v2 > 0 && v3 > 0);
+  calc();
+}
+
+function toggleExpress() {
+  expressOn = !expressOn;
+  document.getElementById('express-toggle').classList.toggle('on', expressOn);
+  document.getElementById('express-row').classList.toggle('active', expressOn);
+  calc();
+}
+
+function getProduction() {
+  switch (currentTab) {
+    case 'meishi': {
+      const sizeBtn = document.querySelector('#panel-meishi .size-btn.active');
+      const levelItem = document.querySelector('#panel-meishi .level-item.active');
+      const sizeAdd = sizeBtn ? parseInt(sizeBtn.dataset.add) || 0 : 0;
+      const lvl = levelItem ? parseInt(levelItem.dataset.price) || 0 : 0;
+      return lvl + sizeAdd;
+    }
+    case 'chirashi':
+      return parseInt(document.getElementById('chirashi-level').value) || 0;
+    case 'pamphlet': {
+      const v2 = parseInt(document.getElementById('pamphlet-2ori').value) || 0;
+      const v3 = parseInt(document.getElementById('pamphlet-3ori').value) || 0;
+      return v2 + v3;
+    }
+    case 'booklet': {
+      const pages = parseInt(document.getElementById('booklet-pages').value) || 0;
+      const unit = parseInt(document.getElementById('booklet-level').value) || 0;
+      const note = document.getElementById('booklet-calc-note');
+      note.textContent = pages > 0 ? `本文 ${pages}P × ¥${unit.toLocaleString()} = ¥${(pages*unit).toLocaleString()}` : '';
+      return pages * unit;
+    }
+    case 'logo': {
+      const plan = parseInt(document.getElementById('logo-plan').value) || 0;
+      const extra = (parseInt(document.getElementById('logo-extra').value) || 0) * 20000;
+      return plan + extra;
+    }
+  }
+  return 0;
+}
+
+function getCover() {
+  if (currentTab !== 'booklet') return 0;
+  return parseInt(document.getElementById('booklet-cover').value) || 0;
+}
+
+function getOptions() {
+  const img = (parseInt(document.getElementById('img-qty').value)||0) * (parseInt(document.getElementById('img-price').value)||0);
+  const map = (parseInt(document.getElementById('map-qty').value)||0) * (parseInt(document.getElementById('map-price').value)||0);
+  const logo = (parseInt(document.getElementById('logo-qty').value)||0) * (parseInt(document.getElementById('logo-price').value)||0);
+  const chart = (parseInt(document.getElementById('chart-qty').value)||0) * (parseInt(document.getElementById('chart-price').value)||0);
+  const layout = (parseInt(document.getElementById('layout-qty').value)||0) * (parseInt(document.getElementById('layout-price').value)||0);
+  const print = (parseInt(document.getElementById('print-qty').value)||0) * (parseInt(document.getElementById('print-price').value)||0);
+  return img + map + logo + chart + layout + print;
+}
+
+function fmt(n) { return '¥' + Math.round(n).toLocaleString('ja-JP'); }
+
+function setVal(id, val) {
+  const el = document.getElementById(id);
+  el.textContent = fmt(val);
+  el.classList.toggle('zero', val === 0);
+}
+
+function calc() {
+  const production = getProduction();
+  const cover = getCover();
+  const options = getOptions();
+  const revisions = parseInt(document.getElementById('revision-count').value) || 0;
+  const revisionCost = Math.max(0, revisions - 3) * 3000;
+
+  const statusEl = document.getElementById('revision-status');
+  if (revisions === 0) statusEl.textContent = '';
+  else if (revisions <= 3) statusEl.innerHTML = `<span style="color:var(--green);font-weight:600;">✓ ${revisions}回 — 無料範囲内です</span>`;
+  else {
+    const ex = revisions - 3;
+    statusEl.innerHTML = `<span style="color:var(--accent2);font-weight:600;">⚠ ${revisions}回 — 無料3回 + 追加${ex}回（¥${(ex*3000).toLocaleString()}）</span>`;
+  }
+
+  const subtotalBase = production + cover + options + revisionCost;
+  const expressRate = expressOn ? parseFloat(document.getElementById('express-rate').value) : 0;
+  const expressCost = expressOn ? subtotalBase * expressRate : 0;
+  const subtotal = subtotalBase + expressCost;
+  const tax = subtotal * 0.1;
+  const total = subtotal + tax;
+
+  setVal('bd-production', production);
+  setVal('bd-cover', cover);
+  setVal('bd-options', options);
+  setVal('bd-revision', revisionCost);
+  setVal('bd-express', expressCost);
+  setVal('bd-subtotal', subtotal);
+  setVal('bd-tax', tax);
+  document.getElementById('total-amount').textContent = fmt(total);
+
+  const ind = document.getElementById('express-indicator');
+  if (expressOn) {
+    ind.textContent = `⚡ 特急料金（+${Math.round(expressRate*100)}%）が適用されています`;
+    ind.classList.add('show');
+  } else {
+    ind.classList.remove('show');
+  }
+}
+
+calc();
+</script>
+</body>
+</html>

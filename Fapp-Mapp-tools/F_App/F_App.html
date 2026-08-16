@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fアプリ｜不動産業務ツール集</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== CSS変数（テーマカラー・フォント） ===== */
+  :root {
+    --primary: #005aff;       /* メインカラー（ブルー） */
+    --primary-light: #337aff; /* 明るいブルー */
+    --accent: #ff3c1e;        /* アクセント（レッドオレンジ） */
+    --accent-light: #ffe9e4;  /* アクセント薄色 */
+    --bg: #f1f4f6;            /* 背景色（クールグレー） */
+    --surface: #ffffff;       /* カード背景 */
+    --surface2: #f5f7f9;      /* サブ背景 */
+    --border: #d9dee3;        /* ボーダー */
+    --text: #303030;          /* メインテキスト */
+    --text-muted: #74777a;    /* サブテキスト */
+    --text-hint: #b0b0b0;     /* ヒントテキスト */
+    --success: #1f8a54;       /* 成功（緑） */
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 2px 12px rgba(48,48,48,0.06);
+    --shadow-lg: 0 4px 24px rgba(48,48,48,0.10);
+  }
+
+  /* ===== リセット & ベース ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+    min-height: 100vh;
+  }
+
+  /* ===== ヘッダー ===== */
+  header {
+    background: #d2d7dd;
+    color: var(--text);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(48,48,48,0.10);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 16px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: var(--primary);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700; color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .logo-sub {
+    font-size: 11px;
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== タブナビ ===== */
+  .tab-nav {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    padding: 0 20px 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+    scrollbar-width: none;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    background: rgba(48,48,48,0.06);
+    border: 1px solid rgba(48,48,48,0.14);
+    color: rgba(48,48,48,0.75);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { background: rgba(48,48,48,0.1); color: var(--text); }
+  .tab-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  /* ===== メインレイアウト ===== */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px 48px;
+  }
+
+  /* ===== セクション ===== */
+  .section { display: none; }
+  .section.active { display: block; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    padding-left: 4px;
+    border-left: 3px solid var(--accent);
+    padding-left: 10px;
+  }
+
+  /* ===== カードグリッド ===== */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    .card-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ===== カード ===== */
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: var(--shadow-lg); }
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .card-mark {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background: #ff3c1e;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--primary);
+  }
+  .card-sub {
+    font-size: 11px;
+    color: var(--text-hint);
+    margin-top: 1px;
+  }
+
+  /* ===== フォーム要素 ===== */
+  .field { margin-bottom: 12px; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+  }
+  .field-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .field-row .field { flex: 1; margin-bottom: 0; }
+  input[type="number"], select {
+    width: 100%;
+    height: 38px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--surface2);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -moz-appearance: textfield;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+  input[type="number"]:focus, select:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(42,90,140,0.12);
+    background: white;
+  }
+
+  /* ===== 結果表示 ===== */
+  .result-box {
+    background: var(--primary);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-top: 14px;
+  }
+  .result-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .result-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.02em;
+  }
+  .result-unit {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin-left: 4px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 400;
+  }
+  .result-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 4px;
+  }
+
+  /* 複数結果 */
+  .result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .result-item {
+    background: var(--primary);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+  }
+  .result-item .result-label { font-size: 10px; }
+  .result-item .result-value { font-size: 16px; }
+
+  /* ===== ローンシミュレーション用テーブル ===== */
+  .loan-summary {
+    margin-top: 14px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .loan-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .loan-row:last-child { border-bottom: none; }
+  .loan-row:nth-child(even) { background: var(--surface2); }
+  .loan-row-key { color: var(--text-muted); }
+  .loan-row-val {
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--primary);
+    font-size: 15px;
+  }
+  .loan-row-val.highlight { color: var(--accent); font-size: 18px; }
+
+  /* ===== ヒントテキスト ===== */
+  .hint {
+    font-size: 11px;
+    color: var(--text-hint);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ===== スイッチャー（坪⇄平米） ===== */
+  .swap-btn {
+    background: var(--accent-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--primary);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 500;
+    transition: background 0.2s;
+    white-space: nowrap;
+    margin-top: 20px;
+  }
+  .swap-btn:hover { background: var(--accent); color: white; }
+
+  /* ===== フッター ===== */
+  footer {
+    text-align: center;
+    padding: 32px 16px;
+    font-size: 12px;
+    color: var(--text-hint);
+    border-top: 1px solid var(--border);
+  }
+
+  /* ===== セクション間スペース ===== */
+  .section-gap { margin-top: 32px; }
+</style>
+</head>
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">F</div>
+      <div>
+        <div class="logo-text">Fアプリ</div>
+        <div class="logo-sub">不動産業務ツール集</div>
+      </div>
+    </div>
+  </div>
+  <!-- タブナビ -->
+  <nav class="tab-nav" role="tablist">
+    <button class="tab-btn active" onclick="showTab('basic')" role="tab">基本計算</button>
+    <button class="tab-btn" onclick="showTab('realestate')" role="tab">不動産専門</button>
+    <button class="tab-btn" onclick="showTab('loan')" role="tab">ローン</button>
+    <button class="tab-btn" onclick="showTab('yield')" role="tab">利回り・収益</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ======================================
+       セクション1: 基本計算
+  ====================================== -->
+  <section id="basic" class="section active">
+    <p class="section-title">基本計算・単位換算</p>
+    <div class="card-grid">
+
+      <!-- 1. 税込→税抜 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">税込 → 税抜計算</div>
+            <div class="card-sub">消費税を差し引いた本体価格を計算</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>税込金額（円）</label>
+          <input type="number" id="tax-in-amount" placeholder="例: 11000000" oninput="calcTaxIn()">
+        </div>
+        <div class="field">
+          <label>税率</label>
+          <select id="tax-in-rate" onchange="calcTaxIn()">
+            <option value="10">10%（現行）</option>
+            <option value="8">8%（軽減税率）</option>
+          </select>
+        </div>
+        <div class="result-box" id="tax-in-result" style="display:none">
+          <div class="result-label">税抜本体価格</div>
+          <div><span class="result-value" id="tax-in-val">—</span><span class="result-unit">円</span></div>
+          <div class="result-sub" id="tax-in-tax">消費税額: —</div>
+        </div>
+      </div>
+
+      <!-- 2. 税抜→税込 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">税抜 → 税込計算</div>
+            <div class="card-sub">消費税を加えた税込価格を計算</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>税抜金額（円）</label>
+          <input type="number" id="tax-out-amount" placeholder="例: 10000000" oninput="calcTaxOut()">
+        </div>
+        <div class="field">
+          <label>税率</label>
+          <select id="tax-out-rate" onchange="calcTaxOut()">
+            <option value="10">10%（現行）</option>
+            <option value="8">8%（軽減税率）</option>
+          </select>
+        </div>
+        <div class="result-box" id="tax-out-result" style="display:none">
+          <div class="result-label">税込金額</div>
+          <div><span class="result-value" id="tax-out-val">—</span><span class="result-unit">円</span></div>
+          <div class="result-sub" id="tax-out-tax">消費税額: —</div>
+        </div>
+      </div>
+
+      <!-- 3. 坪⇄平米換算 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">坪 ⇄ 平米換算</div>
+            <div class="card-sub">1坪 ≈ 3.3058 m²</div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label id="area-label-a">坪</label>
+            <input type="number" id="area-a" placeholder="0" oninput="calcArea()">
+          </div>
+          <button class="swap-btn" onclick="swapArea()">⇄ 切替</button>
+          <div class="field">
+            <label id="area-label-b">平米（m²）</label>
+            <input type="number" id="area-b" placeholder="0" readonly style="background:#f0ede8;color:var(--text-muted)">
+          </div>
+        </div>
+        <div class="hint" id="area-hint">坪を入力すると平米に変換します。「切替」で逆方向も計算できます。</div>
+      </div>
+
+      <!-- 4. m・尺・寸の単位換算 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">m・尺・寸 換算</div>
+            <div class="card-sub">1尺=30.303cm、1寸=3.0303cm</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>入力値</label>
+          <div class="field-row">
+            <input type="number" id="length-val" placeholder="例: 1.8" oninput="calcLength()" style="flex:2">
+            <select id="length-unit" onchange="calcLength()" style="flex:1">
+              <option value="m">m（メートル）</option>
+              <option value="shaku">尺</option>
+              <option value="sun">寸</option>
+              <option value="mm">mm</option>
+              <option value="cm">cm</option>
+            </select>
+          </div>
+        </div>
+        <div class="result-grid" id="length-result" style="display:none">
+          <div class="result-item">
+            <div class="result-label">m（メートル）</div>
+            <div class="result-value" id="len-m">—</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">cm（センチ）</div>
+            <div class="result-value" id="len-cm">—</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">尺</div>
+            <div class="result-value" id="len-shaku">—</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">寸</div>
+            <div class="result-value" id="len-sun">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. 和暦⇄西暦変換 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">和暦 ⇄ 西暦変換</div>
+            <div class="card-sub">令和・平成・昭和・大正・明治</div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>元号</label>
+            <select id="wareki-gen" onchange="calcWareki()">
+              <option value="reiwa">令和</option>
+              <option value="heisei">平成</option>
+              <option value="showa">昭和</option>
+              <option value="taisho">大正</option>
+              <option value="meiji">明治</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>年</label>
+            <input type="number" id="wareki-year" placeholder="例: 6" oninput="calcWareki()" min="1">
+          </div>
+        </div>
+        <div class="result-box" id="wareki-result" style="display:none">
+          <div class="result-label">西暦</div>
+          <div><span class="result-value" id="wareki-ad">—</span><span class="result-unit">年</span></div>
+          <div class="result-sub" id="wareki-sub"></div>
+        </div>
+        <!-- 逆：西暦→和暦 -->
+        <div class="field" style="margin-top:16px; border-top:1px solid var(--border); padding-top:14px;">
+          <label>西暦 → 和暦（西暦を入力）</label>
+          <input type="number" id="seireki-year" placeholder="例: 2024" oninput="calcSeireki()" min="1868">
+        </div>
+        <div class="result-box" id="seireki-result" style="display:none">
+          <div class="result-label">和暦</div>
+          <div class="result-value" id="seireki-wareki" style="font-size:18px">—</div>
+        </div>
+      </div>
+
+      <!-- 6. 距離→所要時間 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">距離 → 所要時間</div>
+            <div class="card-sub">徒歩80m=1分、車60km/h基準</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>距離（m）</label>
+          <input type="number" id="dist-m" placeholder="例: 500" oninput="calcDist()">
+        </div>
+        <div class="result-grid" id="dist-result" style="display:none">
+          <div class="result-item">
+            <div class="result-label">🚶 徒歩（80m/分）</div>
+            <div><span class="result-value" id="dist-walk">—</span><span style="font-size:12px;color:rgba(255,255,255,0.6)"> 分</span></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">🚗 車（60km/h）</div>
+            <div><span class="result-value" id="dist-car">—</span><span style="font-size:12px;color:rgba(255,255,255,0.6)"> 分</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /card-grid -->
+  </section>
+
+
+  <!-- ======================================
+       セクション2: 不動産専門
+  ====================================== -->
+  <section id="realestate" class="section">
+    <p class="section-title">不動産専門ツール</p>
+    <div class="card-grid">
+
+      <!-- 9. 坪単価・平米単価 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">坪単価・平米単価計算</div>
+            <div class="card-sub">物件価格と面積から単価を算出</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>物件価格（万円）</label>
+          <input type="number" id="unit-price" placeholder="例: 5000" oninput="calcUnitPrice()">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>面積</label>
+            <input type="number" id="unit-area" placeholder="例: 80" oninput="calcUnitPrice()">
+          </div>
+          <div class="field">
+            <label>単位</label>
+            <select id="unit-area-type" onchange="calcUnitPrice()">
+              <option value="m2">平米（m²）</option>
+              <option value="tsubo">坪</option>
+            </select>
+          </div>
+        </div>
+        <div class="result-grid" id="unit-result" style="display:none">
+          <div class="result-item">
+            <div class="result-label">坪単価</div>
+            <div><span class="result-value" id="unit-tsubo">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> 万円/坪</span></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">平米単価</div>
+            <div><span class="result-value" id="unit-m2">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> 万円/m²</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. 建ぺい率・容積率計算 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">建ぺい率・容積率計算</div>
+            <div class="card-sub">敷地面積から建築可能な面積を算出</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>敷地面積（m²）</label>
+          <input type="number" id="land-area" placeholder="例: 200" oninput="calcBuildRatio()">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>建ぺい率（%）</label>
+            <input type="number" id="build-ratio" placeholder="例: 60" oninput="calcBuildRatio()">
+          </div>
+          <div class="field">
+            <label>容積率（%）</label>
+            <input type="number" id="floor-ratio" placeholder="例: 200" oninput="calcBuildRatio()">
+          </div>
+        </div>
+        <div class="result-grid" id="build-result" style="display:none">
+          <div class="result-item">
+            <div class="result-label">最大建築面積（建ぺい）</div>
+            <div><span class="result-value" id="build-area">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> m²</span></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">最大延床面積（容積）</div>
+            <div><span class="result-value" id="floor-area">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> m²</span></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">建築面積（坪）</div>
+            <div><span class="result-value" id="build-tsubo">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> 坪</span></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">延床面積（坪）</div>
+            <div><span class="result-value" id="floor-tsubo">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> 坪</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 15. 土地面積→建築可能面積 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">土地面積 → 建築可能面積</div>
+            <div class="card-sub">用途地域別の上限を一覧表示</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>土地面積（m²）</label>
+          <input type="number" id="land-area2" placeholder="例: 165" oninput="calcLandBuild()">
+        </div>
+        <div class="field">
+          <label>用途地域（代表例）</label>
+          <select id="land-zone" onchange="calcLandBuild()">
+            <option value="30_50">第一種低層（建ぺい30% / 容積50%）</option>
+            <option value="40_80">第一種低層（建ぺい40% / 容積80%）</option>
+            <option value="50_100">第一種中高層（建ぺい50% / 容積100%）</option>
+            <option value="60_200" selected>第一種住居（建ぺい60% / 容積200%）</option>
+            <option value="60_300">商業系（建ぺい60% / 容積300%）</option>
+            <option value="80_400">商業地域（建ぺい80% / 容積400%）</option>
+          </select>
+        </div>
+        <div class="result-grid" id="land-build-result" style="display:none">
+          <div class="result-item">
+            <div class="result-label">最大建築面積</div>
+            <div><span class="result-value" id="lb-build">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> m²</span></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">最大延床面積</div>
+            <div><span class="result-value" id="lb-floor">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> m²</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. 仲介手数料計算 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">仲介手数料計算</div>
+            <div class="card-sub">宅建業法に基づく上限計算</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>取引価格（万円）</label>
+          <input type="number" id="broker-price" placeholder="例: 3000" oninput="calcBroker()">
+        </div>
+        <div class="result-box" id="broker-result" style="display:none">
+          <div class="result-label">仲介手数料 上限額（税抜）</div>
+          <div><span class="result-value" id="broker-val">—</span><span class="result-unit">万円</span></div>
+          <div class="result-sub" id="broker-sub"></div>
+          <div class="result-sub" id="broker-tax">税込（10%）: —万円</div>
+        </div>
+        <div class="hint">売買価格に応じた宅建業法上の上限額（3段階速算式）で計算します。</div>
+      </div>
+
+      <!-- 12. 徒歩分数⇄距離 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">徒歩分数 ⇄ 距離</div>
+            <div class="card-sub">不動産広告基準：80m = 1分</div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>徒歩分数（分）</label>
+            <input type="number" id="walk-min" placeholder="例: 7" oninput="calcWalk('min')">
+          </div>
+          <div class="field">
+            <label>距離（m）</label>
+            <input type="number" id="walk-m" placeholder="例: 560" oninput="calcWalk('m')">
+          </div>
+        </div>
+        <div class="result-box" id="walk-result" style="display:none">
+          <div class="result-label" id="walk-result-label">計算結果</div>
+          <div><span class="result-value" id="walk-result-val">—</span><span class="result-unit" id="walk-result-unit"></span></div>
+          <div class="result-sub" id="walk-result-sub"></div>
+        </div>
+      </div>
+
+      <!-- 14. 初期費用概算 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">初期費用（概算）計算</div>
+            <div class="card-sub">賃貸契約時の総費用を見積もり</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>月額家賃（万円）</label>
+          <input type="number" id="init-rent" placeholder="例: 8" oninput="calcInitCost()">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>敷金（ヶ月分）</label>
+            <input type="number" id="init-shiki" placeholder="1" value="1" oninput="calcInitCost()">
+          </div>
+          <div class="field">
+            <label>礼金（ヶ月分）</label>
+            <input type="number" id="init-rei" placeholder="1" value="1" oninput="calcInitCost()">
+          </div>
+        </div>
+        <div class="result-box" id="init-result" style="display:none">
+          <div class="result-label">初期費用合計（概算）</div>
+          <div><span class="result-value" id="init-total">—</span><span class="result-unit">万円</span></div>
+          <div class="result-sub" id="init-detail">内訳: —</div>
+        </div>
+        <div class="hint">仲介手数料1ヶ月分・前家賃1ヶ月を加算した概算です。火災保険等は含みません。</div>
+      </div>
+
+    </div><!-- /card-grid -->
+  </section>
+
+
+  <!-- ======================================
+       セクション3: ローンシミュレーション
+  ====================================== -->
+  <section id="loan" class="section">
+    <p class="section-title">ローン返済シミュレーション（元利均等）</p>
+    <div class="card-grid">
+
+      <!-- 7. ローン返済シミュレーション -->
+      <div class="card" style="grid-column: 1 / -1; max-width: 700px;">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">住宅ローン返済シミュレーション</div>
+            <div class="card-sub">元利均等返済方式で月々の返済額を計算</div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>借入金額（万円）</label>
+            <input type="number" id="loan-amount" placeholder="例: 3000" oninput="calcLoan()">
+          </div>
+          <div class="field">
+            <label>借入期間（年）</label>
+            <input type="number" id="loan-years" placeholder="例: 35" min="1" max="50" oninput="calcLoan()">
+          </div>
+        </div>
+        <div class="field">
+          <label>年利（%）</label>
+          <input type="number" id="loan-rate" placeholder="例: 1.5" step="0.01" oninput="calcLoan()">
+        </div>
+        <div class="loan-summary" id="loan-result" style="display:none">
+          <div class="loan-row">
+            <span class="loan-row-key">月々の返済額</span>
+            <span class="loan-row-val highlight" id="loan-monthly">—</span>
+          </div>
+          <div class="loan-row">
+            <span class="loan-row-key">総返済額</span>
+            <span class="loan-row-val" id="loan-total">—</span>
+          </div>
+          <div class="loan-row">
+            <span class="loan-row-key">うち利息総額</span>
+            <span class="loan-row-val" id="loan-interest">—</span>
+          </div>
+          <div class="loan-row">
+            <span class="loan-row-key">元本合計</span>
+            <span class="loan-row-val" id="loan-principal">—</span>
+          </div>
+          <div class="loan-row">
+            <span class="loan-row-key">元本に対する利息割合</span>
+            <span class="loan-row-val" id="loan-ratio">—</span>
+          </div>
+        </div>
+        <div class="hint" style="margin-top:10px">※元利均等返済方式。ボーナス払い・繰上返済は考慮していません。</div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ======================================
+       セクション4: 利回り・収益
+  ====================================== -->
+  <section id="yield" class="section">
+    <p class="section-title">利回り・収益計算</p>
+    <div class="card-grid">
+
+      <!-- 8. 利回り計算（表面・実質） -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">利回り計算（表面・実質）</div>
+            <div class="card-sub">投資用不動産の収益性を算出</div>
+          </div>
+        </div>
+        <div class="field">
+          <label>物件購入価格（万円）</label>
+          <input type="number" id="yield-price" placeholder="例: 5000" oninput="calcYield()">
+        </div>
+        <div class="field">
+          <label>年間家賃収入（万円）</label>
+          <input type="number" id="yield-income" placeholder="例: 300" oninput="calcYield()">
+        </div>
+        <div class="field" style="border-top:1px solid var(--border);padding-top:12px;margin-top:4px;">
+          <label>年間諸経費（万円）※実質利回り用</label>
+          <input type="number" id="yield-cost" placeholder="例: 50（管理費・固定資産税等）" oninput="calcYield()">
+        </div>
+        <div class="result-grid" id="yield-result" style="display:none">
+          <div class="result-item">
+            <div class="result-label">表面利回り</div>
+            <div><span class="result-value" id="yield-gross">—</span><span style="font-size:12px;color:rgba(255,255,255,0.6)"> %</span></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">実質利回り</div>
+            <div><span class="result-value" id="yield-net">—</span><span style="font-size:12px;color:rgba(255,255,255,0.6)"> %</span></div>
+          </div>
+        </div>
+        <div class="hint">表面利回り＝年間家賃÷購入価格×100<br>実質利回り＝（年間家賃－諸経費）÷購入価格×100</div>
+      </div>
+
+      <!-- 13. 年間家賃収入計算 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-mark"></div>
+          <div>
+            <div class="card-title">年間家賃収入計算</div>
+            <div class="card-sub">複数戸・空室率を考慮した収入試算</div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>月額家賃（万円/戸）</label>
+            <input type="number" id="rent-monthly" placeholder="例: 8" oninput="calcRent()">
+          </div>
+          <div class="field">
+            <label>戸数</label>
+            <input type="number" id="rent-units" placeholder="例: 6" oninput="calcRent()">
+          </div>
+        </div>
+        <div class="field">
+          <label>空室率（%）</label>
+          <input type="number" id="rent-vacancy" placeholder="例: 10" oninput="calcRent()">
+        </div>
+        <div class="result-box" id="rent-result" style="display:none">
+          <div class="result-label">年間家賃収入（空室考慮後）</div>
+          <div><span class="result-value" id="rent-annual">—</span><span class="result-unit">万円/年</span></div>
+          <div class="result-sub" id="rent-sub">満室時: — 万円/年</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>Fアプリ — 不動産業務ツール集 | すべての計算はフロントエンドで処理されます</div>
+  <div style="margin-top:4px;">計算結果は参考値です。重要な判断には専門家にご相談ください。</div>
+</footer>
+
+<script>
+// ===================================================
+// タブ切り替え
+// ===================================================
+function showTab(id) {
+  // すべてのセクションを非表示
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  // 対象を表示
+  document.getElementById(id).classList.add('active');
+  // ボタンをアクティブに
+  event.target.classList.add('active');
+}
+
+// ===================================================
+// 1. 税込→税抜
+// ===================================================
+function calcTaxIn() {
+  const amount = parseFloat(document.getElementById('tax-in-amount').value);
+  const rate = parseFloat(document.getElementById('tax-in-rate').value) / 100;
+  const box = document.getElementById('tax-in-result');
+  if (isNaN(amount) || amount <= 0) { box.style.display = 'none'; return; }
+
+  const honbai = amount / (1 + rate); // 本体価格
+  const tax = amount - honbai;        // 消費税額
+
+  document.getElementById('tax-in-val').textContent = Math.round(honbai).toLocaleString();
+  document.getElementById('tax-in-tax').textContent = '消費税額: ' + Math.round(tax).toLocaleString() + ' 円';
+  box.style.display = 'block';
+}
+
+// ===================================================
+// 2. 税抜→税込
+// ===================================================
+function calcTaxOut() {
+  const amount = parseFloat(document.getElementById('tax-out-amount').value);
+  const rate = parseFloat(document.getElementById('tax-out-rate').value) / 100;
+  const box = document.getElementById('tax-out-result');
+  if (isNaN(amount) || amount <= 0) { box.style.display = 'none'; return; }
+
+  const tax = amount * rate;          // 消費税額
+  const total = amount + tax;         // 税込合計
+
+  document.getElementById('tax-out-val').textContent = Math.round(total).toLocaleString();
+  document.getElementById('tax-out-tax').textContent = '消費税額: ' + Math.round(tax).toLocaleString() + ' 円';
+  box.style.display = 'block';
+}
+
+// ===================================================
+// 3. 坪⇄平米換算
+// ===================================================
+// 換算定数：1坪 = 400/121 m²（正確な値）
+const TSUBO_TO_M2 = 400 / 121; // ≈ 3.30579...
+
+let areaMode = 'tsubo'; // 'tsubo' or 'm2'
+
+function swapArea() {
+  // モードを切り替え
+  areaMode = (areaMode === 'tsubo') ? 'm2' : 'tsubo';
+  const labelA = document.getElementById('area-label-a');
+  const labelB = document.getElementById('area-label-b');
+  const inputA = document.getElementById('area-a');
+  const inputB = document.getElementById('area-b');
+
+  if (areaMode === 'tsubo') {
+    labelA.textContent = '坪';
+    labelB.textContent = '平米（m²）';
+    document.getElementById('area-hint').textContent = '坪を入力すると平米に変換します。';
+  } else {
+    labelA.textContent = '平米（m²）';
+    labelB.textContent = '坪';
+    document.getElementById('area-hint').textContent = '平米を入力すると坪に変換します。';
+  }
+  // 入力欄をリセット
+  inputA.value = '';
+  inputB.value = '';
+}
+
+function calcArea() {
+  const val = parseFloat(document.getElementById('area-a').value);
+  if (isNaN(val) || val < 0) { document.getElementById('area-b').value = ''; return; }
+
+  let result;
+  if (areaMode === 'tsubo') {
+    result = val * TSUBO_TO_M2; // 坪→平米
+  } else {
+    result = val / TSUBO_TO_M2; // 平米→坪
+  }
+  document.getElementById('area-b').value = result.toFixed(2);
+}
+
+// ===================================================
+// 4. m・尺・寸の単位換算
+// ===================================================
+// 1尺 = 10/33 m（≈0.30303m）、1寸 = 1/33 m
+const SHAKU_TO_M = 10 / 33;
+const SUN_TO_M   = 1 / 33;
+
+function calcLength() {
+  const val  = parseFloat(document.getElementById('length-val').value);
+  const unit = document.getElementById('length-unit').value;
+  const box  = document.getElementById('length-result');
+  if (isNaN(val)) { box.style.display = 'none'; return; }
+
+  // まずメートルに変換
+  let meters;
+  switch (unit) {
+    case 'm':     meters = val; break;
+    case 'shaku': meters = val * SHAKU_TO_M; break;
+    case 'sun':   meters = val * SUN_TO_M; break;
+    case 'mm':    meters = val / 1000; break;
+    case 'cm':    meters = val / 100; break;
+  }
+
+  // 各単位に変換して表示
+  document.getElementById('len-m').textContent     = meters.toFixed(4);
+  document.getElementById('len-cm').textContent    = (meters * 100).toFixed(2);
+  document.getElementById('len-shaku').textContent = (meters / SHAKU_TO_M).toFixed(4);
+  document.getElementById('len-sun').textContent   = (meters / SUN_TO_M).toFixed(4);
+  box.style.display = 'grid';
+}
+
+// ===================================================
+// 5. 和暦⇄西暦変換
+// ===================================================
+// 各元号の開始西暦年
+const GENGO = {
+  reiwa:  2019, // 令和元年 = 2019年
+  heisei: 1989, // 平成元年 = 1989年
+  showa:  1926, // 昭和元年 = 1926年
+  taisho: 1912, // 大正元年 = 1912年
+  meiji:  1868  // 明治元年 = 1868年
+};
+const GENGO_NAME = { reiwa:'令和', heisei:'平成', showa:'昭和', taisho:'大正', meiji:'明治' };
+
+function calcWareki() {
+  const gen  = document.getElementById('wareki-gen').value;
+  const year = parseInt(document.getElementById('wareki-year').value);
+  const box  = document.getElementById('wareki-result');
+  if (isNaN(year) || year < 1) { box.style.display = 'none'; return; }
+
+  const ad = GENGO[gen] + year - 1; // 元年=1なので-1
+  document.getElementById('wareki-ad').textContent = ad;
+  document.getElementById('wareki-sub').textContent = GENGO_NAME[gen] + year + '年 = ' + ad + '年';
+  box.style.display = 'block';
+}
+
+function calcSeireki() {
+  const ad  = parseInt(document.getElementById('seireki-year').value);
+  const box = document.getElementById('seireki-result');
+  if (isNaN(ad) || ad < 1868) { box.style.display = 'none'; return; }
+
+  let result = '';
+  // 新しい元号から順番に判定
+  if (ad >= 2019)      result = '令和' + (ad - 2019 + 1) + '年';
+  else if (ad >= 1989) result = '平成' + (ad - 1989 + 1) + '年';
+  else if (ad >= 1926) result = '昭和' + (ad - 1926 + 1) + '年';
+  else if (ad >= 1912) result = '大正' + (ad - 1912 + 1) + '年';
+  else if (ad >= 1868) result = '明治' + (ad - 1868 + 1) + '年';
+  else result = '明治以前';
+
+  document.getElementById('seireki-wareki').textContent = result;
+  box.style.display = 'block';
+}
+
+// ===================================================
+// 6. 距離→所要時間
+// ===================================================
+function calcDist() {
+  const m   = parseFloat(document.getElementById('dist-m').value);
+  const box = document.getElementById('dist-result');
+  if (isNaN(m) || m <= 0) { box.style.display = 'none'; return; }
+
+  // 徒歩：80m/分（不動産広告基準）
+  const walkMin = Math.ceil(m / 80);
+  // 車：60km/h = 1000m/分
+  const carMin  = Math.ceil(m / 1000);
+
+  document.getElementById('dist-walk').textContent = walkMin;
+  document.getElementById('dist-car').textContent  = carMin < 1 ? '1未満' : carMin;
+  box.style.display = 'grid';
+}
+
+// ===================================================
+// 7. ローン返済シミュレーション（元利均等）
+// ===================================================
+function calcLoan() {
+  const P = parseFloat(document.getElementById('loan-amount').value) * 10000; // 円に変換
+  const n = parseFloat(document.getElementById('loan-years').value) * 12;    // 月数
+  const r = parseFloat(document.getElementById('loan-rate').value) / 100 / 12; // 月利
+  const box = document.getElementById('loan-result');
+
+  if (isNaN(P) || isNaN(n) || isNaN(r) || P <= 0 || n <= 0) {
+    box.style.display = 'none'; return;
+  }
+
+  let monthly;
+  if (r === 0) {
+    // 金利0%の場合
+    monthly = P / n;
+  } else {
+    // 元利均等返済の公式: M = P × r(1+r)^n / ((1+r)^n - 1)
+    const pow = Math.pow(1 + r, n);
+    monthly = P * r * pow / (pow - 1);
+  }
+
+  const total    = monthly * n;              // 総返済額
+  const interest = total - P;               // 利息合計
+  const ratio    = (interest / P * 100);    // 利息割合
+
+  document.getElementById('loan-monthly').textContent   = '月 ' + Math.round(monthly).toLocaleString() + ' 円';
+  document.getElementById('loan-total').textContent     = Math.round(total).toLocaleString() + ' 円';
+  document.getElementById('loan-interest').textContent  = Math.round(interest).toLocaleString() + ' 円';
+  document.getElementById('loan-principal').textContent = Math.round(P).toLocaleString() + ' 円';
+  document.getElementById('loan-ratio').textContent     = ratio.toFixed(1) + ' %';
+  box.style.display = 'block';
+}
+
+// ===================================================
+// 8. 利回り計算（表面・実質）
+// ===================================================
+function calcYield() {
+  const price  = parseFloat(document.getElementById('yield-price').value);
+  const income = parseFloat(document.getElementById('yield-income').value);
+  const cost   = parseFloat(document.getElementById('yield-cost').value) || 0;
+  const box    = document.getElementById('yield-result');
+
+  if (isNaN(price) || isNaN(income) || price <= 0) { box.style.display = 'none'; return; }
+
+  // 表面利回り = 年間家賃 ÷ 購入価格 × 100
+  const gross = income / price * 100;
+  // 実質利回り = (年間家賃 - 諸経費) ÷ 購入価格 × 100
+  const net   = (income - cost) / price * 100;
+
+  document.getElementById('yield-gross').textContent = gross.toFixed(2);
+  document.getElementById('yield-net').textContent   = net.toFixed(2);
+  box.style.display = 'grid';
+}
+
+// ===================================================
+// 9. 坪単価・平米単価
+// ===================================================
+function calcUnitPrice() {
+  const price    = parseFloat(document.getElementById('unit-price').value);
+  const area     = parseFloat(document.getElementById('unit-area').value);
+  const areaType = document.getElementById('unit-area-type').value;
+  const box      = document.getElementById('unit-result');
+
+  if (isNaN(price) || isNaN(area) || area <= 0) { box.style.display = 'none'; return; }
+
+  let tsubo, m2;
+  if (areaType === 'm2') {
+    m2    = area;
+    tsubo = area / TSUBO_TO_M2;
+  } else {
+    tsubo = area;
+    m2    = area * TSUBO_TO_M2;
+  }
+
+  const perTsubo = price / tsubo;
+  const perM2    = price / m2;
+
+  document.getElementById('unit-tsubo').textContent = perTsubo.toFixed(1);
+  document.getElementById('unit-m2').textContent    = perM2.toFixed(2);
+  box.style.display = 'grid';
+}
+
+// ===================================================
+// 10. 建ぺい率・容積率計算
+// ===================================================
+function calcBuildRatio() {
+  const land  = parseFloat(document.getElementById('land-area').value);
+  const build = parseFloat(document.getElementById('build-ratio').value);
+  const floor = parseFloat(document.getElementById('floor-ratio').value);
+  const box   = document.getElementById('build-result');
+
+  if (isNaN(land) || isNaN(build) || isNaN(floor)) { box.style.display = 'none'; return; }
+
+  const maxBuild = land * (build / 100);           // 最大建築面積
+  const maxFloor = land * (floor / 100);           // 最大延床面積
+  const buildTsubo = maxBuild / TSUBO_TO_M2;       // 坪換算
+  const floorTsubo = maxFloor / TSUBO_TO_M2;       // 坪換算
+
+  document.getElementById('build-area').textContent  = maxBuild.toFixed(1);
+  document.getElementById('floor-area').textContent  = maxFloor.toFixed(1);
+  document.getElementById('build-tsubo').textContent = buildTsubo.toFixed(1);
+  document.getElementById('floor-tsubo').textContent = floorTsubo.toFixed(1);
+  box.style.display = 'grid';
+}
+
+// ===================================================
+// 11. 仲介手数料計算（宅建業法速算式）
+// ===================================================
+function calcBroker() {
+  const price = parseFloat(document.getElementById('broker-price').value); // 万円
+  const box   = document.getElementById('broker-result');
+  if (isNaN(price) || price <= 0) { box.style.display = 'none'; return; }
+
+  const yen = price * 10000; // 円に変換
+  let fee, formula;
+
+  // 3段階速算式（上限額、税抜）
+  if (yen <= 2000000) {
+    // 200万円以下：5%
+    fee     = yen * 0.05;
+    formula = '200万円以下：売買価格×5%';
+  } else if (yen <= 4000000) {
+    // 200万超400万以下：4%+2万円
+    fee     = yen * 0.04 + 20000;
+    formula = '200万超400万以下：売買価格×4%+2万円';
+  } else {
+    // 400万超：3%+6万円
+    fee     = yen * 0.03 + 60000;
+    formula = '400万超：売買価格×3%+6万円';
+  }
+
+  const feeMan    = fee / 10000;          // 万円に変換
+  const feeTax    = fee * 1.1 / 10000;   // 税込（万円）
+
+  document.getElementById('broker-val').textContent = feeMan.toFixed(1);
+  document.getElementById('broker-sub').textContent = '計算式: ' + formula;
+  document.getElementById('broker-tax').textContent = '税込（10%）: ' + feeTax.toFixed(1) + ' 万円';
+  box.style.display = 'block';
+}
+
+// ===================================================
+// 12. 徒歩分数⇄距離（80m=1分）
+// ===================================================
+function calcWalk(mode) {
+  const box = document.getElementById('walk-result');
+  if (mode === 'min') {
+    const min = parseFloat(document.getElementById('walk-min').value);
+    if (isNaN(min) || min <= 0) { box.style.display = 'none'; return; }
+    const m = min * 80;
+    document.getElementById('walk-result-label').textContent = '徒歩' + min + '分の距離';
+    document.getElementById('walk-result-val').textContent = m.toLocaleString();
+    document.getElementById('walk-result-unit').textContent = 'm';
+    document.getElementById('walk-result-sub').textContent = '= ' + (m / 1000).toFixed(2) + ' km';
+    // 逆の欄をクリア
+    document.getElementById('walk-m').value = '';
+  } else {
+    const m = parseFloat(document.getElementById('walk-m').value);
+    if (isNaN(m) || m <= 0) { box.style.display = 'none'; return; }
+    const min = Math.ceil(m / 80); // 端数切り上げ（広告表示基準）
+    document.getElementById('walk-result-label').textContent = m + 'mの徒歩分数';
+    document.getElementById('walk-result-val').textContent = min;
+    document.getElementById('walk-result-unit').textContent = '分';
+    document.getElementById('walk-result-sub').textContent = '不動産広告基準（80m=1分、端数切上）';
+    // 逆の欄をクリア
+    document.getElementById('walk-min').value = '';
+  }
+  box.style.display = 'block';
+}
+
+// ===================================================
+// 13. 年間家賃収入計算
+// ===================================================
+function calcRent() {
+  const monthly  = parseFloat(document.getElementById('rent-monthly').value);
+  const units    = parseFloat(document.getElementById('rent-units').value);
+  const vacancy  = parseFloat(document.getElementById('rent-vacancy').value) || 0;
+  const box      = document.getElementById('rent-result');
+
+  if (isNaN(monthly) || isNaN(units)) { box.style.display = 'none'; return; }
+
+  const fullYear   = monthly * units * 12;                   // 満室時年間収入
+  const actual     = fullYear * (1 - vacancy / 100);         // 空室考慮後
+
+  document.getElementById('rent-annual').textContent = actual.toFixed(1);
+  document.getElementById('rent-sub').textContent = '満室時: ' + fullYear.toFixed(1) + ' 万円/年';
+  box.style.display = 'block';
+}
+
+// ===================================================
+// 14. 初期費用概算計算
+// ===================================================
+function calcInitCost() {
+  const rent  = parseFloat(document.getElementById('init-rent').value);
+  const shiki = parseFloat(document.getElementById('init-shiki').value) || 0;
+  const rei   = parseFloat(document.getElementById('init-rei').value) || 0;
+  const box   = document.getElementById('init-result');
+
+  if (isNaN(rent) || rent <= 0) { box.style.display = 'none'; return; }
+
+  // 仲介手数料（1ヶ月分）、前家賃（1ヶ月）を加算
+  const broker    = rent * 1.1; // 仲介手数料（税込）
+  const preRent   = rent;       // 前家賃
+  const total     = rent * (shiki + rei) + broker + preRent;
+
+  const detail = `敷金${shiki}ヶ月 + 礼金${rei}ヶ月 + 仲介手数料（税込1ヶ月） + 前家賃1ヶ月`;
+  document.getElementById('init-total').textContent  = total.toFixed(2);
+  document.getElementById('init-detail').textContent = detail;
+  box.style.display = 'block';
+}
+
+// ===================================================
+// 15. 土地面積→建築可能面積（用途地域別）
+// ===================================================
+function calcLandBuild() {
+  const land = parseFloat(document.getElementById('land-area2').value);
+  const zone = document.getElementById('land-zone').value;
+  const box  = document.getElementById('land-build-result');
+
+  if (isNaN(land) || land <= 0) { box.style.display = 'none'; return; }
+
+  // zone値 = "建ぺい率_容積率"
+  const [buildRatio, floorRatio] = zone.split('_').map(Number);
+  const buildArea = land * (buildRatio / 100);
+  const floorArea = land * (floorRatio / 100);
+
+  document.getElementById('lb-build').textContent = buildArea.toFixed(1);
+  document.getElementById('lb-floor').textContent = floorArea.toFixed(1);
+  box.style.display = 'grid';
+}
+</script>
+</body>
+</html>
