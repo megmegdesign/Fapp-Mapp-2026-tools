@@ -12,15 +12,14 @@
   --surface: #ffffff;
   --surface2: #f5f7f9;
   --border: #d9dee3;
-  --accent: #005aff;
-  --accent2: #ff3c1e;
-  --accent3: #303030;
+  --result-bg: #001410;
+  --accent: #ff5281;
+  --accent2: #00d7e6;
   --text: #303030;
   --text-muted: #9f9f9f;
   --text-light: #b0b0b0;
-  --green: #1f8a54;
-  --green-bg: #e9f5f0;
-  --radius: 12px;
+  --message-color: #341f8a;
+  --radius: 5px;
   --shadow: 0 1px 12px rgba(48,48,48,0.06);
   --shadow-lg: 0 6px 36px rgba(48,48,48,0.10);
 }
@@ -43,7 +42,7 @@ body {
 }
 .header-left h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; color: var(--accent); }
 .header-left .sub { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
-.badge { background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 4px; letter-spacing: 0.5px; }
+.badge { background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 5px; letter-spacing: 0.5px; }
 .layout {
   max-width: 980px;
   margin: 0 auto;
@@ -62,22 +61,22 @@ body {
   font-size: 10px;
   font-weight: 700;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 5px;
   letter-spacing: 0.5px;
 }
 
 /* Tabs */
-.tabs-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 16px; overflow: hidden; }
+.tabs-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; box-shadow: var(--shadow); margin-bottom: 16px; overflow: hidden; }
 .tabs-label { padding: 12px 16px 0; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
 .tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 14px 14px; }
-.tab-btn { border: 1.5px solid var(--border); background: var(--surface2); border-radius: 8px; padding: 7px 13px; cursor: pointer; font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: 500; color: var(--text-muted); transition: all 0.15s; user-select: none; white-space: nowrap; }
+.tab-btn { border: 1.5px solid var(--border); background: var(--surface2); border-radius: 5px; padding: 7px 13px; cursor: pointer; font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: 500; color: var(--text-muted); transition: all 0.15s; user-select: none; white-space: nowrap; }
 .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
 .tab-btn.active { border-color: var(--accent); background: var(--accent); color: #fff; }
 
 /* Cards */
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 14px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: 14px; }
 .card-header { padding: 13px 18px 12px; border-bottom: 1px solid var(--border); background: var(--surface2); display: flex; align-items: center; gap: 9px; }
-.card-mark { width: 10px; height: 10px; border-radius: 3px; background: #ff3c1e; flex-shrink: 0; }
+.card-mark { width: 10px; height: 10px; border-radius: 5px; background: var(--accent2); flex-shrink: 0; }
 .card-header h2 { font-size: 13px; font-weight: 700; color: var(--accent); }
 .card-body { padding: 16px 18px; }
 
@@ -85,57 +84,57 @@ body {
 .section-label:first-child { margin-top: 0; }
 
 /* Select */
-.styled-select { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: 9px 32px 9px 12px; font-family: 'Noto Sans JP', sans-serif; font-size: 13px; background: var(--surface); color: var(--text); outline: none; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239f9f9f' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; transition: border-color 0.15s; }
+.styled-select { width: 100%; border: 1.5px solid var(--border); border-radius: 5px; padding: 9px 32px 9px 12px; font-family: 'Noto Sans JP', sans-serif; font-size: 13px; background: var(--surface); color: var(--text); outline: none; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239f9f9f' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; transition: border-color 0.15s; }
 .styled-select:focus { border-color: var(--accent); }
 
 /* Size buttons */
 .size-grid { display: flex; gap: 8px; flex-wrap: wrap; }
-.size-btn { border: 1.5px solid var(--border); background: var(--surface); border-radius: 8px; padding: 8px 14px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: var(--text-muted); transition: all 0.15s; user-select: none; }
+.size-btn { border: 1.5px solid var(--border); background: var(--surface); border-radius: 5px; padding: 8px 14px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: var(--text-muted); transition: all 0.15s; user-select: none; }
 .size-btn:hover { border-color: var(--accent); color: var(--accent); }
 .size-btn.active { border-color: var(--accent); background: var(--accent); color: #fff; }
 
 /* Level radio */
 .level-list { display: flex; flex-direction: column; gap: 7px; }
-.level-item { border: 1.5px solid var(--border); border-radius: 9px; padding: 11px 14px; cursor: pointer; display: flex; align-items: center; gap: 11px; transition: all 0.15s; user-select: none; }
+.level-item { border: 1.5px solid var(--border); border-radius: 5px; padding: 11px 14px; cursor: pointer; display: flex; align-items: center; gap: 11px; transition: all 0.15s; user-select: none; }
 .level-item:hover { border-color: #aaa; }
 .level-item.active { border-color: var(--accent); background: #eaf1ff; }
-.level-radio { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.level-radio { width: 16px; height: 16px; border-radius: 5px; border: 2px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
 .level-item.active .level-radio { border-color: var(--accent); background: var(--accent); }
-.level-item.active .level-radio::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+.level-item.active .level-radio::after { content: ''; width: 6px; height: 6px; border-radius: 5px; background: #fff; }
 .level-name { font-size: 13px; font-weight: 500; color: var(--text); flex: 1; }
 .level-price { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: var(--text-muted); }
 
 /* Number input */
-.num-input { width: 72px; border: 1.5px solid var(--border); border-radius: 8px; padding: 7px 10px; font-family: 'Montserrat', sans-serif; font-size: 13px; text-align: center; background: var(--surface); color: var(--text); outline: none; transition: border-color 0.15s; }
+.num-input { width: 72px; border: 1.5px solid var(--border); border-radius: 5px; padding: 7px 10px; font-family: 'Montserrat', sans-serif; font-size: 13px; text-align: center; background: var(--surface); color: var(--text); outline: none; transition: border-color 0.15s; }
 .num-input:focus { border-color: var(--accent); }
 
 /* Option rows */
-.option-row { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 9px; background: var(--surface); margin-bottom: 8px; flex-wrap: wrap; }
+.option-row { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 5px; background: var(--surface); margin-bottom: 8px; flex-wrap: wrap; }
 .option-row:last-child { margin-bottom: 0; }
 .opt-label { font-size: 12px; font-weight: 600; min-width: 95px; color: var(--text); }
 .opt-unit { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
-.opt-select { border: 1.5px solid var(--border); border-radius: 7px; padding: 5px 26px 5px 9px; font-family: 'Noto Sans JP', sans-serif; font-size: 12px; background: var(--surface2); color: var(--text); outline: none; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%239f9f9f' d='M1 1l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 9px center; flex-shrink: 0; transition: border-color 0.15s; }
+.opt-select { border: 1.5px solid var(--border); border-radius: 5px; padding: 5px 26px 5px 9px; font-family: 'Noto Sans JP', sans-serif; font-size: 12px; background: var(--surface2); color: var(--text); outline: none; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%239f9f9f' d='M1 1l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 9px center; flex-shrink: 0; transition: border-color 0.15s; }
 .opt-select:focus { border-color: var(--accent); }
-.opt-qty { width: 56px; border: 1.5px solid var(--border); border-radius: 7px; padding: 5px 8px; font-family: 'Montserrat', sans-serif; font-size: 12px; text-align: center; background: var(--surface2); color: var(--text); outline: none; transition: border-color 0.15s; }
+.opt-qty { width: 56px; border: 1.5px solid var(--border); border-radius: 5px; padding: 5px 8px; font-family: 'Montserrat', sans-serif; font-size: 12px; text-align: center; background: var(--surface2); color: var(--text); outline: none; transition: border-color 0.15s; }
 .opt-qty:focus { border-color: var(--accent); }
 
 /* Revision */
-.revision-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 9px; background: var(--surface); }
+.revision-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 5px; background: var(--surface); }
 .revision-label { font-size: 13px; flex: 1; }
 .revision-hint { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
 /* Express */
-.express-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 9px; background: var(--surface); transition: all 0.15s; }
+.express-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 5px; background: var(--surface); transition: all 0.15s; }
 .express-row.active { border-color: var(--accent2); background: #fef5f1; }
-.express-toggle { width: 38px; height: 22px; background: var(--border); border-radius: 11px; position: relative; transition: background 0.2s; flex-shrink: 0; cursor: pointer; }
+.express-toggle { width: 38px; height: 22px; background: var(--border); border-radius: 5px; position: relative; transition: background 0.2s; flex-shrink: 0; cursor: pointer; }
 .express-toggle.on { background: var(--accent2); }
-.express-toggle::after { content: ''; position: absolute; left: 3px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); transition: transform 0.2s; }
+.express-toggle::after { content: ''; position: absolute; left: 3px; top: 3px; width: 16px; height: 16px; border-radius: 5px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); transition: transform 0.2s; }
 .express-toggle.on::after { transform: translateX(16px); }
 .express-text { font-size: 13px; font-weight: 500; flex: 1; cursor: pointer; }
 
 /* Summary */
-.summary-card { position: sticky; top: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-lg); overflow: hidden; }
-.summary-header { background: var(--accent); padding: 18px 20px 16px; color: #fff; }
+.summary-card { position: sticky; top: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 5px; box-shadow: var(--shadow-lg); overflow: hidden; }
+.summary-header { background: var(--result-bg); padding: 18px 20px 16px; color: #fff; }
 .sum-media { font-size: 11px; opacity: 0.6; margin-bottom: 4px; }
 .summary-header h2 { font-size: 12px; font-weight: 500; opacity: 0.75; margin-bottom: 6px; }
 .total-amount { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 500; letter-spacing: -1px; color: #fff; }
@@ -150,11 +149,11 @@ body {
 .tax-row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 2px solid var(--accent); }
 .tax-label { font-size: 12px; font-weight: 700; color: var(--accent); }
 .tax-val { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent); }
-.express-indicator { display: none; background: #fef5f1; border: 1px solid #f8d5c8; border-radius: 7px; padding: 7px 11px; margin-top: 10px; font-size: 11px; color: var(--accent2); font-weight: 600; }
+.express-indicator { display: none; background: #fef5f1; border: 1px solid #f8d5c8; border-radius: 5px; padding: 7px 11px; margin-top: 10px; font-size: 11px; color: var(--accent2); font-weight: 600; }
 .express-indicator.show { display: block; }
-.notice { margin-top: 12px; padding: 9px 13px; background: var(--green-bg); border-radius: 8px; font-size: 11px; color: var(--green); line-height: 1.6; font-weight: 500; }
+.notice { margin-top: 12px; padding: 9px 13px; border-radius: 5px; font-size: 11px; color: var(--message-color); line-height: 1.6; font-weight: 500; }
 .sub-note { font-size: 11px; color: var(--text-muted); margin-top: 6px; padding-left: 4px; line-height: 1.6; }
-.a4-note { font-size: 11px; color: var(--accent2); font-weight: 600; margin-bottom: 12px; padding: 6px 10px; background: #fef5f1; border-radius: 6px; }
+.a4-note { font-size: 11px; color: var(--accent2); font-weight: 600; margin-bottom: 12px; padding: 6px 10px; background: #fef5f1; border-radius: 5px; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 @media (max-width: 480px) { .two-col { grid-template-columns: 1fr; } }
 .field-wrap { display: flex; flex-direction: column; gap: 5px; }
@@ -163,16 +162,19 @@ body {
 .panel.active { display: block; }
 .warn-note { font-size: 11px; color: var(--accent2); font-weight: 600; margin-top: 6px; display: none; }
 .warn-note.show { display: block; }
+
+.level-item { width: 100%; text-align: left; color: var(--text); font-family: inherit; }
+.express-toggle { border: 0; padding: 0; }
+:focus-visible { outline: 3px solid #185f83; outline-offset: 3px; }
+@media(prefers-reduced-motion:reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+.caution-note { background: transparent; color: var(--message-color); }
 </style>
 </head>
 <body>
-
 <div class="page-header">
   <div class="header-left">
-    <div class="sub">営業用ツール</div>
     <h1>制作費見積もり</h1>
   </div>
-  <span class="badge">DESIGN &amp; PRODUCTION ONLY</span>
 </div>
 
 <div class="layout">
@@ -201,15 +203,12 @@ body {
       <div class="section-label">サイズ</div>
       <div class="size-grid">
         <button class="size-btn active" data-add="0" onclick="clickSizeBtn(this,'meishi-sizes')">55×91mm</button>
-        <button class="size-btn" data-add="5000" onclick="clickSizeBtn(this,'meishi-sizes')">変形（+¥5,000）</button>
+        <button class="size-btn" data-add="0" onclick="clickSizeBtn(this,'meishi-sizes')">変形</button>
       </div>
-      <div class="section-label" style="margin-top:18px;">制作レベル</div>
-      <div class="level-list">
-        <div class="level-item active" data-price="20000" onclick="clickLevelItem(this,'meishi-levels')">
-          <div class="level-radio"></div>
-          <span class="level-name">ベース</span>
-          <span class="level-price">¥20,000</span>
-        </div>
+      <div class="section-label" style="margin-top:18px;" id="meishi-design-label">デザイン制作</div>
+      <div class="size-grid" id="meishi-design" role="group" aria-labelledby="meishi-design-label">
+        <button type="button" class="size-btn" data-price="15000" onclick="clickSizeBtn(this,'meishi-design')">片面（¥15,000）</button>
+        <button type="button" class="size-btn active" data-price="20000" onclick="clickSizeBtn(this,'meishi-design')">両面（¥20,000）</button>
       </div>
     </div>
   </div>
@@ -257,7 +256,7 @@ body {
       <h2>折パンフレット（素材支給）　制作内容</h2>
     </div>
     <div class="card-body">
-      <div class="a4-note">※価格はA4サイズの場合の目安です</div>
+      <div class="a4-note caution-note">※価格はA4サイズの場合の目安です</div>
       <div class="field-wrap" style="margin-bottom:16px;">
         <div class="field-label">サイズ</div>
         <select class="styled-select" id="pamphlet-size" onchange="calc()">
@@ -296,7 +295,7 @@ body {
       <h2>冊子（素材支給）　制作内容</h2>
     </div>
     <div class="card-body">
-      <div class="a4-note">※価格はA4サイズの場合の目安です</div>
+      <div class="a4-note caution-note">※価格はA4サイズの場合の目安です</div>
       <div class="two-col" style="margin-bottom:14px;">
         <div class="field-wrap">
           <div class="field-label">サイズ</div>
@@ -457,7 +456,7 @@ body {
   </div>
   <div class="card-body">
     <div class="express-row" id="express-row">
-      <div class="express-toggle" id="express-toggle" onclick="toggleExpress()"></div>
+      <button type="button" class="express-toggle" id="express-toggle" onclick="toggleExpress()" role="switch" aria-checked="false" aria-label="特急対応を追加する"></button>
       <span class="express-text" onclick="toggleExpress()">特急対応を追加する</span>
       <select class="opt-select" id="express-rate" onchange="calc()" style="min-width:80px;">
         <option value="0.2">+20%</option>
@@ -510,7 +509,7 @@ body {
         <span class="tax-val" id="bd-tax">¥0</span>
       </div>
       <div class="express-indicator" id="express-indicator"></div>
-      <div class="notice">※印刷費は仕様確定後に別途お見積もりいたします</div>
+      <div class="notice caution-note">※印刷費は仕様確定後に別途お見積もりいたします</div>
     </div>
   </div>
 </div>
@@ -518,6 +517,55 @@ body {
 </div><!-- end layout -->
 
 <script>
+// 視覚上の選択とキーボード・読み上げの状態を揃える。
+const mediaTabs = [...document.querySelectorAll('.tabs .tab-btn')];
+document.querySelector('.tabs').setAttribute('role', 'tablist');
+document.querySelector('.tabs').setAttribute('aria-label', '制作媒体');
+mediaTabs.forEach(button => {
+  const key = button.getAttribute('onclick').match(/switchTab\('([^']+)'/)[1];
+  button.id = 'tab-' + key;
+  button.setAttribute('role', 'tab');
+  button.setAttribute('aria-controls', 'panel-' + key);
+  const panel = document.getElementById('panel-' + key);
+  panel.setAttribute('role', 'tabpanel');
+  panel.setAttribute('aria-labelledby', button.id);
+  panel.tabIndex = 0;
+});
+function syncSelection() {
+  mediaTabs.forEach(button => {
+    const selected = button.classList.contains('active');
+    button.setAttribute('aria-selected', String(selected));
+    button.tabIndex = selected ? 0 : -1;
+  });
+  document.querySelectorAll('.size-btn, .level-item').forEach(button => {
+    button.setAttribute('aria-pressed', String(button.classList.contains('active')));
+  });
+}
+document.querySelector('.tabs').addEventListener('keydown', event => {
+  const current = mediaTabs.indexOf(event.target);
+  if (current < 0 || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+  event.preventDefault();
+  const next = event.key === 'Home' ? 0 : event.key === 'End' ? mediaTabs.length - 1 :
+    (current + (event.key === 'ArrowRight' ? 1 : -1) + mediaTabs.length) % mediaTabs.length;
+  mediaTabs[next].click();
+  mediaTabs[next].focus();
+});
+document.querySelectorAll('.field-wrap').forEach((field, index) => {
+  const label = field.querySelector('.field-label');
+  if (!label) return;
+  label.id = 'field-label-' + index;
+  field.querySelectorAll('input, select').forEach(control => control.setAttribute('aria-labelledby', label.id));
+});
+document.querySelectorAll('.option-row').forEach(row => {
+  const label = row.querySelector('.opt-label').textContent.trim();
+  row.querySelectorAll('input, select').forEach(control => {
+    control.setAttribute('aria-label', label + (control.tagName === 'SELECT' ? ' 単価' : ' 数量'));
+  });
+});
+document.getElementById('revision-count').setAttribute('aria-label', '修正回数');
+document.getElementById('express-rate').setAttribute('aria-label', '特急対応の割増率');
+syncSelection();
+
 let currentTab = 'meishi';
 let expressOn = false;
 
@@ -530,6 +578,7 @@ function switchTab(tab, btn) {
   currentTab = tab;
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  syncSelection();
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-' + tab).classList.add('active');
   document.getElementById('sum-media').textContent = mediaNames[tab];
@@ -540,12 +589,14 @@ function switchTab(tab, btn) {
 function clickSizeBtn(btn, groupId) {
   btn.closest('.size-grid').querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  syncSelection();
   calc();
 }
 
 function clickLevelItem(item, groupId) {
   item.closest('.level-list').querySelectorAll('.level-item').forEach(i => i.classList.remove('active'));
   item.classList.add('active');
+  syncSelection();
   calc();
 }
 
@@ -558,6 +609,7 @@ function pamphletCheck() {
 
 function toggleExpress() {
   expressOn = !expressOn;
+  document.getElementById('express-toggle').setAttribute('aria-checked', String(expressOn));
   document.getElementById('express-toggle').classList.toggle('on', expressOn);
   document.getElementById('express-row').classList.toggle('active', expressOn);
   calc();
@@ -566,11 +618,8 @@ function toggleExpress() {
 function getProduction() {
   switch (currentTab) {
     case 'meishi': {
-      const sizeBtn = document.querySelector('#panel-meishi .size-btn.active');
-      const levelItem = document.querySelector('#panel-meishi .level-item.active');
-      const sizeAdd = sizeBtn ? parseInt(sizeBtn.dataset.add) || 0 : 0;
-      const lvl = levelItem ? parseInt(levelItem.dataset.price) || 0 : 0;
-      return lvl + sizeAdd;
+      const design = document.querySelector('#meishi-design .size-btn.active');
+      return design ? parseInt(design.dataset.price) || 0 : 0;
     }
     case 'chirashi':
       return parseInt(document.getElementById('chirashi-level').value) || 0;
@@ -627,7 +676,7 @@ function calc() {
 
   const statusEl = document.getElementById('revision-status');
   if (revisions === 0) statusEl.textContent = '';
-  else if (revisions <= 3) statusEl.innerHTML = `<span style="color:var(--green);font-weight:600;">✓ ${revisions}回 — 無料範囲内です</span>`;
+  else if (revisions <= 3) statusEl.innerHTML = `<span style="color:var(--message-color);font-weight:600;">✓ ${revisions}回 — 無料範囲内です</span>`;
   else {
     const ex = revisions - 3;
     statusEl.innerHTML = `<span style="color:var(--accent2);font-weight:600;">⚠ ${revisions}回 — 無料3回 + 追加${ex}回（¥${(ex*3000).toLocaleString()}）</span>`;

@@ -9,15 +9,13 @@
 <style>
 :root {
   --bg: #f1f4f6;
-  --bg-deep: #dfe4ea;
   --surface: #ffffff;
   --border: #d9dee3;
   --text: #303030;
   --text-muted: #9f9f9f;
-  --text-faint: #b0b0b0;
-  --accent: #005aff;
-  --accent2: #ff3c1e;
-  --radius: 14px;
+  --accent: #00d7e6;
+  --accent2: #ff5281;
+  --radius: 5px;
   --shadow: 0 2px 16px rgba(48,48,48,0.06);
   --shadow-lg: 0 10px 32px rgba(48,48,48,0.10);
 }
@@ -57,7 +55,7 @@ body {
   display: inline-block;
   width: 10px;
   height: 10px;
-  border-radius: 3px;
+  border-radius: 5px;
   background: var(--accent);
 }
 
@@ -111,7 +109,7 @@ body {
   background: var(--surface);
   border: 1px solid var(--border);
   padding: 32px 28px;
-  border-radius: var(--radius);
+  border-radius: 5px;
   box-shadow: var(--shadow);
   text-decoration: none;
   color: var(--text);
@@ -128,7 +126,7 @@ body {
 .card-mark {
   width: 34px;
   height: 34px;
-  border-radius: 9px;
+  border-radius: 5px;
   background: var(--accent);
   margin-bottom: 20px;
 }
@@ -149,6 +147,10 @@ body {
   line-height: 1.6;
   margin: 0;
 }
+
+.main .title { font-size: 24px; margin: 0 0 24px; }
+:focus-visible { outline: 3px solid #185f83; outline-offset: 3px; }
+@media(prefers-reduced-motion:reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 </style>
 </head>
 
@@ -162,11 +164,7 @@ body {
 </div>
 
 <div class="main">
-  <div class="eyebrow">Tool Collection</div>
-  <div class="title">
-    必要なツールを、<br>
-    シンプルに。
-  </div>
+  <h1 class="title">ツール一覧</h1>
 
   <div class="apps">
     <a href="./F_App/F_App.html" class="card">

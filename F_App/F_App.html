@@ -8,10 +8,11 @@
 <style>
   /* ===== CSS変数（テーマカラー・フォント） ===== */
   :root {
-    --primary: #005aff;       /* メインカラー（ブルー） */
+    --result-bg: #001410;  /* 計算結果の背景 */
+    --primary: #00d7e6;       /* メインカラー（シアン） */
     --primary-light: #337aff; /* 明るいブルー */
-    --accent: #ff3c1e;        /* アクセント（レッドオレンジ） */
-    --accent-light: #ffe9e4;  /* アクセント薄色 */
+    --accent: #ff5281;        /* アクセント（ピンク） */
+
     --bg: #f1f4f6;            /* 背景色（クールグレー） */
     --surface: #ffffff;       /* カード背景 */
     --surface2: #f5f7f9;      /* サブ背景 */
@@ -19,9 +20,9 @@
     --text: #303030;          /* メインテキスト */
     --text-muted: #74777a;    /* サブテキスト */
     --text-hint: #b0b0b0;     /* ヒントテキスト */
-    --success: #1f8a54;       /* 成功（緑） */
-    --radius: 12px;
-    --radius-sm: 8px;
+
+    --radius: 5px;
+    --radius-sm: 5px;
     --shadow: 0 2px 12px rgba(48,48,48,0.06);
     --shadow-lg: 0 4px 24px rgba(48,48,48,0.10);
   }
@@ -66,7 +67,7 @@
   .logo-icon {
     width: 36px; height: 36px;
     background: var(--primary);
-    border-radius: 8px;
+    border-radius: 5px;
     display: flex; align-items: center; justify-content: center;
     font-size: 18px; font-weight: 700; color: #ffffff;
     font-family: 'Montserrat', sans-serif;
@@ -99,7 +100,7 @@
     border: 1px solid rgba(48,48,48,0.14);
     color: rgba(48,48,48,0.75);
     padding: 6px 14px;
-    border-radius: 20px;
+    border-radius: 5px;
     font-size: 12px;
     font-family: 'Noto Sans JP', sans-serif;
     cursor: pointer;
@@ -149,7 +150,7 @@
   /* ===== カード ===== */
   .card {
     background: var(--surface);
-    border-radius: var(--radius);
+    border-radius: 5px;
     border: 1px solid var(--border);
     padding: 20px;
     box-shadow: var(--shadow);
@@ -165,8 +166,8 @@
   .card-mark {
     width: 10px;
     height: 10px;
-    border-radius: 3px;
-    background: #ff3c1e;
+    border-radius: 5px;
+    background: #ff5281;
     flex-shrink: 0;
     margin-top: 4px;
   }
@@ -202,7 +203,7 @@
     height: 38px;
     padding: 0 12px;
     border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
+    border-radius: 5px;
     font-size: 15px;
     font-family: 'Noto Sans JP', sans-serif;
     background: var(--surface2);
@@ -221,8 +222,8 @@
 
   /* ===== 結果表示 ===== */
   .result-box {
-    background: var(--primary);
-    border-radius: var(--radius-sm);
+    background: var(--result-bg);
+    border-radius: 5px;
     padding: 14px 16px;
     margin-top: 14px;
   }
@@ -260,8 +261,8 @@
     margin-top: 14px;
   }
   .result-item {
-    background: var(--primary);
-    border-radius: var(--radius-sm);
+    background: var(--result-bg);
+    border-radius: 5px;
     padding: 10px 12px;
   }
   .result-item .result-label { font-size: 10px; }
@@ -270,7 +271,7 @@
   /* ===== ローンシミュレーション用テーブル ===== */
   .loan-summary {
     margin-top: 14px;
-    border-radius: var(--radius-sm);
+    border-radius: 5px;
     overflow: hidden;
     border: 1px solid var(--border);
   }
@@ -303,9 +304,9 @@
 
   /* ===== スイッチャー（坪⇄平米） ===== */
   .swap-btn {
-    background: var(--accent-light);
+    background: #001410;
     border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
+    border-radius: 5px;
     padding: 6px 12px;
     font-size: 13px;
     cursor: pointer;
@@ -316,6 +317,19 @@
     white-space: nowrap;
     margin-top: 20px;
   }
+  /* ラベルと操作欄を別の行にし、左右の入力と切替を中央揃えにする */
+  .area-conversion {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 6px 8px;
+    align-items: center;
+  }
+  .area-conversion .field { display: contents; }
+  .area-conversion label { grid-row: 1; margin-bottom: 0; }
+  #area-label-a, #area-a { grid-column: 1; }
+  #area-label-b, #area-b { grid-column: 3; }
+  .area-conversion input, .area-conversion .swap-btn { grid-row: 2; min-width: 0; }
+  .area-conversion .swap-btn { grid-column: 2; margin-top: 0; align-self: center; }
   .swap-btn:hover { background: var(--accent); color: white; }
 
   /* ===== フッター ===== */
@@ -329,6 +343,10 @@
 
   /* ===== セクション間スペース ===== */
   .section-gap { margin-top: 32px; }
+
+:focus-visible { outline: 3px solid #185f83; outline-offset: 3px; }
+@media(prefers-reduced-motion:reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+.caution-note { background: transparent; color: #341f8a; }
 </style>
 </head>
 <body>
@@ -345,11 +363,11 @@
     </div>
   </div>
   <!-- タブナビ -->
-  <nav class="tab-nav" role="tablist">
-    <button class="tab-btn active" onclick="showTab('basic')" role="tab">基本計算</button>
-    <button class="tab-btn" onclick="showTab('realestate')" role="tab">不動産専門</button>
-    <button class="tab-btn" onclick="showTab('loan')" role="tab">ローン</button>
-    <button class="tab-btn" onclick="showTab('yield')" role="tab">利回り・収益</button>
+  <nav class="tab-nav" role="tablist" aria-label="計算カテゴリー">
+    <button class="tab-btn active" onclick="showTab('basic')" role="tab" id="tab-basic" aria-controls="basic" aria-selected="true" tabindex="0">基本計算</button>
+    <button class="tab-btn" onclick="showTab('realestate')" role="tab" id="tab-realestate" aria-controls="realestate" aria-selected="false" tabindex="-1">不動産専門</button>
+    <button class="tab-btn" onclick="showTab('loan')" role="tab" id="tab-loan" aria-controls="loan" aria-selected="false" tabindex="-1">ローン</button>
+    <button class="tab-btn" onclick="showTab('yield')" role="tab" id="tab-yield" aria-controls="yield" aria-selected="false" tabindex="-1">利回り・収益</button>
   </nav>
 </header>
 
@@ -358,7 +376,7 @@
   <!-- ======================================
        セクション1: 基本計算
   ====================================== -->
-  <section id="basic" class="section active">
+  <section role="tabpanel" aria-labelledby="tab-basic" id="basic" class="section active">
     <p class="section-title">基本計算・単位換算</p>
     <div class="card-grid">
 
@@ -425,7 +443,7 @@
             <div class="card-sub">1坪 ≈ 3.3058 m²</div>
           </div>
         </div>
-        <div class="field-row">
+        <div class="field-row area-conversion">
           <div class="field">
             <label id="area-label-a">坪</label>
             <input type="number" id="area-a" placeholder="0" oninput="calcArea()">
@@ -433,7 +451,7 @@
           <button class="swap-btn" onclick="swapArea()">⇄ 切替</button>
           <div class="field">
             <label id="area-label-b">平米（m²）</label>
-            <input type="number" id="area-b" placeholder="0" readonly style="background:#f0ede8;color:var(--text-muted)">
+            <input type="number" id="area-b" placeholder="0" readonly>
           </div>
         </div>
         <div class="hint" id="area-hint">坪を入力すると平米に変換します。「切替」で逆方向も計算できます。</div>
@@ -538,11 +556,11 @@
         <div class="result-grid" id="dist-result" style="display:none">
           <div class="result-item">
             <div class="result-label">🚶 徒歩（80m/分）</div>
-            <div><span class="result-value" id="dist-walk">—</span><span style="font-size:12px;color:rgba(255,255,255,0.6)"> 分</span></div>
+            <div><span class="result-value" id="dist-walk">—</span><span class="result-unit"> 分</span></div>
           </div>
           <div class="result-item">
             <div class="result-label">🚗 車（60km/h）</div>
-            <div><span class="result-value" id="dist-car">—</span><span style="font-size:12px;color:rgba(255,255,255,0.6)"> 分</span></div>
+            <div><span class="result-value" id="dist-car">—</span><span class="result-unit"> 分</span></div>
           </div>
         </div>
       </div>
@@ -554,7 +572,7 @@
   <!-- ======================================
        セクション2: 不動産専門
   ====================================== -->
-  <section id="realestate" class="section">
+  <section role="tabpanel" aria-labelledby="tab-realestate" id="realestate" class="section">
     <p class="section-title">不動産専門ツール</p>
     <div class="card-grid">
 
@@ -587,11 +605,11 @@
         <div class="result-grid" id="unit-result" style="display:none">
           <div class="result-item">
             <div class="result-label">坪単価</div>
-            <div><span class="result-value" id="unit-tsubo">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> 万円/坪</span></div>
+            <div><span class="result-value" id="unit-tsubo">—</span><span class="result-unit"> 万円/坪</span></div>
           </div>
           <div class="result-item">
             <div class="result-label">平米単価</div>
-            <div><span class="result-value" id="unit-m2">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> 万円/m²</span></div>
+            <div><span class="result-value" id="unit-m2">—</span><span class="result-unit"> 万円/m²</span></div>
           </div>
         </div>
       </div>
@@ -622,19 +640,19 @@
         <div class="result-grid" id="build-result" style="display:none">
           <div class="result-item">
             <div class="result-label">最大建築面積（建ぺい）</div>
-            <div><span class="result-value" id="build-area">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> m²</span></div>
+            <div><span class="result-value" id="build-area">—</span><span class="result-unit"> m²</span></div>
           </div>
           <div class="result-item">
             <div class="result-label">最大延床面積（容積）</div>
-            <div><span class="result-value" id="floor-area">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> m²</span></div>
+            <div><span class="result-value" id="floor-area">—</span><span class="result-unit"> m²</span></div>
           </div>
           <div class="result-item">
             <div class="result-label">建築面積（坪）</div>
-            <div><span class="result-value" id="build-tsubo">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> 坪</span></div>
+            <div><span class="result-value" id="build-tsubo">—</span><span class="result-unit"> 坪</span></div>
           </div>
           <div class="result-item">
             <div class="result-label">延床面積（坪）</div>
-            <div><span class="result-value" id="floor-tsubo">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> 坪</span></div>
+            <div><span class="result-value" id="floor-tsubo">—</span><span class="result-unit"> 坪</span></div>
           </div>
         </div>
       </div>
@@ -666,11 +684,11 @@
         <div class="result-grid" id="land-build-result" style="display:none">
           <div class="result-item">
             <div class="result-label">最大建築面積</div>
-            <div><span class="result-value" id="lb-build">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> m²</span></div>
+            <div><span class="result-value" id="lb-build">—</span><span class="result-unit"> m²</span></div>
           </div>
           <div class="result-item">
             <div class="result-label">最大延床面積</div>
-            <div><span class="result-value" id="lb-floor">—</span><span style="font-size:11px;color:rgba(255,255,255,0.6)"> m²</span></div>
+            <div><span class="result-value" id="lb-floor">—</span><span class="result-unit"> m²</span></div>
           </div>
         </div>
       </div>
@@ -761,7 +779,7 @@
   <!-- ======================================
        セクション3: ローンシミュレーション
   ====================================== -->
-  <section id="loan" class="section">
+  <section role="tabpanel" aria-labelledby="tab-loan" id="loan" class="section">
     <p class="section-title">ローン返済シミュレーション（元利均等）</p>
     <div class="card-grid">
 
@@ -810,7 +828,7 @@
             <span class="loan-row-val" id="loan-ratio">—</span>
           </div>
         </div>
-        <div class="hint" style="margin-top:10px">※元利均等返済方式。ボーナス払い・繰上返済は考慮していません。</div>
+        <div class="hint caution-note" style="margin-top:10px">※元利均等返済方式。ボーナス払い・繰上返済は考慮していません。</div>
       </div>
 
     </div>
@@ -820,7 +838,7 @@
   <!-- ======================================
        セクション4: 利回り・収益
   ====================================== -->
-  <section id="yield" class="section">
+  <section role="tabpanel" aria-labelledby="tab-yield" id="yield" class="section">
     <p class="section-title">利回り・収益計算</p>
     <div class="card-grid">
 
@@ -842,17 +860,17 @@
           <input type="number" id="yield-income" placeholder="例: 300" oninput="calcYield()">
         </div>
         <div class="field" style="border-top:1px solid var(--border);padding-top:12px;margin-top:4px;">
-          <label>年間諸経費（万円）※実質利回り用</label>
+          <label>年間諸経費（万円）<span class="caution-note">※実質利回り用</span></label>
           <input type="number" id="yield-cost" placeholder="例: 50（管理費・固定資産税等）" oninput="calcYield()">
         </div>
         <div class="result-grid" id="yield-result" style="display:none">
           <div class="result-item">
             <div class="result-label">表面利回り</div>
-            <div><span class="result-value" id="yield-gross">—</span><span style="font-size:12px;color:rgba(255,255,255,0.6)"> %</span></div>
+            <div><span class="result-value" id="yield-gross">—</span><span class="result-unit"> %</span></div>
           </div>
           <div class="result-item">
             <div class="result-label">実質利回り</div>
-            <div><span class="result-value" id="yield-net">—</span><span style="font-size:12px;color:rgba(255,255,255,0.6)"> %</span></div>
+            <div><span class="result-value" id="yield-net">—</span><span class="result-unit"> %</span></div>
           </div>
         </div>
         <div class="hint">表面利回り＝年間家賃÷購入価格×100<br>実質利回り＝（年間家賃－諸経費）÷購入価格×100</div>
@@ -899,6 +917,20 @@
 </footer>
 
 <script>
+document.querySelector('.tab-nav').addEventListener('keydown', event => {
+  const tabs = [...document.querySelectorAll('.tab-nav [role="tab"]')];
+  const current = tabs.indexOf(document.activeElement);
+  if (current < 0 || !['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+  event.preventDefault();
+  const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (current + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+  tabs[next].click(); tabs[next].focus();
+});
+document.querySelectorAll('.field').forEach(field => {
+  const label = field.querySelector('label');
+  const input = field.querySelector('input[id], select[id]');
+  if (label && input) label.htmlFor = input.id;
+});
+
 // ===================================================
 // タブ切り替え
 // ===================================================
@@ -909,7 +941,12 @@ function showTab(id) {
   // 対象を表示
   document.getElementById(id).classList.add('active');
   // ボタンをアクティブに
-  event.target.classList.add('active');
+  document.querySelectorAll('.tab-nav .tab-btn').forEach(button => {
+    const selected = button.getAttribute('aria-controls') === id;
+    button.classList.toggle('active', selected);
+    button.setAttribute('aria-selected', String(selected));
+    button.tabIndex = selected ? 0 : -1;
+  });
 }
 
 // ===================================================
