@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>InDesign 設定・使い方メモ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#f1f4f6; --surface:#ffffff; --surface2:#f5f7f9; --border:#d9dee3; --text:#303030; --accent:#ff5281; --accent2:#00d7e6; --message-color:#341f8a; --radius:5px; --shadow:0 1px 12px rgba(48,48,48,.06); }
+* { box-sizing:border-box; }
+body { margin:0; padding:24px 16px 80px; background:var(--bg); color:var(--text); font-family:'Noto Sans JP',sans-serif; font-size:13px; line-height:1.8; overflow-wrap:anywhere; }
+.page-header, .layout, .app-nav { max-width:980px; margin:0 auto; }
+.page-header { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
+h1 { font-size:20px; line-height:1.5; margin:0; color:var(--accent); }
+a { color:var(--text); text-underline-offset:3px; }
+.home-btn { background:var(--accent2); padding:5px 10px; border-radius:var(--radius); font-size:11px; font-weight:700; text-decoration:none; }
+.app-nav { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px; }
+.app-nav a { padding:7px 13px; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); font-size:12px; text-decoration:none; }
+.app-nav a[aria-current] { background:var(--accent); border-color:var(--accent); color:var(--text); font-weight:700; }
+.layout { display:grid; grid-template-columns:minmax(0,1fr) 260px; gap:20px; align-items:start; }
+.content,aside { min-width:0; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:14px; }
+.card h2 { display:flex; align-items:center; gap:9px; margin:0; padding:13px 18px 12px; background:var(--surface2); border-bottom:1px solid var(--border); border-radius:5px 5px 0 0; color:var(--accent); font-size:13px; }
+.card h2::before { content:''; width:10px; height:10px; flex-shrink:0; border-radius:5px; background:var(--accent2); }
+.card-body { padding:16px 18px; }
+ul { margin:0; padding-left:20px; }
+li + li { margin-top:9px; }
+li ul { margin-top:8px; }
+p { margin:0 0 10px; } p:last-child { margin-bottom:0; }
+code { font-family:inherit; background:var(--surface2); padding:1px 4px; border-radius:5px; }
+.caution-note,.pending { color:var(--message-color); background:transparent; font-size:12px; }
+aside { position:sticky; top:20px; }
+.toc { list-style:none; padding:0; } .toc a { display:block; padding:4px 0; }
+section { scroll-margin-top:20px; }
+:focus-visible { outline:3px solid #185f83; outline-offset:3px; }
+a:hover { text-decoration:underline; }
+@media(max-width:760px) { .layout { grid-template-columns:minmax(0,1fr); } aside { position:static; grid-row:1; } }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+</style></head><body>
+<header class="page-header"><h1>InDesign 設定・使い方メモ</h1><a class="home-btn" href="../index.html">トップへ</a></header>
+<nav class="app-nav" aria-label="アプリ別メモ"><a href="../InDesign_settings/InDesign_settings.html" aria-current="page">InDesign</a><a href="../Illustrator_settings/Illustrator_settings.html">Illustrator</a><a href="../Photoshop_settings/Photoshop_settings.html">Photoshop</a></nav>
+<div class="layout"><main class="content"><!-- 最初に変えておきたい設定：下のリストへ項目を追記 -->
+<section class="card" id="section-1"><h2>最初に変えておきたい設定</h2><div class="card-body"><ul><li>InDesign_PerfectBook_v12.pdfのChapter 1「1-06 変更しておきたい設定」(誌面p.052〜055)をもとにメモする</li><li>掲載テーマ: 環境設定、段落パネル、文字パネル、テキストフレーム設定、ハイフネーション設定</li><li>Creative Cloud 環境設定<ul><li>以前のバージョンを残す設定に変更。自動更新（アップデート）はオフにしておく。</li><li>バージョンを新規インストールするときは、「以前のバージョンを削除」を必ずオフにする。</li></ul></li></ul></div></section><!-- よく使うショートカット一覧：下のリストへ項目を追記 -->
+<section class="card" id="section-2"><h2>よく使うショートカット一覧</h2><div class="card-body"><ul><li class="pending">(例: よく使うツール切り替え、パネル表示 等 → 具体的なキーを追記)</li><li>⌘ + Option + Return：カラー値のいずれかを変更したあとに押すと、他のカラー値も同じ割合で変更される。<ul><li>例：C100 / M50 / Y60 / K20 の状態でCを50に変更して⌘ + Option + Returnを押すと、50%の比率が適用されM25 / Y30 / K10に変更される。</li></ul></li></ul></div></section><!-- 何度も調べてしまう操作・使い方：下のリストへ項目を追記 -->
+<section class="card" id="section-3"><h2>何度も調べてしまう操作・使い方</h2><div class="card-body"><ul><li class="pending">(例: マスターページ・スタイルの設定方法、入稿データの作り方 等 → 具体的な項目を追記)</li></ul></div></section><!-- 作業時の確認メモ：下のリストへ項目を追記 -->
+<section class="card" id="section-4"><h2>作業時の確認メモ</h2><div class="card-body"><ul><li class="pending">(例: 入稿前の確認事項、データ整理ルール 等 → 具体的な項目を追記)</li></ul></div></section></main>
+<aside aria-label="目次と参考資料"><nav class="card" aria-label="ページ内目次"><h2>目次</h2><div class="card-body"><ul class="toc"><li><a href="#section-1">最初に変えておきたい設定</a></li><li><a href="#section-2">よく使うショートカット一覧</a></li><li><a href="#section-3">何度も調べてしまう操作・使い方</a></li><li><a href="#section-4">作業時の確認メモ</a></li></ul></div></nav>
+<section class="card" id="references"><h2>参考資料</h2><div class="card-body"><p>InDesign PerfectBook</p><p class="pending">共有リンク設定待ち</p>
+<!-- 制限付きGoogle Driveの共有URL取得後、上の設定待ち表示を次のリンクに置き換える。
+<a href="共有URL" target="_blank" rel="noopener noreferrer">InDesign PerfectBookを開く（新しいタブ）</a>
+PDF本体はリポジトリへ配置しない。 -->
+<p class="caution-note">※参考PDFは本人だけがアクセスできるGoogle Driveに保存します。</p></div></section>
+<p class="caution-note">※現在のメモをまとめた初期版です。「例」の項目は追記予定です。</p></aside></div>
+</body></html>
