@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>おすすめフォント | My Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#f1f4f6; --surface:#ffffff; --border:#d9dee3; --text:#303030; --text-muted:#74777a; --accent:#ff5281; --accent2:#00d7e6; --radius:5px; --shadow:0 1px 12px rgba(48,48,48,.06); }
+* { box-sizing:border-box; }
+body { margin:0; padding:24px 16px 80px; background:var(--bg); color:var(--text); font-family:'Noto Sans JP',sans-serif; font-size:13px; line-height:1.8; overflow-wrap:anywhere; }
+.page-header, .category-nav, main { max-width:980px; margin:0 auto; }
+.page-header { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
+h1 { margin:0; font-size:20px; line-height:1.5; color:var(--accent); }
+.home-btn { display:inline-block; padding:3px 9px; background:var(--accent2); color:#fff; font-size:10px; font-weight:700; line-height:normal; text-decoration:none; border-radius:5px; letter-spacing:0.5px; }
+.category-nav { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px; }
+.category-nav a { padding:7px 13px; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface); color:var(--text); font-size:12px; text-decoration:none; transition:all .15s; }
+.category-nav a:hover { border-color:var(--accent); color:var(--accent); }
+.category + .category { margin-top:32px; }
+.category { scroll-margin-top:20px; }
+h2 { display:flex; align-items:center; gap:9px; margin:0 0 14px; color:var(--accent); font-size:13px; }
+h2::before { content:''; width:10px; height:10px; flex-shrink:0; border-radius:5px; background:var(--accent2); }
+.font-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; align-items:start; }
+.font-card { min-width:0; padding:16px 18px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); }
+h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
+.recommender { margin:0; color:var(--text-muted); font-size:13px; font-weight:500; }
+.memo { margin-top:10px; font-size:13px; color:var(--text-muted); }
+.memo p { margin:0 0 10px; }
+.memo p:last-child { margin-bottom:0; }
+.references { margin-top:10px; }
+.references p { margin-bottom:4px; }
+.references ul { margin:0; padding-left:20px; }
+.guide-list { display:grid; gap:14px; }
+.guide-panel { min-width:0; padding:16px 18px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); }
+.guide-panel h3 { font-size:13px; color:var(--accent); padding-bottom:10px; margin-bottom:12px; border-bottom:1px solid var(--border); }
+.guide-panel h4 { font-size:13px; margin:16px 0 8px; }
+.guide-panel p, .guide-panel ul { margin:0 0 10px; }
+.guide-panel ul { padding-left:20px; }
+.guide-panel li + li { margin-top:6px; }
+.guide-panel > :last-child { margin-bottom:0; }
+.guide-terms { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); margin:0 0 10px; }
+.guide-terms dt, .guide-terms dd { margin:0; padding:7px 0; border-bottom:1px solid var(--border); }
+.guide-terms dt { font-weight:700; padding-right:12px; }
+.guide-note { color:#341f8a; font-size:12px; }
+.guide-points { border-left:4px solid var(--accent); }
+.guide-points strong { color:var(--accent); }
+.back-to-top { position:fixed; right:max(16px, env(safe-area-inset-right)); bottom:max(16px, env(safe-area-inset-bottom)); z-index:10; }
+@media print { .back-to-top { display:none; } }
+:focus-visible { outline:3px solid #185f83; outline-offset:3px; }
+@media(max-width:760px) { .font-list { grid-template-columns:minmax(0,1fr); } }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+</style>
+</head>
+<body id="page-top">
+<header class="page-header"><h1>おすすめフォント</h1><a class="home-btn" href="../index.html">トップへ</a></header>
+<nav class="category-nav" aria-label="フォントのカテゴリ"><a href="#font-names">フォント名の見方</a><a href="#japanese">日本語フォント</a><a href="#western">欧文フォント</a><a href="#numerals">美しい数字の書体</a></nav>
+<main>
+<section class="category" id="font-names" aria-labelledby="font-names-heading">
+<h2 id="font-names-heading">フォント名の見方</h2>
+<div class="guide-list">
+<section class="guide-panel" aria-labelledby="vendors-heading">
+<h3 id="vendors-heading">ベンダーの省略記号</h3>
+<p>多くのベンダーは、フォント名の冒頭に省略記号などを入れています。</p>
+<dl class="guide-terms">
+<dt>A-OTF、A P-OTF、BIZ</dt><dd>モリサワ</dd>
+<dt>FOT-</dt><dd>フォントワークス</dd>
+<dt>DF</dt><dd>ダイナフォント</dd>
+<dt>DS</dt><dd>デザインシグナル</dd>
+<dt>MS</dt><dd>マイクロソフト</dd>
+<dt>HG</dt><dd>リコー</dd>
+</dl>
+<p class="guide-note">※ちなみに「<strong>A P-OTF</strong>」はAP版と呼ばれ、ここ最近に出てきたものです。</p>
+</section>
+<section class="guide-panel" aria-labelledby="proportional-heading">
+<h3 id="proportional-heading">プロポーショナルフォント</h3>
+<p><strong>「プロポーショナルフォント」にはフォント名に「P」がついています。</strong></p>
+<p>Windows環境には、</p>
+<ul><li>MS <strong>P</strong>ゴシック</li><li>HG<strong>P</strong>ゴシックM</li><li>BIZ UD<strong>P</strong>ゴシック</li></ul>
+<p>などのプロポーショナルフォントが付属しています。</p>
+<p>自動カーニング機能のないPowerPointにて重宝します。</p>
+</section>
+<section class="guide-panel" aria-labelledby="glyph-sets-heading">
+<h3 id="glyph-sets-heading">ProやStdなどの意味（グリフセット）</h3>
+<p>「ヒラギノ角ゴPro W3」や「ヒラギノ角ゴStd W8」などのOpenTypeフォントについている「<strong>Pro</strong>」「<strong>Std</strong>」は、収録している文字数を表します。</p>
+<p><strong>Adobe-Japan1という規格</strong>により収録文字が定められています。</p>
+<p>同じ「新ゴ」でも、手元に</p>
+<p><strong>Std / Pro / Pr5 / Pr6</strong></p>
+<p>がある場合には、収録字形数の多い「<strong>Pr6</strong>」を使います（上位互換性があります）。</p>
+</section>
+<section class="guide-panel" aria-labelledby="n-fonts-heading">
+<h3 id="n-fonts-heading">Nフォント</h3>
+<p>「<strong>ProN</strong>」など「<strong>N</strong>」がついているものは、「JIS2004字形」に準拠したNフォント（「Nつきフォント」）。</p>
+<p>168文字が旧字風の字形で表示されます。</p>
+<p class="guide-note">※ただし、フォント名に「<strong>N</strong>」がついていなくても、Nフォントのことがあります。</p>
+</section>
+<section class="guide-panel guide-points" aria-labelledby="usage-points-heading">
+<h3 id="usage-points-heading">使う上でのポイント</h3>
+<ul><li>「Pro」「Pr5」「Pr6」がある場合には、収録文字の多い「<strong>Pr6</strong>」を使う</li><li>特に指定がなければ「<strong>Nフォント</strong>」を使う</li></ul>
+</section>
+<section class="guide-panel" aria-labelledby="multilingual-heading">
+<h3 id="multilingual-heading">多言語フォント</h3>
+<p>多言語フォントでは、次の略語も覚えておきましょう。</p>
+<h4>国・地域</h4>
+<dl class="guide-terms"><dt>JP</dt><dd>日本</dd><dt>CN</dt><dd>中国</dd><dt>TW</dt><dd>台湾</dd><dt>HK</dt><dd>香港</dd><dt>KR</dt><dd>韓国</dd></dl>
+<h4>中国語の表記</h4>
+<dl class="guide-terms"><dt>SC</dt><dd>簡体字（Simplified Chinese）</dd><dt>TC</dt><dd>繁体字（Traditional Chinese）</dd></dl>
+<h4>複数言語</h4>
+<dl class="guide-terms"><dt>CJK</dt><dd>Chinese Japanese Korean</dd><dt>CJKV</dt><dd>中国語・日本語・朝鮮語・ベトナム語</dd></dl>
+</section>
+</div>
+</section>
+<section class="category" id="japanese" aria-labelledby="japanese-heading">
+<h2 id="japanese-heading">日本語フォント</h2>
+<div class="font-list">
+<article class="font-card">
+<h3>筑紫A丸ゴシック ＆ 筑紫B丸ゴシック</h3>
+<p class="recommender">おすすめ：hamkoさん / ミヤマ</p>
+<div class="memo">
+<p>もはや説明不要の高品質な丸ゴシックフォント。<br>
+丸ゴシックは利用シーンによって子どもっぽさや野暮ったさが出やすいが、この2書体は「可愛い」と「上品」の両方をこなせる。</p>
+<p>Adobe Fontsでも提供されている。</p>
+<p>ミヤマのメモ：AとBがあり、Bは少しクラシックな感じ。</p>
+<div class="references"><p>参考：</p><ul><li>Adobe Fonts</li><li>書籍『筑紫書体と藤田重信』</li></ul></div>
+</div>
+</article>
+<article class="font-card">
+<h3>プフ ピクニック</h3>
+<p class="recommender">おすすめ：hamkoさん</p>
+<div class="memo">
+<p>モリサワの「プフ」シリーズ。<br>
+太めの書体なので、アピアランス機能で装飾を加えやすく、見出しなどでもしっかり目立つ。<br>
+かわいいけれど野暮ったさをあまり感じないところもポイント。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>こぶりなゴシック</h3>
+<p class="recommender">おすすめ：NASU 前田さん</p>
+<div class="memo">
+<p>モリサワ。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>秀英丸ゴシック</h3>
+<p class="recommender">おすすめ：でざいん姉さん</p>
+</article>
+<article class="font-card">
+<h3>TBチビ丸ゴシック</h3>
+<p class="recommender">おすすめ：でざいん姉さん</p>
+<div class="memo">
+<p>モリサワ。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>TB丸ゴシック</h3>
+<p class="recommender">おすすめ：でざいん姉さん</p>
+</article>
+<article class="font-card">
+<h3>游明朝</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>王道で安心感のある定番書体。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Zen Old Mincho</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>Oldが好みの人におすすめ。ほかのZenシリーズもよく、Google Fontsにもある。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>源ノ明朝</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>Adobeの書体。無料ダウンロードも可能で、太さの種類が多い。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>貂明朝</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>かわいらしさが魅力の書体。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>UD デジタル 教科書体</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>教育現場におすすめ。視力が弱い子どもにも見やすい書体。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>砧 丸明シリーズ</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>丸みが魅力のシリーズ。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>筑紫A オールド明朝</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>オールドな雰囲気が好みの人に。仲間に丸ゴシックもある。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>DNP 秀英明朝</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>「に」がくっついた字形も魅力。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>游ゴシック</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>クセがなく、使いやすい書体。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>凸版文久 見出しゴシック</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>少し丸みがあり、力強さもある書体。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>DNP 秀英角ゴシックシリーズ</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>金と銀の種類があり、銀はクラシック。丸ゴシックもおすすめ。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>A-OTF UD 新丸ゴ・角ゴ</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>ミヤマ個人がUD書体で一番好きなのはヒラギノ（有償）。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>HOT-白舟シリーズ</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>貴重な筆文字系。年賀状や和風のデザインで活躍。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>AB-kirigirisu</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>GREEN DA・KA・RAの広告で使われている、かわいらしい書体。</p>
+</div>
+</article>
+</div>
+</section>
+<section class="category" id="western" aria-labelledby="western-heading">
+<h2 id="western-heading">欧文フォント</h2>
+<div class="font-list">
+<article class="font-card">
+<h3>Adobe Caslon Pro</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>歴史のある書体。本文におすすめ。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Adventures Unlimited</h3>
+<p class="recommender">おすすめ：hamkoさん</p>
+<div class="memo">
+<p>Adobe Fontsではファミリーのうちスクリプト書体のみ提供。<br>
+手書き感のあるフォルムが特徴。</p>
+<p>単一のストロークでグリフを作成しているため、形は華やかでも線自体の抑揚が少なく、すっきりした印象。</p>
+<p>リガチャや異体字も豊富。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Akzidenz Gothic</h3>
+</article>
+<article class="font-card">
+<h3>Avenir（アベニール）</h3>
+<div class="memo">
+<p>Oが円に近いなど、幾何学的なシンプルさがある。<br>
+「かわいい」印象やソフトなイメージ。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Baskerville Display PT</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>英国風の有名書体。Qのしっぽがかわいい。PTは見出し向き。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Berthold Akzidenz Grotesk（ベアトルド アクチデンツ グロテスク）</h3>
+<div class="memo">
+<p>Helveticaなどより以前からあるクラシックなゴシック体。<br>
+太めで縦長のがっしりとしたバリエーションは、企業ロゴなどに適している。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Bickham Script Pro3</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>Snell Roundhandなどで困ったときの候補。Adobeの筆記体。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Bodoni URW</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>とても有名な書体。ミヤマ個人の好みはLinotype Didot。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Clarendon URW</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>太く力強いスラブセリフ書体。可読性が良い。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Classico URW</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>Optimaの代替。Imperialも似ている。元資料ではゴディバのロゴにも言及。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Copperplate</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>小文字がなく、高級感がある。ディーン＆デルカで使用。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>DIN（ディン） / DIN 2014</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>ユニクロロゴのもとになった書体。<br>
+工業的で無機的なイメージ。<br>
+1930年代のドイツが原型だが、今の時代にも合う印象。</p>
+<p>ドイツ生まれの有名書体。UNIQLOでも使用。ミヤマは微差ながら2014を支持。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Franklin Gothic（フランクリンゴシック） / Franklin Gothic ATF</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>クラシックなタイプのゴシック体。<br>
+倉庫っぽいカフェのロゴなどにぴったり。</p>
+<p>アメリカ生まれ。少し古風で、やや縦長の書体。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Frutiger（フルティガー）</h3>
+<div class="memo">
+<p>新しい感覚のスタンダード書体。<br>
+曲線がゆるやかで、明るいイメージ。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Futura（フーツラ） / Futura PT</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>1923年につくられた書体。<br>
+フランスの雑誌『ELLE』などにも使われていた。<br>
+おしゃれな印象。</p>
+<p>ヴィトンなどで使われている書体。</p>
+<p>Futuraの代替フォント</p>
+<ul><li>Jost</li><li>Gilroy</li><li>Centra No2</li><li>Codec Pro</li></ul>
+</div>
+</article>
+<article class="font-card">
+<h3>Garamond Premier Pro</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>有名な、古典的で優雅な書体。ミヤマは細めがおすすめ。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Gill Sans（ギルサン） / Gill Sans Nova</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>イギリスで生まれた書体。<br>
+幾何学的な中にも、しゃれた感覚と優雅さがある個性的なサンセリフ。<br>
+ファッションや食品など、ソフトなイメージに合う。</p>
+<p>ギルさんがデザインした書体。本文にも見出しにも使えて便利。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Gotham</h3>
+</article>
+<article class="font-card">
+<h3>Helvetica（ヘルベチカ）</h3>
+<div class="memo">
+<p>サンセリフ書体の最高峰。<br>
+計算されつくした形状で、力強い王道感。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Montserrat</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>有償のUniversやGothamの代わりに。2011年リリース。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Myriad</h3>
+</article>
+<article class="font-card">
+<h3>Nimbus Sans</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>Helveticaの代替。ミヤマ個人の好みはNeue Haas Grotesk。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Optima（オプティマ）</h3>
+<div class="memo">
+<p>線が完全な直線ではなく、少しカーブしている。<br>
+碑文をもとにした優美な書体。<br>
+化粧品のロゴなどに合うエレガントさがある。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Rift / Rift Soft</h3>
+<p class="recommender">おすすめ：hamkoさん</p>
+<div class="memo">
+<p>サンセリフのコンデンス書体。どちらも大文字のみ。<br>
+ウエイトが豊富で、可変の帯を付けるような装飾にも扱いやすい。<br>
+異体字にかわいい形があるのもポイント。</p>
+<p>Adobe Fontsで利用可能。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Trajan Pro3</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>高級感を出したいときにおすすめ。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Univers（ユニバース）</h3>
+<div class="memo">
+<p>Helveticaよりソフトで、洗練されたイメージ。</p>
+</div>
+</article>
+</div>
+</section>
+<section class="category" id="numerals" aria-labelledby="numerals-heading">
+<h2 id="numerals-heading">美しい数字の書体</h2>
+<div class="font-list">
+<article class="font-card">
+<h3>DIN 2014</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>ドイツ生まれ。超有名。<br>
+2014は丸めのDIN。URW DINもいい。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Alte DIN 1451 Mittelschrift gepraegt</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>古典的な感じのDIN。<br>
+Font Memeで無料DLできる。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Nimbus Sans</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>Helveticaのかわり。<br>
+Font Memeで無料DLできる。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Roboto</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>クセがなく、すごく使いやすい。<br>
+Google Fontsにもある。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Futura PT</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>鉄板。<br>
+迷ったらFuturaでだいたい解決。</p>
+<p>Futuraの代替フォント</p>
+<ul><li>Jost</li><li>Gilroy</li><li>Centra No2</li><li>Codec Pro</li></ul>
+</div>
+</article>
+<article class="font-card">
+<h3>Century Gothic</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>すっきりしていて視認性が高い。<br>
+小さくても見やすい。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Lato</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>古典的でおしゃれ。<br>
+よく利用されている。<br>
+Google Fontsにもある。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Baskerville URW</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>超有名書体。<br>
+縦にシュッとしている。<br>
+オールドスタイル。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Garamond</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>超有名書体。<br>
+EB GaramondがGoogle Fontsにもある。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Amiri</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>すっきりした、モダンな雰囲気がある書体。<br>
+Google Fontsにもある。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Times New Roman</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>新聞用書体として開発された書体。<br>
+なじみのある書体。<br>
+Windows / Mac標準搭載。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Century Old Style</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>ほんのり丸みがあるオールドスタイル。<br>
+使いやすい。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Quicksand</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>丸みがほしいときに。<br>
+かわいい書体。<br>
+Google Fontsにもある。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Bebas Neue Pro</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>オシャレにシュッとさせたいときに。<br>
+Google Fontsにもある。</p>
+</div>
+</article>
+<article class="font-card">
+<h3>Copperplate</h3>
+<p class="recommender">おすすめ：ミヤマ</p>
+<div class="memo">
+<p>個性的な数字。<br>
+Font MemeでBoldが無料DLできる。</p>
+</div>
+</article>
+</div>
+</section>
+</main>
+<a class="home-btn back-to-top" href="#page-top" aria-label="ページの上に戻る">↑ 上に戻る</a>
+</body>
+</html>
