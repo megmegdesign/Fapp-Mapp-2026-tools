@@ -24,6 +24,7 @@
 | Illustrator | `Illustrator_settings/Illustrator_settings.html` | 設定・使い方メモ |
 | Photoshop | `Photoshop_settings/Photoshop_settings.html` | 設定・使い方メモ |
 | おすすめフォント | `Recommended_fonts/Recommended_fonts.html` | フォント名のリファレンス＋推薦フォント一覧 |
+| 印刷物制作について | `Print_production/Print_production.html` | オーバープリントと黒の実務リファレンス |
 
 過去の公開サイトではなく、上記ローカルファイルの現行状態を基準とする。フォント・配色・角丸などは公開当初から変更済み。
 
@@ -330,3 +331,10 @@ F Appの本文は15px、行高1.7。見積もりの金額・数量などにはMo
 
 - `profile-warnings`を最初の設定カードの次に配置し、目次にも同じ順でリンクする。判別説明→RGB→CMYKの順。
 - RGB・CMYKは1px枠・5px角丸・余白16px 18pxの別区画。2列・間隔14px、1000px以下はRGB→CMYKの1列。見出し13px、操作名は太字、注意点は共通の紫・背景なし12px。
+
+## 12. 印刷物制作について
+
+- ピンク主色・シアン副色、背景#f1f4f6。既存Adobeメモと同じ最大980px、本文＋右260px目次、間隔20px。760px以下は目次先頭の1列。
+- 4カードを比較・自動スミノセ・3種類の黒・実案件例の順に配置。本文13px/1.8、ページ見出し20px、カード・小見出し13px、余白16px 18px、角丸5px。
+- オーバープリントと乗算は2列比較、600px以下は1列。黒の用途は2列表。カラー値は既存code相当の薄い背景・太字、注意は紫12px・背景なし。
+- トップへは見出し行右・シアン背景の共通仕様。indexカードはピンクのマーク・ホバー枠。

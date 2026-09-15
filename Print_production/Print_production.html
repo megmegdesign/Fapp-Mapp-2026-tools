@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>印刷物制作について | My Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#f1f4f6; --surface:#fff; --surface2:#f5f7f9; --border:#d9dee3; --text:#303030; --accent:#ff5281; --accent2:#00d7e6; --message-color:#341f8a; --radius:5px; --shadow:0 1px 12px rgba(48,48,48,.06); }
+* { box-sizing:border-box; }
+body { margin:0; padding:24px 16px 80px; background:var(--bg); color:var(--text); font-family:'Noto Sans JP',sans-serif; font-size:13px; line-height:1.8; overflow-wrap:anywhere; }
+.page-header,.layout { max-width:980px; margin:0 auto; }
+.page-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px; }
+h1 { margin:0; font-size:20px; line-height:1.5; color:var(--accent); }
+a { color:var(--text); text-underline-offset:3px; }
+.home-btn { display:inline-block; padding:3px 9px; background:var(--accent2); color:#fff; font-size:10px; font-weight:700; line-height:normal; letter-spacing:.5px; text-decoration:none; border-radius:5px; }
+.layout { display:grid; grid-template-columns:minmax(0,1fr) 260px; gap:20px; align-items:start; }
+main,aside { min-width:0; }
+aside { position:sticky; top:20px; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:14px; }
+.card h2 { display:flex; align-items:center; gap:9px; margin:0; padding:13px 18px 12px; background:var(--surface2); border-bottom:1px solid var(--border); border-radius:5px 5px 0 0; color:var(--accent); font-size:13px; }
+.card h2::before { content:''; width:10px; height:10px; flex-shrink:0; border-radius:5px; background:var(--accent2); }
+.card-body { padding:16px 18px; }
+h3,h4 { font-size:13px; margin:0 0 10px; }
+h4 { margin-top:16px; }
+p { margin:0 0 10px; } p:last-child { margin-bottom:0; }
+ul { margin:0; padding-left:20px; } li + li { margin-top:9px; }
+code { font-family:inherit; font-weight:700; background:var(--surface2); padding:1px 4px; border-radius:5px; }
+.caution-note { color:var(--message-color); background:transparent; font-size:12px; }
+.compare { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.compare section { min-width:0; }
+.example { margin-top:14px; padding-top:12px; border-top:1px solid var(--border); }
+.detail + .detail { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); }
+.black-table { width:100%; border-collapse:collapse; table-layout:fixed; margin-bottom:16px; }
+.black-table th,.black-table td { padding:9px 8px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+.black-table th { background:var(--surface2); font-weight:700; }
+.black-table th:first-child { width:44%; }
+.toc { list-style:none; padding:0; } .toc a { display:block; padding:4px 0; }
+section { scroll-margin-top:20px; }
+:focus-visible { outline:3px solid #185f83; outline-offset:3px; }
+@media(max-width:760px) { .layout { grid-template-columns:minmax(0,1fr); } aside { position:static; grid-row:1; } }
+@media(max-width:600px) { .compare { grid-template-columns:minmax(0,1fr); } .compare section + section { border-top:1px solid var(--border); padding-top:16px; } }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+</style>
+</head>
+<body>
+<header class="page-header"><h1>印刷物制作について</h1><a class="home-btn" href="../index.html">トップへ</a></header>
+<div class="layout">
+<main>
+<section class="card" id="overprint-multiply"><h2>「オーバープリント」と「乗算」の違い</h2><div class="card-body compare">
+<section aria-labelledby="overprint-heading"><h3 id="overprint-heading">オーバープリント</h3>
+<p><strong>0%の時のみ下の版指定を活かす</strong></p>
+<p>オーバープリントは、上のオブジェクトの版指定が0%のときのみ、下のオブジェクトの版指定が反映されます。</p>
+<p>上にあるオブジェクトの色が1%でも設定されていれば、下のオブジェクトの版指定は無視されます。</p>
+<div class="example"><h4>例</h4><p>上のオブジェクト：<br><code>C100 M0 Y10 K1</code></p><p>下のオブジェクト：<br><code>C0 M20 Y100 K10</code></p><p>↓ オーバープリント</p><p><strong>印刷結果：</strong><br><code>C100 M20 Y10 K1</code></p></div>
+</section>
+<section aria-labelledby="multiply-heading"><h3 id="multiply-heading">乗算</h3>
+<p><strong>カラー値をプラスする</strong></p>
+<p>乗算は、下のオブジェクトと上のオブジェクトのカラー値（版ごとの数値）を合成します。</p>
+<div class="example"><h4>例</h4><p>上のオブジェクト：<br><code>C100 M0 Y10 K1</code></p><p>下のオブジェクト：<br><code>C0 M20 Y100 K10</code></p><p>↓ 乗算</p><p><strong>印刷結果：</strong><br><code>C100 M20 Y100 K11</code></p></div>
+</section>
+</div></section>
+<section class="card" id="avoid-auto-overprint"><h2>自動スミノセを回避するには？</h2><div class="card-body">
+<div class="detail"><p>自動スミノセを回避するには、<code>K99</code>または<code>C1 K100</code>のスウォッチを作成し、K100の代わりに使用します。</p><p class="caution-note"><strong>自動スミノセを回避する場合はK100をそのまま使用しない。</strong></p></div>
+<section class="detail"><h3>「自動スミノセ」ワークフローでのトラブル事例</h3><p>袋文字の文字フチを「線」属性で作成したため、塗りの部分に穴（マド）ができてしまい、濃淡差が透けたように視認される。</p></section>
+<section class="detail"><h3>InDesignの［黒］スウォッチ</h3><p>InDesignの［黒］スウォッチは、濃度100%で使用されたときに自動でオーバープリントが設定されます。</p><p>設定場所：<br><strong>環境設定 → 黒の表示方法 → ［黒］のスウォッチ</strong></p><p>K100のスウォッチを別途作成した場合は、InDesignの自動オーバープリントは設定されません。</p><p>ただし、印刷会社のK100自動オーバープリントでは、［黒］スウォッチと別途作成したK100スウォッチの両方が処理対象になります。</p></section>
+</div></section>
+<section class="card" id="three-blacks"><h2>3種類の「黒」を使い分ける</h2><div class="card-body">
+<p>用途に応じて、以下の3種類の黒を使い分けます。</p>
+<table class="black-table" aria-label="黒のカラー値と用途"><thead><tr><th scope="col">カラー値</th><th scope="col">用途</th></tr></thead><tbody>
+<tr><th scope="row"><code>K100</code></th><td>オーバープリント用</td></tr>
+<tr><th scope="row"><code>C1 K100</code> / <code>K99</code></th><td>自動スミノセを回避したい箇所</td></tr>
+<tr><th scope="row"><code>C50 M40 Y40 K100</code></th><td>大きな文字や面積の大きいカコミ</td></tr>
+</tbody></table>
+<section class="detail"><h3>1. K100</h3><p>Illustratorでは「ブラック」としてデフォルトで用意されています。</p><p>InDesignではK100のスウォッチの代わりに［黒］スウォッチを使用します。</p></section>
+<section class="detail"><h3>2. C1 K100 または K99</h3><p>自動スミノセの対象にしたくない箇所には、<code>C1 K100</code>または<code>K99</code>を適用します。</p></section>
+<section class="detail"><h3>3. C50 M40 Y40 K100</h3><p>大きな文字や面積の大きいカコミには、<code>C50 M40 Y40 K100</code>といった「掛け合わせの黒」を使用します。</p><div class="caution-note"><p><strong>ただし、以下には使用しません。</strong></p><ul><li>本文</li><li>キャプションなどのサイズの小さい文字</li><li>0.5mm以下の細い罫線</li></ul></div></section>
+</div></section>
+<section class="card" id="practical-examples"><h2>実案件での「黒」の設定例</h2><div class="card-body">
+<section class="detail"><h3>サイズの小さい文字</h3><p>商品説明や店舗の住所など、サイズの小さい文字には<code>K100</code>を使用します。</p></section>
+<section class="detail"><h3>面積の大きい黒</h3><p>面積の大きい部分の黒は、<code>C50 M40 Y40 K100</code>といった「掛け合わせの黒」を使用します。</p><p>スウォッチを活用してください。</p></section>
+<section class="detail"><h3>Illustratorで文字フチを作る場合</h3><p><strong>アピアランス → 塗り → パスのオフセット</strong></p><p>Illustratorでの文字フチは、アピアランスで「線」を使用するのではなく、<strong>「塗り」に「パスのオフセット」を使用</strong>します。</p><p>これにより、文字の下にフチの色の塗りが配置されます。</p><p>パスのオフセットでは、<strong>実際の線幅をオフセット値として指定</strong>します。</p></section>
+<section class="detail"><h3>掛け合わせの黒ベタ・インキ総量の高い背景の白ヌキ文字</h3><p>掛け合わせの黒ベタやインキ総量の高い背景に白ヌキ文字を配置する場合は、<strong>版ズレ対策</strong>を行います。</p><p>抜き文字の周囲に、ヌキのフチを付けます。</p><h4>背景が掛け合わせの黒ベタの場合</h4><p><code>C1 K100</code>のフチを使用します。</p><p>自動スミノセ対策として使用します。</p><h4>その他の背景の場合</h4><p>いずれかの版を<strong>100%</strong>に設定した、<strong>0.1mm程度のフチ</strong>を付けます。</p></section>
+</div></section>
+</main>
+<aside><nav class="card" aria-label="ページ内目次"><h2>目次</h2><div class="card-body"><ul class="toc"><li><a href="#overprint-multiply">「オーバープリント」と「乗算」の違い</a></li><li><a href="#avoid-auto-overprint">自動スミノセを回避するには？</a></li><li><a href="#three-blacks">3種類の「黒」を使い分ける</a></li><li><a href="#practical-examples">実案件での「黒」の設定例</a></li></ul></div></nav></aside>
+</div>
+</body>
+</html>
