@@ -44,6 +44,11 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 .guide-note { color:#341f8a; font-size:12px; }
 .guide-points { border-left:4px solid var(--accent); }
 .guide-points strong { color:var(--accent); }
+.guide-detail + .guide-detail { border-top:1px solid var(--border); margin-top:16px; padding-top:16px; }
+.guide-detail h4 { margin:0 0 10px; font-size:13px; font-weight:700; }
+.guide-detail > :last-child { margin-bottom:0; }
+.guide-cautions { border-left:4px solid #341f8a; }
+.guide-cautions h3, .guide-important { color:#341f8a; }
 .back-to-top { position:fixed; right:max(16px, env(safe-area-inset-right)); bottom:max(16px, env(safe-area-inset-bottom)); z-index:10; }
 @media print { .back-to-top { display:none; } }
 :focus-visible { outline:3px solid #185f83; outline-offset:3px; }
@@ -106,6 +111,58 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <dl class="guide-terms"><dt>SC</dt><dd>簡体字（Simplified Chinese）</dd><dt>TC</dt><dd>繁体字（Traditional Chinese）</dd></dl>
 <h4>複数言語</h4>
 <dl class="guide-terms"><dt>CJK</dt><dd>Chinese Japanese Korean</dd><dt>CJKV</dt><dd>中国語・日本語・朝鮮語・ベトナム語</dd></dl>
+</section>
+<section class="guide-panel" aria-labelledby="font-types-heading">
+<h3 id="font-types-heading">フォントの種類</h3>
+<div class="guide-detail">
+<h4>OpenTypeフォント（OTF）</h4>
+<p>制作現場における現在の主流。</p>
+<p><strong>Windows</strong>と<strong>macOS</strong>で互換性があります。</p>
+<p><strong>OpenType</strong>フォントの中にもいくつかの種類があり、同じ書体であっても収録字数や機能が異なります。</p>
+</div>
+<div class="guide-detail">
+<h4>TrueTypeフォント</h4>
+<p><strong>Windows</strong>でよく使われているフォーマットです。</p>
+<p><strong>Windows</strong>と<strong>macOS</strong>では互換性がありません。同じフォント名でもドキュメントの体裁が変化します。</p>
+</div>
+<div class="guide-detail">
+<h4>OCF／CIDフォント</h4>
+<p><strong>macOS</strong>専用の和文フォントフォーマット。</p>
+<p>以前はDTP業界の主流として使われていました。</p>
+<p>現在の<strong>macOS</strong>・<strong>Adobe CC</strong>がサポートしているのは<strong>CID</strong>フォントのみですが、モリサワ・フォントワークスともにCIDフォントのサポートは終了しています。</p>
+</div>
+<div class="guide-detail">
+<h4>Type 1フォント（PostScript Type 1フォント）</h4>
+<p>1984年にAdobeが発表した欧文用フォントフォーマットで、DTPの黎明期から広く使用されてきました。</p>
+<p><strong>Creative Cloud</strong>での<strong>Type 1</strong>フォントのサポートは終了しており、<strong>2023以降のCreative Cloud</strong>では認識されません。</p>
+</div>
+<div class="guide-detail">
+<h4>バリアブルフォント</h4>
+<p>1つのフォントで太さや字幅などの「<strong>デザイン軸</strong>」を自由に変更できるフォントです。</p>
+<p>従来のフォントと異なり、スタイルを無段階に調整できます。</p>
+<p>フォントによって調整できるデザイン軸が異なります。</p>
+</div>
+<div class="guide-detail">
+<h4>カラーフォント</h4>
+<p>文字にカラーが設定されているフォントです。</p>
+<p>特定の文字がカラー文字になっているほか、「異体字」パネルからカラー文字を入力できます。</p>
+<p>正式には「<strong>OpenType-SVGフォント</strong>」と呼ばれます。</p>
+</div>
+</section>
+<section class="guide-panel guide-cautions" aria-labelledby="font-cautions-heading">
+<h3 id="font-cautions-heading">フォント使用時の注意</h3>
+<div class="guide-detail">
+<h4>サポート終了したType 1フォントを使用したデータ</h4>
+<p><strong>Type 1</strong>フォントを使用して制作し、適切に保存した<strong>PDF</strong>や<strong>Illustrator</strong>ドキュメントにはフォントデータが埋め込まれています。</p>
+<p><strong>データを開かず、保存したままの状態</strong>なら、他のデータに配置して使用できます。</p>
+<p>例えば、Illustrator 2020で作成した図版データをInDesign 2025で作成したドキュメントに配置した場合、PDF書き出しやプリントアウトを問題なく行えます。</p>
+</div>
+<div class="guide-detail">
+<h4>Adobe Fonts、フリーフォントについて</h4>
+<p><strong>Adobe Fonts</strong>やフリーフォントだけでデータ制作を行うには、ウェイトや収録字数が足りません。</p>
+<p class="guide-important">さらに、<strong>Adobe Fontsはフォントベンダーからの要求などで提供が終了する場合があります。</strong></p>
+<p>そのため、フォントを永続的に使用できるとは限りません。</p>
+</div>
 </section>
 </div>
 </section>
