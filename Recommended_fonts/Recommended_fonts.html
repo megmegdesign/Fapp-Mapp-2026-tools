@@ -54,11 +54,31 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 :focus-visible { outline:3px solid #185f83; outline-offset:3px; }
 @media(max-width:760px) { .font-list { grid-template-columns:minmax(0,1fr); } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+.local-library { display:flex; }
+.local-library[hidden] { display:none; }
+.logo-intro { margin:0 0 14px; color:var(--text-muted); font-size:12px; }
+.foundry-section { margin-bottom:32px; }
+.foundry-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0; }
+.foundry-card { min-width:0; padding:0 18px 0 0; }
+.foundry-card + .foundry-card { padding:0 0 0 18px; border-left:1px solid var(--border); }
+.foundry-card h4 { margin:0 0 12px; font-size:17px; line-height:1.5; }
+.foundry-reading { display:block; margin-top:3px; color:var(--text-muted); font-size:12px; font-weight:400; }
+.foundry-card p { margin:0 0 12px; }
+.foundry-card > :last-child { margin-bottom:0; }
+.foundry-availability { color:#341f8a; font-size:12px; }
+.logo-list-heading { font-size:13px; color:var(--accent); margin:0 0 16px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+@media(max-width:760px) {
+  .foundry-list { grid-template-columns:minmax(0,1fr); }
+  .foundry-card { padding:0 0 18px; }
+  .foundry-card + .foundry-card { padding:18px 0 0; border-left:0; border-top:1px solid var(--border); }
+}
+.logo-context { margin:6px 0; color:#341f8a; font-size:12px; }
+.logo-context a { color:inherit; }
 </style>
 </head>
 <body id="page-top">
 <header class="page-header"><h1>おすすめフォント</h1><a class="home-btn" href="../index.html">トップへ</a></header>
-<nav class="category-nav" aria-label="フォントのカテゴリ"><a href="#font-names">フォント名の見方</a><a href="#japanese">日本語フォント</a><a href="#western">欧文フォント</a><a href="#numerals">美しい数字の書体</a><a href="#noto-sans">NotoSansについて</a></nav>
+<nav class="category-nav" aria-label="フォントのカテゴリ"><a href="#font-names">フォント名の見方</a><a href="#japanese">日本語フォント</a><a href="#western">欧文フォント</a><a href="#logo-fonts">ロゴにおすすめのフォント</a><a href="#numerals">美しい数字の書体</a><a href="#noto-sans">NotoSansについて</a><span class="local-library" id="local-latin-library" hidden><a id="local-latin-library-link" title="登録されている欧文フォントを実際の書体で一覧・比較できます。">欧文フォント見本帳</a></span></nav>
 <main>
 <section class="category" id="font-names" aria-labelledby="font-names-heading">
 <h2 id="font-names-heading">フォント名の見方</h2>
@@ -315,11 +335,22 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <section class="category" id="western" aria-labelledby="western-heading">
 <h2 id="western-heading">欧文フォント</h2>
 <div class="font-list">
-<article class="font-card">
+<article class="font-card" id="font-logo-source-1" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Adobe Caslon Pro</h3>
-<p class="recommender">おすすめ：ミヤマ</p>
+<p class="recommender">おすすめ：ミヤマ / 遠藤大輔さん</p>
 <div class="memo">
 <p>歴史のある書体。本文におすすめ。</p>
+<p>記事のAdobe Caslonについて：落ち着いたセリフ体。長文のほか、格式ある招待状にも。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/adobe-caslon" target="_blank" rel="noopener noreferrer">Adobe Caslon Pro</a>（記事で紹介される版・ファミリー）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Libre+Caslon+Text" target="_blank" rel="noopener noreferrer">Libre Caslon Text</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Adobe%20Caslon" target="_blank" rel="noopener noreferrer">Adobe Caslonを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
 <article class="font-card">
@@ -335,11 +366,24 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <article class="font-card">
 <h3>Akzidenz Gothic</h3>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-2" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Avenir（アベニール）</h3>
+<p class="recommender">おすすめ：遠藤大輔さん</p>
 <div class="memo">
 <p>Oが円に近いなど、幾何学的なシンプルさがある。<br>
 「かわいい」印象やソフトなイメージ。</p>
+<p>幾何学系に柔らかさを加えたサンセリフ。ブランド表現や本文に。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>macOS標準搭載：Avenir（OSの版・追加ダウンロードの要否は<a href="https://support.apple.com/ja-jp/108939" target="_blank" rel="noopener noreferrer">Appleの一覧</a>で確認）。</li>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/avenir-next" target="_blank" rel="noopener noreferrer">Avenir Next</a>（記事で紹介される版・ファミリー）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener noreferrer">Montserrat</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Avenir" target="_blank" rel="noopener noreferrer">Avenirを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
 <article class="font-card">
@@ -363,18 +407,41 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>Snell Roundhandなどで困ったときの候補。Adobeの筆記体。</p>
 </div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-3" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Bodoni URW</h3>
-<p class="recommender">おすすめ：ミヤマ</p>
+<p class="recommender">おすすめ：ミヤマ / 遠藤大輔さん</p>
 <div class="memo">
 <p>とても有名な書体。ミヤマ個人の好みはLinotype Didot。</p>
+<p>記事のBodoniについて：細線と太線が際立つモダンセリフ。大きな見出し向きで、小サイズの細線に注意。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>macOS標準搭載：Bodoni 72（OSの版・追加ダウンロードの要否は<a href="https://support.apple.com/ja-jp/108939" target="_blank" rel="noopener noreferrer">Appleの一覧</a>で確認）。</li>
+<li>Adobe Fonts：記事ではBodoni 72を紹介。記事のリンク先では提供を確認できず（2026年9月23日確認）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Bodoni+Moda" target="_blank" rel="noopener noreferrer">Bodoni Moda</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Bodoni" target="_blank" rel="noopener noreferrer">Bodoniを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-4" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Clarendon URW</h3>
-<p class="recommender">おすすめ：ミヤマ</p>
+<p class="recommender">おすすめ：ミヤマ / 遠藤大輔さん</p>
 <div class="memo">
 <p>太く力強いスラブセリフ書体。可読性が良い。</p>
+<p>記事のClarendonについて：ポスターやパッケージなど、短いメッセージを目立たせたい場面に。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/clarendon-urw" target="_blank" rel="noopener noreferrer">Clarendon URW</a>（記事で紹介される版・ファミリー）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Roboto+Slab" target="_blank" rel="noopener noreferrer">Roboto Slab</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Clarendon" target="_blank" rel="noopener noreferrer">Clarendonを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
 <article class="font-card">
@@ -391,23 +458,45 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>小文字がなく、高級感がある。ディーン＆デルカで使用。</p>
 </div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-5" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>DIN（ディン） / DIN 2014</h3>
-<p class="recommender">おすすめ：ミヤマ</p>
+<p class="recommender">おすすめ：ミヤマ / 遠藤大輔さん</p>
 <div class="memo">
 <p>ユニクロロゴのもとになった書体。<br>
 工業的で無機的なイメージ。<br>
 1930年代のドイツが原型だが、今の時代にも合う印象。</p>
 <p>ドイツ生まれの有名書体。UNIQLOでも使用。ミヤマは微差ながら2014を支持。</p>
+<p>機能的なサンセリフ。数字が明快で、標識や情報整理に向く。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/din-2014" target="_blank" rel="noopener noreferrer">DIN 2014</a>（記事で紹介される版・ファミリー）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Barlow+Condensed" target="_blank" rel="noopener noreferrer">Barlow Condensed</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=DIN" target="_blank" rel="noopener noreferrer">DINを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-6" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Franklin Gothic（フランクリンゴシック） / Franklin Gothic ATF</h3>
-<p class="recommender">おすすめ：ミヤマ</p>
+<p class="recommender">おすすめ：ミヤマ / 遠藤大輔さん</p>
 <div class="memo">
 <p>クラシックなタイプのゴシック体。<br>
 倉庫っぽいカフェのロゴなどにぴったり。</p>
 <p>アメリカ生まれ。少し古風で、やや縦長の書体。</p>
+<p>力強いグロテスク系。広告や新聞の見出しに向く。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/itc-franklin-gothic" target="_blank" rel="noopener noreferrer">ITC Franklin Gothic</a>（記事で紹介される版・ファミリー）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Libre+Franklin" target="_blank" rel="noopener noreferrer">Libre Franklin</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Franklin%20Gothic" target="_blank" rel="noopener noreferrer">Franklin Gothicを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
 <article class="font-card">
@@ -417,9 +506,9 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 曲線がゆるやかで、明るいイメージ。</p>
 </div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-7" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Futura（フーツラ） / Futura PT</h3>
-<p class="recommender">おすすめ：ミヤマ</p>
+<p class="recommender">おすすめ：ミヤマ / 遠藤大輔さん</p>
 <div class="memo">
 <p>1923年につくられた書体。<br>
 フランスの雑誌『ELLE』などにも使われていた。<br>
@@ -427,6 +516,18 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>ヴィトンなどで使われている書体。</p>
 <p>Futuraの代替フォント</p>
 <ul><li>Jost</li><li>Gilroy</li><li>Centra No2</li><li>Codec Pro</li></ul>
+<p>幾何学系サンセリフ。ロゴや広告に向き、長文では個性が強く出る。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>macOS標準搭載：Futura（OSの版・追加ダウンロードの要否は<a href="https://support.apple.com/ja-jp/108939" target="_blank" rel="noopener noreferrer">Appleの一覧</a>で確認）。</li>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/futura-pt" target="_blank" rel="noopener noreferrer">Futura PT</a>（記事で紹介される版・ファミリー）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Jost" target="_blank" rel="noopener noreferrer">Jost</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Futura" target="_blank" rel="noopener noreferrer">Futuraを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
 <article class="font-card">
@@ -436,24 +537,81 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>有名な、古典的で優雅な書体。ミヤマは細めがおすすめ。</p>
 </div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-8" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Gill Sans（ギルサン） / Gill Sans Nova</h3>
-<p class="recommender">おすすめ：ミヤマ</p>
+<p class="recommender">おすすめ：ミヤマ / 遠藤大輔さん</p>
 <div class="memo">
 <p>イギリスで生まれた書体。<br>
 幾何学的な中にも、しゃれた感覚と優雅さがある個性的なサンセリフ。<br>
 ファッションや食品など、ソフトなイメージに合う。</p>
 <p>ギルさんがデザインした書体。本文にも見出しにも使えて便利。</p>
+<p>ヒューマニスト系のサンセリフ。案内表示や個性のある見出しに。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>macOS標準搭載：Gill Sans（OSの版・追加ダウンロードの要否は<a href="https://support.apple.com/ja-jp/108939" target="_blank" rel="noopener noreferrer">Appleの一覧</a>で確認）。</li>
+<li>Adobe Fonts：記事ではGill Sansを紹介。記事のリンク先では提供を確認できず（2026年9月23日確認）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Lato" target="_blank" rel="noopener noreferrer">Lato</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Gill%20Sans" target="_blank" rel="noopener noreferrer">Gill Sansを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-9" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Gotham</h3>
+<p class="recommender">おすすめ：遠藤大輔さん</p>
+<div class="memo">
+<p>現代的な幾何学系サンセリフ。ロゴや見出し向きで、本文は字間・太さを調整。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/gotham" target="_blank" rel="noopener noreferrer">Gotham</a>。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Montserrat" target="_blank" rel="noopener noreferrer">Montserrat</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Gotham" target="_blank" rel="noopener noreferrer">Gothamを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
+</div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-10" data-logo-recommender="遠藤大輔さん" data-logo-only="true">
+<h3>Helvetica Neue</h3>
+<p class="recommender">おすすめ：遠藤大輔さん</p>
+<div class="memo">
+<p>Helveticaから発展したサンセリフのファミリー。Helveticaとは別書体として扱う。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>macOS標準搭載：Helvetica Neue（OSの版・追加ダウンロードの要否は<a href="https://support.apple.com/ja-jp/108939" target="_blank" rel="noopener noreferrer">Appleの一覧</a>で確認）。</li>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/helvetica-neue" target="_blank" rel="noopener noreferrer">Helvetica Neue</a>。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Noto+Sans" target="_blank" rel="noopener noreferrer">Noto Sans</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Helvetica%20Neue" target="_blank" rel="noopener noreferrer">Helvetica Neueを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
+</div>
+</article>
+<article class="font-card" id="font-logo-source-11" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Helvetica（ヘルベチカ）</h3>
+<p class="recommender">おすすめ：遠藤大輔さん</p>
 <div class="memo">
 <p>サンセリフ書体の最高峰。<br>
 計算されつくした形状で、力強い王道感。</p>
+<p>中立的なサンセリフ。案内表示やUIなど幅広い用途に。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>macOS標準搭載：Helvetica（OSの版・追加ダウンロードの要否は<a href="https://support.apple.com/ja-jp/108939" target="_blank" rel="noopener noreferrer">Appleの一覧</a>で確認）。</li>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/helvetica-neue" target="_blank" rel="noopener noreferrer">Helvetica Neue</a>（記事で紹介される関連書体。Helveticaそのものではない）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Noto+Sans" target="_blank" rel="noopener noreferrer">Noto Sans</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Helvetica" target="_blank" rel="noopener noreferrer">Helveticaを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
 <article class="font-card">
@@ -473,12 +631,43 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>Helveticaの代替。ミヤマ個人の好みはNeue Haas Grotesk。</p>
 </div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-12" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Optima（オプティマ）</h3>
+<p class="recommender">おすすめ：遠藤大輔さん</p>
 <div class="memo">
 <p>線が完全な直線ではなく、少しカーブしている。<br>
 碑文をもとにした優美な書体。<br>
 化粧品のロゴなどに合うエレガントさがある。</p>
+<p>ヒューマニスト系。線の抑揚を生かすため、太さ選びが大切。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>macOS標準搭載：Optima（OSの版・追加ダウンロードの要否は<a href="https://support.apple.com/ja-jp/108939" target="_blank" rel="noopener noreferrer">Appleの一覧</a>で確認）。</li>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/optima-nova" target="_blank" rel="noopener noreferrer">Optima Nova</a>（記事で紹介される版・ファミリー）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Lato" target="_blank" rel="noopener noreferrer">Lato</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Optima" target="_blank" rel="noopener noreferrer">Optimaを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
+</div>
+</article>
+<article class="font-card" id="font-logo-source-13" data-logo-recommender="遠藤大輔さん" data-logo-only="true">
+<h3>Palatino</h3>
+<p class="recommender">おすすめ：遠藤大輔さん</p>
+<div class="memo">
+<p>幅広のセリフ体。親しみやすく、書籍や教育資料の本文に。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>macOS標準搭載：Palatino（OSの版・追加ダウンロードの要否は<a href="https://support.apple.com/ja-jp/108939" target="_blank" rel="noopener noreferrer">Appleの一覧</a>で確認）。</li>
+<li>Adobe Fonts：記事ではPalatinoを紹介。記事のリンク先では提供を確認できず（2026年9月23日確認）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Bitter" target="_blank" rel="noopener noreferrer">Bitter</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Palatino" target="_blank" rel="noopener noreferrer">Palatinoを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
 <article class="font-card">
@@ -491,19 +680,109 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>Adobe Fontsで利用可能。</p>
 </div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-14" data-logo-recommender="遠藤大輔さん" data-logo-only="true">
+<h3>Snell Roundhand</h3>
+<p class="recommender">おすすめ：遠藤大輔さん</p>
+<div class="memo">
+<p>華やかなスクリプト体。招待状などの短い言葉向きで、小サイズには注意。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>macOS標準搭載：Snell Roundhand（OSの版・追加ダウンロードの要否は<a href="https://support.apple.com/ja-jp/108939" target="_blank" rel="noopener noreferrer">Appleの一覧</a>で確認）。</li>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/snell-roundhand" target="_blank" rel="noopener noreferrer">Snell Roundhand</a>。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Parisienne" target="_blank" rel="noopener noreferrer">Parisienne</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Snell%20Roundhand" target="_blank" rel="noopener noreferrer">Snell Roundhandを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
+</div>
+</article>
+<article class="font-card" id="font-logo-source-15" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Trajan Pro3</h3>
-<p class="recommender">おすすめ：ミヤマ</p>
+<p class="recommender">おすすめ：ミヤマ / 遠藤大輔さん</p>
 <div class="memo">
 <p>高級感を出したいときにおすすめ。</p>
+<p>記事のTrajanについて：碑文調のセリフ体。大文字の短いタイトルやロゴに向く。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/trajan" target="_blank" rel="noopener noreferrer">Trajan Pro</a>（記事で紹介される版・ファミリー）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Cinzel" target="_blank" rel="noopener noreferrer">Cinzel</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Trajan" target="_blank" rel="noopener noreferrer">Trajanを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-16" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Univers（ユニバース）</h3>
+<p class="recommender">おすすめ：遠藤大輔さん</p>
 <div class="memo">
 <p>Helveticaよりソフトで、洗練されたイメージ。</p>
+<p>太さ・字幅の体系が豊富なサンセリフ。サインや編集物を揃えやすい。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>macOS：記事では標準搭載と記載。ただし<a href="https://support.apple.com/ja-jp/108939" target="_blank" rel="noopener noreferrer">AppleのSonoma一覧</a>に掲載を確認できないため、利用環境で要確認。</li>
+<li>Adobe Fonts：記事ではUniversを紹介。記事のリンク先では提供を確認できず（2026年9月23日確認）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Barlow" target="_blank" rel="noopener noreferrer">Barlow</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Univers" target="_blank" rel="noopener noreferrer">Universを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
+</div>
+</section>
+<section class="category" id="logo-fonts" aria-labelledby="logo-fonts-heading">
+<h2 id="logo-fonts-heading">ロゴにおすすめのフォント</h2>
+<p class="logo-intro">遠藤大輔さんがおすすめする18書体を、ロゴ制作向けとしてまとめています。以前からのおすすめ・説明・入手先もあわせて掲載しています。</p>
+<section class="guide-panel guide-points foundry-section" aria-labelledby="logo-foundries-heading">
+<h3 class="foundry-heading" id="logo-foundries-heading">ロゴにおすすめフォントメーカー</h3>
+<div class="foundry-list">
+<article class="foundry-card">
+<h4>Dalton Maag<span class="foundry-reading">ダルトンマーグ</span></h4>
+<p>バイクメーカーのドゥカティのロゴなど。近代的でエッジの効いた素晴らしい書体が多い。</p>
+<p class="foundry-availability">Adobe Fontsにもあり。</p>
+<p><a href="https://www.daltonmaag.com/" target="_blank" rel="noopener noreferrer">公式サイト ↗（外部サイト・新しいタブ）</a></p>
+</article>
+<article class="foundry-card">
+<h4>Newlyn<span class="foundry-reading">ニューリン</span></h4>
+<p>テート・ミュージアム、バーガーキングなどのロゴ。</p>
+<p class="foundry-availability">Adobe Fontsにもあり。</p>
+<p><a href="https://newlyn.com/" target="_blank" rel="noopener noreferrer">公式サイト ↗（外部サイト・新しいタブ）</a></p>
+</article>
+</div>
+</section>
+<h3 class="logo-list-heading" id="logo-list-heading">ロゴにおすすめのフォント</h3>
+<!-- Canonical font data stays in western/numerals for the unchanged local-library importer.
+     This view is derived from data-logo-recommender; do not manually duplicate font content. -->
+<div class="font-list" id="logo-font-list" aria-labelledby="logo-list-heading"></div>
+<div id="logo-font-fallback">
+<p>ロゴ制作向けのおすすめ：遠藤大輔さん。各書体の情報へ移動できます。</p>
+<ul>
+<li><a href="#font-logo-source-1">Adobe Caslon Pro</a></li>
+<li><a href="#font-logo-source-2">Avenir（アベニール）</a></li>
+<li><a href="#font-logo-source-3">Bodoni URW</a></li>
+<li><a href="#font-logo-source-4">Clarendon URW</a></li>
+<li><a href="#font-logo-source-5">DIN（ディン） / DIN 2014</a></li>
+<li><a href="#font-logo-source-6">Franklin Gothic（フランクリンゴシック） / Franklin Gothic ATF</a></li>
+<li><a href="#font-logo-source-7">Futura（フーツラ） / Futura PT</a></li>
+<li><a href="#font-logo-source-8">Gill Sans（ギルサン） / Gill Sans Nova</a></li>
+<li><a href="#font-logo-source-9">Gotham</a></li>
+<li><a href="#font-logo-source-10">Helvetica Neue</a></li>
+<li><a href="#font-logo-source-11">Helvetica（ヘルベチカ）</a></li>
+<li><a href="#font-logo-source-12">Optima（オプティマ）</a></li>
+<li><a href="#font-logo-source-13">Palatino</a></li>
+<li><a href="#font-logo-source-14">Snell Roundhand</a></li>
+<li><a href="#font-logo-source-15">Trajan Pro3</a></li>
+<li><a href="#font-logo-source-16">Univers（ユニバース）</a></li>
+<li><a href="#font-logo-source-17">Baskerville URW</a></li>
+<li><a href="#font-logo-source-18">Garamond</a></li>
+</ul>
 </div>
 </section>
 <section class="category" id="numerals" aria-labelledby="numerals-heading">
@@ -568,21 +847,44 @@ Google Fontsにもある。</p>
 Google Fontsにもある。</p>
 </div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-17" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Baskerville URW</h3>
-<p class="recommender">おすすめ：ミヤマ</p>
+<p class="recommender">おすすめ：ミヤマ / 遠藤大輔さん</p>
 <div class="memo">
 <p>超有名書体。<br>
 縦にシュッとしている。<br>
 オールドスタイル。</p>
+<p>記事のBaskervilleについて：明暗差のあるセリフ体。知的な印象の書籍や招待状に。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>macOS標準搭載：Baskerville（OSの版・追加ダウンロードの要否は<a href="https://support.apple.com/ja-jp/108939" target="_blank" rel="noopener noreferrer">Appleの一覧</a>で確認）。</li>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/baskerville-urw" target="_blank" rel="noopener noreferrer">Baskerville URW</a>（記事で紹介される版・ファミリー）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/Libre+Baskerville" target="_blank" rel="noopener noreferrer">Libre Baskerville</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Baskerville" target="_blank" rel="noopener noreferrer">Baskervilleを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
-<article class="font-card">
+<article class="font-card" id="font-logo-source-18" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Garamond</h3>
-<p class="recommender">おすすめ：ミヤマ</p>
+<p class="recommender">おすすめ：ミヤマ / 遠藤大輔さん</p>
 <div class="memo">
 <p>超有名書体。<br>
 EB GaramondがGoogle Fontsにもある。</p>
+<p>柔らかなセリフ体で長文向き。復刻版によって字形が異なる。</p>
+<div class="references">
+<p>入手先メモ（参考記事に基づく）</p>
+<ul>
+<li>Adobe Fonts：<a href="https://fonts.adobe.com/fonts/adobe-garamond" target="_blank" rel="noopener noreferrer">Adobe Garamond</a>（記事で紹介される版・ファミリー）。</li>
+<li>Google Fonts（代替）：<a href="https://fonts.google.com/specimen/EB+Garamond" target="_blank" rel="noopener noreferrer">EB Garamond</a>。</li>
+<li>MyFonts等で購入：<a href="https://www.myfonts.com/search?query=Garamond" target="_blank" rel="noopener noreferrer">Garamondを検索</a>（販売される版・ライセンスを確認）。</li>
+</ul>
+<p>各版は字形や収録文字が異なる場合がある。Google Fontsの代替書体は元書体とは別のフォント。</p>
+<p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
+</div>
 </div>
 </article>
 <article class="font-card">
@@ -649,5 +951,54 @@ Font MemeでBoldが無料DLできる。</p>
 </section>
 </main>
 <a class="home-btn back-to-top" href="#page-top" aria-label="ページの上に戻る">↑ 上に戻る</a>
+<script>
+(() => {
+  // Local files only. Public HTTP(S) pages never load the private configuration.
+  if (window.location.protocol !== 'file:') return;
+  const configScript = document.createElement('script');
+  configScript.src = './local-only-config.js';
+  configScript.onload = () => {
+    const path = window.toolSiteLocalConfig?.latinFontLibrary;
+    // Accept relative filesystem paths only; keep machine-specific paths out of this HTML.
+    if (typeof path !== 'string' || !path || /^(?:[a-z][a-z0-9+.-]*:|[\\/])/i.test(path)) return;
+    const target = new URL(path, window.location.href);
+    if (target.protocol !== 'file:') return;
+    document.getElementById('local-latin-library-link').href = target.href;
+    document.getElementById('local-latin-library').hidden = false;
+  };
+  // A missing local configuration leaves the entry hidden.
+  document.body.append(configScript);
+})();
+</script>
+<script>
+(() => {
+  const list = document.getElementById('logo-font-list');
+  const sources = [...document.querySelectorAll('article[data-logo-recommender]')]
+    .sort((a, b) => a.querySelector('h3').textContent.localeCompare(b.querySelector('h3').textContent, 'en'));
+  for (const source of sources) {
+    const logoOnly = source.dataset.logoOnly === 'true';
+    const card = logoOnly ? source : source.cloneNode(true);
+    if (!logoOnly) {
+      card.id = source.id + '-logo';
+      // Only the original card owns the recommendation metadata.
+      card.removeAttribute('data-logo-recommender');
+      card.removeAttribute('data-logo-only');
+      const note = document.createElement('p');
+      note.className = 'logo-context';
+      const link = document.createElement('a');
+      link.href = '#' + card.id;
+      link.textContent = '遠藤大輔さんのおすすめは「ロゴ制作向け」に掲載';
+      note.append(link);
+      source.querySelector('.recommender').after(note);
+    }
+    const context = document.createElement('p');
+    context.className = 'logo-context';
+    context.textContent = 'ロゴ制作向けのおすすめ：' + source.dataset.logoRecommender;
+    card.querySelector('h3').after(context);
+    list.append(card);
+  }
+  document.getElementById('logo-font-fallback').hidden = true;
+})();
+</script>
 </body>
 </html>
