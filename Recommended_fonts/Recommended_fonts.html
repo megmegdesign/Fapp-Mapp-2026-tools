@@ -54,8 +54,6 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 :focus-visible { outline:3px solid #185f83; outline-offset:3px; }
 @media(max-width:760px) { .font-list { grid-template-columns:minmax(0,1fr); } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
-.local-library { display:flex; }
-.local-library[hidden] { display:none; }
 .logo-intro { margin:0 0 14px; color:var(--text-muted); font-size:12px; }
 .foundry-section { margin-bottom:32px; }
 .foundry-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0; }
@@ -78,7 +76,7 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 </head>
 <body id="page-top">
 <header class="page-header"><h1>おすすめフォント</h1><a class="home-btn" href="../index.html">トップへ</a></header>
-<nav class="category-nav" aria-label="フォントのカテゴリ"><a href="#font-names">フォント名の見方</a><a href="#japanese">日本語フォント</a><a href="#western">欧文フォント</a><a href="#logo-fonts">ロゴにおすすめのフォント</a><a href="#numerals">美しい数字の書体</a><a href="#noto-sans">NotoSansについて</a><span class="local-library" id="local-latin-library" hidden><a id="local-latin-library-link" title="登録されている欧文フォントを実際の書体で一覧・比較できます。">欧文フォント見本帳</a></span></nav>
+<nav class="category-nav" aria-label="フォントのカテゴリ"><a href="#font-names">フォント名の見方</a><a href="#japanese">日本語フォント</a><a href="#western">欧文フォント</a><a href="#logo-fonts">ロゴにおすすめのフォント</a><a href="#numerals">美しい数字の書体</a><a href="#noto-sans">NotoSansについて</a><a href="../Latin_Font_Library/index.html" title="欧文フォント見本帳：登録書体を一覧・比較できます。">欧文フォント一覧</a></nav>
 <main>
 <section class="category" id="font-names" aria-labelledby="font-names-heading">
 <h2 id="font-names-heading">フォント名の見方</h2>
@@ -951,25 +949,6 @@ Font MemeでBoldが無料DLできる。</p>
 </section>
 </main>
 <a class="home-btn back-to-top" href="#page-top" aria-label="ページの上に戻る">↑ 上に戻る</a>
-<script>
-(() => {
-  // Local files only. Public HTTP(S) pages never load the private configuration.
-  if (window.location.protocol !== 'file:') return;
-  const configScript = document.createElement('script');
-  configScript.src = './local-only-config.js';
-  configScript.onload = () => {
-    const path = window.toolSiteLocalConfig?.latinFontLibrary;
-    // Accept relative filesystem paths only; keep machine-specific paths out of this HTML.
-    if (typeof path !== 'string' || !path || /^(?:[a-z][a-z0-9+.-]*:|[\\/])/i.test(path)) return;
-    const target = new URL(path, window.location.href);
-    if (target.protocol !== 'file:') return;
-    document.getElementById('local-latin-library-link').href = target.href;
-    document.getElementById('local-latin-library').hidden = false;
-  };
-  // A missing local configuration leaves the entry hidden.
-  document.body.append(configScript);
-})();
-</script>
 <script>
 (() => {
   const list = document.getElementById('logo-font-list');

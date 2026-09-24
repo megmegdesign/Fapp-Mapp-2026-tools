@@ -1,3 +1,19 @@
 # Local-only pages and private machine-specific navigation settings
 local-only/
 /Recommended_fonts/local-only-config.js
+
+# Font binaries must never be committed (including uppercase extensions).
+*.[oO][tT][fF]
+*.[tT][tT][fF]
+*.[wW][oO][fF][fF]
+*.[wW][oO][fF][fF]2
+*.[tT][tT][cC]
+*.[oO][tT][cC]
+*.[dD][fF][oO][nN][tT]
+*.[eE][oO][tT]
+*.[pP][fF][bB]
+*.[pP][fF][mM]
+*.[pP][fF][aA]
+*.[fF][oO][nN]
+*.[fF][nN][tT]
+fonts/

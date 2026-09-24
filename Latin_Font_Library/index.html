@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>欧文フォント見本帳 | Latin Font Library</title>
+<link rel="stylesheet" href="style.css">
+<script src="font-data.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<header><div><h1>欧文フォント見本帳</h1><p class="subtitle">Latin Font Library <span>Google Fonts / ローカルフォント</span></p></div><div class="header-actions"><a class="home-btn" id="back-to-fonts" href="../Recommended_fonts/Recommended_fonts.html">おすすめフォントへ戻る</a><a href="README.md">使い方</a></div></header>
+<main>
+<section class="controls" aria-label="比較の設定">
+<div class="primary-controls"><label class="sample-label" for="sample">サンプル文字<input id="sample" type="text" value="Hamburgefontsiv" maxlength="300" spellcheck="false" autocomplete="off" aria-describedby="sample-note"></label><label for="size">文字サイズ <output id="size-value" for="size">48px</output><input id="size" type="range" min="24" max="100" value="48"></label></div>
+<p id="sample-note" class="note">英数字・半角記号で比較できます。未インストール・読み込み失敗時は、代替表示と明記して標準フォントで表示します。</p>
+<div class="filter-controls"><label for="search">フォント名検索<input id="search" type="search" placeholder="Helvetica, DIN…"></label><label for="category">分類<select id="category"><option value="">すべての分類</option><option>Serif</option><option>Sans Serif</option><option>Script</option><option>Display</option><option>Slab Serif</option><option>その他</option></select></label><label for="source">掲載カテゴリ<select id="source"><option value="">すべて</option><option>欧文フォント</option><option>美しい数字の書体</option></select></label><label class="check"><input id="favorites-only" type="checkbox">お気に入りのみ</label><label class="check"><input id="available-only" type="checkbox">実書体を表示できるもののみ</label></div>
+<div class="toolbar"><div class="mode" role="group" aria-label="表示モード"><button id="cards-mode" type="button" aria-pressed="true">カード表示</button><button id="compact-mode" type="button" aria-pressed="false">コンパクト表示</button></div><button id="reset" type="button">絞り込みを解除</button><button id="export-report" type="button">表示結果を保存</button></div>
+<p id="storage-warning" class="note" hidden>このブラウザではお気に入りを保存できません。今回開いている間のみ保持します。</p>
+</section>
+<div class="results-bar"><p id="count" role="status" aria-live="polite">フォントを確認しています…</p><p id="updated"></p></div>
+<p id="empty" hidden>該当するフォントがありません。検索条件を変更してください。</p>
+<div id="library" class="library"></div>
+<noscript><p>このページの表示にはJavaScriptを有効にしてください。</p></noscript>
+<footer><p>元データ：「おすすめフォント」の欧文・数字カテゴリ。説明とリンクは「情報・入手先」から確認できます。</p><p>分類は比較用の補助分類です。Google Fontsにある対象書体はWebフォント、それ以外はインストール済みのローカルフォントを使用します。掲載書体と異なるGoogle Fontsの代替候補は情報のみです。</p></footer>
+</main>
+</body>
+</html>
