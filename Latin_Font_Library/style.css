@@ -9,3 +9,6 @@ header { flex-wrap:wrap; }
 
 .fallback-specimen .main-sample,.fallback-specimen .characters{color:#92979c}
 .fallback-specimen .note{font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:var(--muted)}
+
+.back-to-top{position:fixed;right:max(16px, env(safe-area-inset-right));bottom:max(16px, env(safe-area-inset-bottom));z-index:10}
+@media print{.back-to-top{display:none}}

@@ -274,7 +274,7 @@ F Appの本文は15px、行高1.7。見積もりの金額・数量などにはMo
 
 ### 欧文フォント見本帳（GitHub Pages）
 
-- `Latin_Font_Library/index.html` に既存42項目・分類・原文・検索・お気に入り・スタイル選択を移植。「おすすめフォント」の上部ナビに「欧文フォント一覧」を常設。
+- `Latin_Font_Library/index.html` に既存42項目・分類・原文・検索・お気に入り・スタイル選択を移植。「おすすめフォント」の上部ナビに「欧文フォント見本帳」を常設。見本帳にも右下固定の「↑ 上に戻る」を共通シアンボタンで配置し、印刷時は非表示。
 - Amiri / Lato / Montserrat / Quicksand / RobotoはGoogle Fonts CSS APIから表示。それ以外はFontFaceのlocal()を使用。未読込時は見本文字をグレー（#92979c）にし、代替フォント名を明記。セリフ系はTimes New Roman→Georgia、それ以外はArial→Helveticaをlocal()で確認。いずれも利用不可ならブラウザ標準書体と表示。
 - フォント本体は同梱しない。元のDrive版は保持。旧fonts/の未使用Open Rundeは外部退避し、フォント拡張子を.gitignoreで除外。
 
