@@ -72,14 +72,66 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 }
 .logo-context { margin:6px 0; color:#341f8a; font-size:12px; }
 .logo-context a { color:inherit; }
+.logo-history { margin:12px 0; padding:12px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.logo-history h4 { margin:0 0 8px; font-size:13px; color:var(--accent); }
+.logo-history p { margin:0 0 8px; }
+.logo-history p:last-child { margin-bottom:0; }
+/* Category navigation is enhanced only when JavaScript is available. */
+[hidden] { display:none!important; }
+.font-navigation-ready .category { margin-top:0; }
+.category-nav a[aria-selected="true"] { background:var(--accent); border-color:var(--accent); color:#fff; }
+.library-link-row,.font-search-controls { max-width:980px; margin:0 auto 16px; }
+.library-link-row a { color:#185f83; text-underline-offset:3px; }
+.font-search-controls label { display:block; font-size:13px; font-weight:500; margin-bottom:6px; }
+.search-input-row { display:flex; gap:8px; }
+.search-input-row input,.search-input-row button { font:inherit; border:1px solid var(--border); border-radius:5px; background:#fff; color:var(--text); padding:9px 12px; min-height:42px; }
+.search-input-row input { flex:1; min-width:0; }
+.search-input-row button { cursor:pointer; flex-shrink:0; }
+.search-input-row button:hover { border-color:var(--accent); }
+.search-help { color:var(--text-muted); margin:6px 0 0; }
+.guide-toc { margin:0 0 16px; padding:12px 18px; background:#fff; border:1px solid var(--border); border-radius:5px; }
+.guide-toc ul { display:flex; flex-wrap:wrap; gap:6px 20px; list-style:none; margin:0; padding:0; }
+.guide-toc a,.result-links a { color:#185f83; text-underline-offset:3px; }
+.font-details { margin-top:12px; border-top:1px solid var(--border); padding-top:8px; }
+.font-details summary { cursor:pointer; color:#185f83; font-size:13px; padding:4px 0; }
+.font-details[open] summary { margin-bottom:8px; }
+.font-details .logo-history { border:0; padding:0; }
+#search-result-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.search-result { min-width:0; padding:16px 18px; border:1px solid var(--border); border-radius:5px; background:#fff; box-shadow:var(--shadow); }
+.search-result h3 { font-size:17px; }
+.search-excerpt { color:var(--text-muted); margin:8px 0; }
+.result-links { display:flex; flex-wrap:wrap; gap:6px 16px; }
+@media(max-width:760px) { #search-result-list { grid-template-columns:minmax(0,1fr); } .category-nav a { flex:1 1 140px; padding:10px 12px; } }
+@media print {
+  main > .category[hidden] { display:block!important; }
+  .category-nav,.library-link-row,.font-search-controls,#search-results,.guide-toc,.logo-context a { display:none!important; }
+  main > .category { margin-top:24px!important; }
+  .font-list { display:block; }
+  .font-card { margin-bottom:14px; box-shadow:none; }
+  details::details-content { display:block!important; content-visibility:visible!important; }
+}
+
 </style>
 </head>
 <body id="page-top">
 <header class="page-header"><h1>おすすめフォント</h1><a class="home-btn" href="../index.html">トップへ</a></header>
-<nav class="category-nav" aria-label="フォントのカテゴリ"><a href="#font-names">フォント名の見方</a><a href="#japanese">日本語フォント</a><a href="#western">欧文フォント</a><a href="#logo-fonts">ロゴにおすすめのフォント</a><a href="#numerals">美しい数字の書体</a><a href="#noto-sans">NotoSansについて</a><a href="../Latin_Font_Library/index.html" title="欧文フォント見本帳：登録書体を一覧・比較できます。">欧文フォント見本帳</a></nav>
+<nav class="category-nav" aria-label="フォントのカテゴリ"><a href="#font-names">フォント名の見方</a><a href="#japanese">日本語フォント</a><a href="#western">欧文フォント</a><a href="#logo-fonts">ロゴにおすすめのフォント</a><a href="#numerals">美しい数字の書体</a><a href="#noto-sans">NotoSansについて</a></nav>
+<p class="library-link-row"><a href="../Latin_Font_Library/index.html">欧文フォント見本帳を開く ↗</a></p>
+<div class="font-search-controls" id="font-search-controls" hidden>
+<label for="font-search">全カテゴリから検索</label>
+<div class="search-input-row"><input id="font-search" type="search" placeholder="フォント名・推薦者・説明文" aria-describedby="font-search-help" aria-controls="search-results"><button id="clear-font-search" type="button">検索を解除</button></div>
+<p class="search-help" id="font-search-help">解説・入手先・書体の背景も検索できます。</p>
+</div>
 <main>
+<section id="search-results" aria-labelledby="search-heading" hidden>
+<h2 id="search-heading">全カテゴリの検索結果</h2>
+<p id="search-count" role="status" aria-live="polite" aria-atomic="true"></p>
+<p id="search-empty" hidden>該当する情報がありません。検索語を変えるか、検索を解除してください。</p>
+<div id="search-result-list"></div>
+</section>
 <section class="category" id="font-names" aria-labelledby="font-names-heading">
 <h2 id="font-names-heading">フォント名の見方</h2>
+<nav class="guide-toc" aria-label="フォント名の見方の目次"><ul><li><a href="#vendors-heading">ベンダーの省略記号</a></li><li><a href="#proportional-heading">プロポーショナルフォント</a></li><li><a href="#glyph-sets-heading">ProやStdなどの意味（グリフセット）</a></li><li><a href="#n-fonts-heading">Nフォント</a></li><li><a href="#usage-points-heading">使う上でのポイント</a></li><li><a href="#multilingual-heading">多言語フォント</a></li><li><a href="#font-types-heading">フォントの種類</a></li><li><a href="#font-cautions-heading">フォント使用時の注意</a></li></ul></nav>
 <div class="guide-list">
 <section class="guide-panel" aria-labelledby="vendors-heading">
 <h3 id="vendors-heading">ベンダーの省略記号</h3>
@@ -383,6 +435,15 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
 </div>
 </div>
+
+<template class="logo-history-template">
+<div class="logo-history">
+<h4>書体の背景：Avenir</h4>
+<p><strong>タイプ：</strong>Geometric Sans Serif<br>
+<strong>制作年：</strong>1988</p>
+<p>近代書体の代表格。</p>
+</div>
+</template>
 </article>
 <article class="font-card">
 <h3>Baskerville Display PT</h3>
@@ -423,6 +484,15 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
 </div>
 </div>
+
+<template class="logo-history-template">
+<div class="logo-history">
+<h4>書体の背景：Bodoni</h4>
+<p><strong>タイプ：</strong>Modern<br>
+<strong>制作年：</strong>c. 1790s</p>
+<p>Baskervilleから極限までコントラストを強くしたもの。</p>
+</div>
+</template>
 </article>
 <article class="font-card" id="font-logo-source-4" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Clarendon URW</h3>
@@ -441,6 +511,16 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
 </div>
 </div>
+
+<template class="logo-history-template">
+<div class="logo-history">
+<h4>書体の背景：Clarendon（クレアランドン）</h4>
+<p><strong>タイプ：</strong>Slab Serif<br>
+<strong>制作年：</strong>1845</p>
+<p>フランス革命後、大量生産大量消費、広告文化が花開いた頃のもの。</p>
+<p>クレアランドンは中でも特徴的なものだが、イギリスビクトリア朝を代表する書体。</p>
+</div>
+</template>
 </article>
 <article class="font-card">
 <h3>Classico URW</h3>
@@ -476,6 +556,16 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
 </div>
 </div>
+
+<template class="logo-history-template">
+<div class="logo-history">
+<h4>書体の背景：DIN</h4>
+<p><strong>タイプ：</strong>Geometric Sans Serif (DIN 1451)<br>
+<strong>制作年：</strong>1931</p>
+<p>Futuraとならぶドイツ、バウハウス、幾何学的なサンセリフ体の代表格。</p>
+<p>ユニクロのロゴ。</p>
+</div>
+</template>
 </article>
 <article class="font-card" id="font-logo-source-6" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Franklin Gothic（フランクリンゴシック） / Franklin Gothic ATF</h3>
@@ -496,6 +586,15 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
 </div>
 </div>
+
+<template class="logo-history-template">
+<div class="logo-history">
+<h4>書体の背景：Franklin Gothic</h4>
+<p><strong>タイプ：</strong>Sans Serif Grotesque<br>
+<strong>制作年：</strong>1902</p>
+<p>経済・文化の中心がアメリカへ移動した頃のもの。近代美術館のロゴに使用。</p>
+</div>
+</template>
 </article>
 <article class="font-card">
 <h3>Frutiger（フルティガー）</h3>
@@ -527,6 +626,16 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
 </div>
 </div>
+
+<template class="logo-history-template">
+<div class="logo-history">
+<h4>書体の背景：Futura</h4>
+<p><strong>タイプ：</strong>Geometric Sans Serif<br>
+<strong>制作年：</strong>1927</p>
+<p>DINとならぶドイツ、バウハウス、幾何学的なサンセリフ体の代表格。</p>
+<p>Nike、Supremeなどのブランドロゴ。</p>
+</div>
+</template>
 </article>
 <article class="font-card">
 <h3>Garamond Premier Pro</h3>
@@ -573,6 +682,17 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
 </div>
 </div>
+
+<template class="logo-history-template">
+<div class="logo-history">
+<h4>書体の背景：Gotham</h4>
+<p><strong>タイプ：</strong>Geometric Sans Serif<br>
+<strong>制作年：</strong>2000</p>
+<p>近代書体の代表格。</p>
+<p>メンズファッション誌『GQ』が「力強く新鮮な文字を」と依頼したことで制作されたフォント。オバマ大統領の選挙ポスターに使われたことでも有名。</p>
+<p>遠藤大輔さんが作ったビズリーチ系ロゴはほとんどこの書体を使用。</p>
+</div>
+</template>
 </article>
 <article class="font-card" id="font-logo-source-10" data-logo-recommender="遠藤大輔さん" data-logo-only="true">
 <h3>Helvetica Neue</h3>
@@ -611,6 +731,15 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
 </div>
 </div>
+
+<template class="logo-history-template">
+<div class="logo-history">
+<h4>書体の背景：Helvetica</h4>
+<p><strong>タイプ：</strong>Neo-grotesque Sans-serif（ネオ・グロテスクサンセリフ）<br>
+<strong>制作年：</strong>1957</p>
+<p>第二次世界大戦後、理性的、中立的な風潮のなか生まれた。</p>
+</div>
+</template>
 </article>
 <article class="font-card">
 <h3>Montserrat</h3>
@@ -713,6 +842,15 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
 </div>
 </div>
+
+<template class="logo-history-template">
+<div class="logo-history">
+<h4>書体の背景：TRAJAN（トレージャン）</h4>
+<p><strong>タイプ：</strong>Glyphic（グリフィック）<br>
+<strong>制作年：</strong>113 (1989)</p>
+<p>ギリシャ、ローマ時代に石に彫られていた書体。</p>
+</div>
+</template>
 </article>
 <article class="font-card" id="font-logo-source-16" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Univers（ユニバース）</h3>
@@ -732,6 +870,15 @@ h3 { margin:0 0 8px; font-size:17px; font-weight:700; line-height:1.5; }
 <p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
 </div>
 </div>
+
+<template class="logo-history-template">
+<div class="logo-history">
+<h4>書体の背景：Univers</h4>
+<p><strong>タイプ：</strong>Neo-grotesque Sans-serif<br>
+<strong>制作年：</strong>1957</p>
+<p>近代書体の代表格。</p>
+</div>
+</template>
 </article>
 </div>
 </section>
@@ -865,6 +1012,15 @@ Google Fontsにもある。</p>
 <p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
 </div>
 </div>
+
+<template class="logo-history-template">
+<div class="logo-history">
+<h4>書体の背景：Baskerville</h4>
+<p><strong>タイプ：</strong>Transitional（トランジショナル）<br>
+<strong>制作年：</strong>1757</p>
+<p>文化がイタリアからイギリス・フランスに移った時代のもの。</p>
+</div>
+</template>
 </article>
 <article class="font-card" id="font-logo-source-18" data-logo-recommender="遠藤大輔さん" data-logo-only="false">
 <h3>Garamond</h3>
@@ -884,6 +1040,15 @@ EB GaramondがGoogle Fontsにもある。</p>
 <p>参考・出典：<a href="https://note.com/dtp_tranist/n/na2a74e8d5cb3" target="_blank" rel="noopener noreferrer">DTP Transit 別館「定番18書体」の入手方法ガイド</a></p>
 </div>
 </div>
+
+<template class="logo-history-template">
+<div class="logo-history">
+<h4>書体の背景：Garamond</h4>
+<p><strong>タイプ：</strong>Old Style (Adobe Garamond)<br>
+<strong>制作年：</strong>c. 1530–1540 (1989)</p>
+<p>ルネッサンス時期、印刷が始まった頃の時代のもの。</p>
+</div>
+</template>
 </article>
 <article class="font-card">
 <h3>Amiri</h3>
@@ -959,6 +1124,7 @@ Font MemeでBoldが無料DLできる。</p>
     const card = logoOnly ? source : source.cloneNode(true);
     if (!logoOnly) {
       card.id = source.id + '-logo';
+      card.dataset.sourceCard = source.id;
       // Only the original card owns the recommendation metadata.
       card.removeAttribute('data-logo-recommender');
       card.removeAttribute('data-logo-only');
@@ -974,10 +1140,214 @@ Font MemeでBoldが無料DLできる。</p>
     context.className = 'logo-context';
     context.textContent = 'ロゴ制作向けのおすすめ：' + source.dataset.logoRecommender;
     card.querySelector('h3').after(context);
+    const history = card.querySelector('.logo-history-template');
+    if (history) {
+      card.querySelector('.recommender').after(history.content.cloneNode(true));
+      history.remove();
+    }
     list.append(card);
   }
   document.getElementById('logo-font-fallback').hidden = true;
 })();
+</script>
+<script>
+// Progressive enhancement: source cards remain unchanged for the specimen importer.
+(() => {
+  const categories = [...document.querySelectorAll('main > .category')];
+  const nav = document.querySelector('.category-nav');
+  const tabs = [...nav.querySelectorAll('a')];
+  const search = document.getElementById('font-search');
+  const results = document.getElementById('search-results');
+  const resultList = document.getElementById('search-result-list');
+  const count = document.getElementById('search-count');
+  const storageKey = 'recommended-fonts:category:v1';
+  const normalize = value => value.normalize('NFKC').toLocaleLowerCase().replace(/\s+/g, ' ').trim();
+  const make = (tag, text, className) => {
+    const node = document.createElement(tag);
+    if (text) node.textContent = text;
+    if (className) node.className = className;
+    return node;
+  };
+  let active = 'japanese';
+  try {
+    const saved = localStorage.getItem(storageKey);
+    if (categories.some(c => c.id === saved)) active = saved;
+  } catch { /* Storage is optional. */ }
+
+  // Group only explicitly related source/derived cards; never infer identity by name.
+  const records = new Map();
+  document.querySelectorAll('.font-card').forEach((card, index) => {
+    if (!card.id) card.id = `font-card-${index + 1}`;
+    const key = card.dataset.sourceCard || card.id;
+    if (!records.has(key)) records.set(key, {title:card.querySelector('h3').textContent, nodes:[]});
+    records.get(key).nodes.push(card);
+  });
+  document.querySelectorAll('#font-names .guide-panel, #noto-sans .guide-panel, .foundry-card, .logo-intro').forEach((node, index) => {
+    if (!node.id) node.id = `font-guide-${index + 1}`;
+    records.set(node.id, {title:(node.querySelector('h3,h4') || node.closest('.category').querySelector('h2')).textContent, nodes:[node]});
+  });
+  // Capture searchable text before adding UI labels. textContent includes closed details.
+  for (const record of records.values()) {
+    record.text = normalize(record.title + ' ' + record.nodes.map(node => [
+      node.closest('.category').querySelector('h2').textContent,
+      node.closest('.foundry-section')?.querySelector('h3').textContent || '',
+      node.textContent
+    ].join(' ')).join(' '));
+  }
+
+  const fold = (nodes, title) => {
+    const details = make('details', '', 'font-details');
+    const summary = make('summary', title);
+    nodes[0].before(details);
+    details.append(summary, ...nodes);
+  };
+  document.querySelectorAll('.font-card').forEach(card => {
+    const references = [...card.querySelectorAll('.references')].filter(node => node.textContent.trim().length > 180);
+    for (const reference of references) {
+      // Futura's existing alternative heading and list belong with its acquisition notes.
+      const alternative = [...card.querySelectorAll('.memo > p')].find(p => p.textContent === 'Futuraの代替フォント');
+      const nodes = alternative ? [alternative, alternative.nextElementSibling, reference] : [reference];
+      fold(nodes, '入手先・代替フォント');
+    }
+    const history = card.querySelector('.logo-history');
+    if (history) fold([history], '書体の背景');
+  });
+
+  nav.setAttribute('role', 'tablist');
+  tabs.forEach((tab, index) => {
+    tab.id = `category-tab-${categories[index].id}`;
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-controls', categories[index].id);
+    categories[index].setAttribute('role', 'tabpanel');
+    categories[index].setAttribute('aria-labelledby', tab.id);
+    categories[index].tabIndex = 0;
+  });
+  document.getElementById('font-search-controls').hidden = false;
+  document.body.classList.add('font-navigation-ready');
+
+  function showCategory(id) {
+    active = id;
+    categories.forEach(category => { category.hidden = category.id !== id; });
+    tabs.forEach(tab => {
+      const selected = tab.hash === '#' + id;
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    });
+    results.hidden = true;
+    try { localStorage.setItem(storageKey, id); } catch { /* Keep working without persistence. */ }
+  }
+  function reveal(target, scroll) {
+    const category = target?.closest('.category');
+    if (category) showCategory(category.id);
+    if (!target) return;
+    // A result can match any paragraph in a card. Open all its supplementary information.
+    const container = target.closest('.font-card');
+    container?.querySelectorAll('details').forEach(details => { details.open = true; });
+    for (let parent = target.parentElement; parent; parent = parent.parentElement) {
+      if (parent.tagName === 'DETAILS') parent.open = true;
+    }
+    if (scroll) {
+      target.tabIndex = -1;
+      target.focus({preventScroll:true});
+      target.scrollIntoView({block:'start'});
+    }
+  }
+  function renderSearch(query) {
+    const terms = normalize(query).split(' ').filter(Boolean);
+    const matches = [...records.values()].filter(record => terms.every(term => record.text.includes(term)));
+    categories.forEach(category => { category.hidden = true; });
+    tabs.forEach(tab => tab.setAttribute('aria-selected', 'false'));
+    results.hidden = false;
+    resultList.replaceChildren();
+    count.textContent = `${matches.length}件の結果`;
+    document.getElementById('search-empty').hidden = matches.length !== 0;
+    for (const record of matches) {
+      const item = make('article', '', 'search-result');
+      item.append(make('h3', record.title));
+      const matchingNode = record.nodes.find(node => terms.some(term => normalize(node.textContent).includes(term))) || record.nodes[0];
+      const paragraphs = [...matchingNode.querySelectorAll('p,li,dd')];
+      const preview = paragraphs.find(node => terms.some(term => normalize(node.textContent).includes(term)));
+      if (preview) item.append(make('p', preview.textContent, 'search-excerpt'));
+      const links = make('div', '', 'result-links');
+      for (const node of record.nodes) {
+        const category = node.closest('.category');
+        const link = make('a', `${category.querySelector('h2').textContent}の説明へ`);
+        link.href = '#' + node.id;
+        links.append(link);
+      }
+      item.append(links);
+      resultList.append(item);
+    }
+  }
+  function hashTarget() {
+    try { return document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch { return null; }
+  }
+  function sync(scroll = false) {
+    const target = hashTarget();
+    showCategory(target?.closest('.category')?.id || active);
+    search.value = new URL(location.href).searchParams.get('q') || '';
+    if (normalize(search.value)) renderSearch(search.value);
+    else reveal(target, scroll);
+  }
+  function navigate(hash, query = '', replace = false, scroll = true) {
+    const url = new URL(location.href);
+    url.hash = hash;
+    if (query) url.searchParams.set('q', query);
+    else url.searchParams.delete('q');
+    try { history[replace ? 'replaceState' : 'pushState'](null, '', url); }
+    catch { location.hash = hash; }
+    sync(scroll);
+  }
+  search.addEventListener('input', () => {
+    const hadQuery = new URL(location.href).searchParams.has('q');
+    navigate('#' + active, search.value, hadQuery, false);
+  });
+  document.getElementById('clear-font-search').addEventListener('click', () => {
+    navigate('#' + active, '', false, false);
+    search.focus();
+  });
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const id = decodeURIComponent(link.hash.slice(1));
+    if (!document.getElementById(id)) return;
+    event.preventDefault();
+    const isTab = tabs.includes(link);
+    navigate(link.hash, '', false, !isTab);
+    if (isTab) link.focus();
+  });
+  nav.addEventListener('keydown', event => {
+    const index = tabs.indexOf(event.target);
+    if (index < 0) return;
+    const keys = {ArrowRight:(index+1)%tabs.length, ArrowLeft:(index+tabs.length-1)%tabs.length, Home:0, End:tabs.length-1};
+    if (event.key in keys) {
+      event.preventDefault();
+      tabs[keys[event.key]].click();
+    } else if (event.key === ' ') {
+      event.preventDefault(); tabs[index].click();
+    }
+  });
+  window.addEventListener('popstate', () => sync(true));
+  window.addEventListener('hashchange', () => sync(true));
+  // Printing includes all panels and full details, and restores the screen state afterwards.
+  let printedDetails = null;
+  function beforePrint() {
+    if (printedDetails) return;
+    printedDetails = [...document.querySelectorAll('details')].map(node => [node, node.open]);
+    printedDetails.forEach(([node]) => { node.open = true; });
+  }
+  function afterPrint() {
+    printedDetails?.forEach(([node, open]) => { node.open = open; });
+    printedDetails = null;
+  }
+  window.addEventListener('beforeprint', beforePrint);
+  window.addEventListener('afterprint', afterPrint);
+  const printMedia = matchMedia('print');
+  printMedia.addEventListener('change', event => event.matches ? beforePrint() : afterPrint());
+  if (!location.hash) navigate('#' + active, new URL(location.href).searchParams.get('q') || '', true, false);
+  else sync(true);
+})();
+
 </script>
 </body>
 </html>
