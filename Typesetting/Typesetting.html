@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>組版について | My Tools</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet"><style>
+:root { --bg:#f1f4f6; --surface:#fff; --surface2:#f5f7f9; --border:#d9dee3; --text:#303030; --accent:#ff5281; --accent2:#00d7e6; --message-color:#341f8a; --radius:5px; --shadow:0 1px 12px rgba(48,48,48,.06); }
+* { box-sizing:border-box; }
+body { margin:0; padding:24px 16px 80px; background:var(--bg); color:var(--text); font-family:'Noto Sans JP',sans-serif; font-size:13px; line-height:1.8; overflow-wrap:anywhere; }
+.page-header,.layout { max-width:980px; margin:0 auto; }
+.page-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px; }
+h1 { margin:0; font-size:20px; line-height:1.5; color:var(--accent); }
+a { color:var(--text); text-underline-offset:3px; }
+.home-btn { display:inline-block; padding:3px 9px; background:var(--accent2); color:#fff; font-size:10px; font-weight:700; line-height:normal; letter-spacing:.5px; text-decoration:none; border-radius:5px; }
+.layout { display:grid; grid-template-columns:minmax(0,1fr) 260px; gap:20px; align-items:start; }
+main,aside { min-width:0; }
+aside { position:sticky; top:20px; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:14px; }
+.card h2 { display:flex; align-items:center; gap:9px; margin:0; padding:13px 18px 12px; background:var(--surface2); border-bottom:1px solid var(--border); border-radius:5px 5px 0 0; color:var(--accent); font-size:13px; }
+.card h2::before { content:''; width:10px; height:10px; flex-shrink:0; border-radius:5px; background:var(--accent2); }
+.card-body { padding:16px 18px; }
+h3,h4 { font-size:13px; margin:0 0 10px; }
+h4 { margin-top:16px; }
+p { margin:0 0 10px; } p:last-child { margin-bottom:0; }
+ul { margin:0; padding-left:20px; } li + li { margin-top:9px; }
+code { font-family:inherit; font-weight:700; background:var(--surface2); padding:1px 4px; border-radius:5px; }
+.caution-note { color:var(--message-color); background:transparent; font-size:12px; }
+.compare { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.compare section { min-width:0; }
+.example { margin-top:14px; padding-top:12px; border-top:1px solid var(--border); }
+.detail + .detail { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); }
+.black-table { width:100%; border-collapse:collapse; table-layout:fixed; margin-bottom:16px; }
+.black-table th,.black-table td { padding:9px 8px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border); }
+.black-table th { background:var(--surface2); font-weight:700; }
+.black-table th:first-child { width:44%; }
+.toc { list-style:none; padding:0; } .toc a { display:block; padding:4px 0; }
+section { scroll-margin-top:20px; }
+:focus-visible { outline:3px solid #185f83; outline-offset:3px; }
+@media(max-width:760px) { .layout { grid-template-columns:minmax(0,1fr); } aside { position:static; grid-row:1; } }
+@media(max-width:600px) { .compare { grid-template-columns:minmax(0,1fr); } .compare section + section { border-top:1px solid var(--border); padding-top:16px; } }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+
+.layout { display:block; }
+.section-nav,.tabs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.section-nav a,.tabs button { border:1px solid var(--border); background:#fff; padding:7px 13px; border-radius:5px; font:inherit; font-size:12px; text-decoration:none; cursor:pointer; color:var(--text); }
+.section-nav a:hover,.tabs button:hover { border-color:var(--accent); color:var(--accent); }
+.tabs button[aria-selected="true"] { background:var(--accent); color:#fff; border-color:var(--accent); }
+.home-btn:hover { background:var(--accent); }
+.calc-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:20px; }
+.fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px 10px; }
+.field { min-width:0; }
+.field label { display:block; font-size:12px; font-weight:500; margin-bottom:4px; }
+input,select { width:100%; min-width:0; height:38px; padding:6px 10px; border:1px solid var(--border); border-radius:5px; background:var(--surface2); color:var(--text); font:inherit; font-size:15px; }
+input:focus,select:focus { background:#fff; }
+.sub { display:block; font-size:11px; color:#92979c; margin-top:3px; }
+.result { background:#001410; color:#fff; border-radius:5px; padding:14px 16px; margin-bottom:14px; }
+.result dl { margin:0; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:10px; }
+.result dt { font-size:11px; }
+.result dd { margin:0; font-size:16px; font-weight:700; overflow-wrap:anywhere; }
+.result .primary { grid-column:1/-1; }
+.result .primary dd { font-size:22px; color:var(--accent); }
+.result .number { font-family:'Montserrat','Noto Sans JP',sans-serif; }
+.warning { color:var(--message-color); font-size:12px; margin:12px 0; }
+.preview { margin:0; padding:12px; background:var(--surface2); border-radius:5px; }
+.preview svg { display:block; width:100%; height:280px; }
+.preview figcaption { font-size:11px; color:#74777a; margin-top:8px; }
+.formula { margin-top:16px; }
+.formula summary { cursor:pointer; }
+.converter-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.converter-grid .result { margin-top:12px; }
+.converter-grid output { font-size:18px; font-weight:700; color:var(--accent); }
+.reference-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.reference-grid .card { margin:0; }
+.reference-grid .wide { grid-column:1/-1; }
+.flow { font-weight:700; color:var(--accent); }
+.back-to-top { position:fixed; bottom:18px; right:18px; }
+[hidden] { display:none!important; }
+@media(max-width:760px) { .calc-layout,.reference-grid { grid-template-columns:minmax(0,1fr); } .converter-grid { grid-template-columns:minmax(0,1fr); } }
+@media(max-width:380px) { .fields { grid-template-columns:minmax(0,1fr); } }
+@media print { .section-nav,.tabs,.home-btn { display:none; } [role="tabpanel"][hidden] { display:block!important; } .card { break-inside:avoid; box-shadow:none; } }
+</style></head><body id="page-top"><header class="page-header"><h1>組版について</h1><a class="home-btn" href="../index.html">トップへ</a></header><main class="layout">
+<nav class="section-nav" aria-label="ページ内目次"><a href="#type-size-guide">文字サイズの決め方</a><a href="#calculator">組版計算</a><a href="#conversion">Q / H / pt換算</a><a href="#units">文字単位</a><a href="#spacing">文字詰め</a><a href="#adjustment">詰め調整</a><a href="#kinsoku">禁則処理</a><a href="#illustrator">Illustrator 2025以降</a></nav>
+<section class="card" id="type-size-guide"><h2>文字サイズの決め方</h2><div class="card-body">
+<p><strong>ジャンプ率：</strong>本文を基準に、大見出しは2〜3倍、小見出しは1〜２倍、キャプションは0.7〜0.8倍。</p>
+<p><strong>行間：</strong>本文での読みやすい行間としては、テキストのサイズの1.5～2倍が推奨。</p>
+</div></section>
+<section class="card" id="calculator"><h2>組版計算ツール</h2><div class="card-body">
+<p>横組みの文字数・行数・段組から、版面と余白を設計します。</p>
+<noscript><p class="caution-note">計算ツールの利用にはJavaScriptを有効にしてください。下の基本解説はそのまま読めます。</p></noscript>
+<div class="tabs" role="tablist" aria-label="計算モード"><button type="button" role="tab" id="tab-forward" aria-controls="forward" aria-selected="true" tabindex="0">通常計算</button><button type="button" role="tab" id="tab-reverse" aria-controls="reverse" aria-selected="false" tabindex="-1">逆算</button><button type="button" role="tab" id="tab-conversion" aria-controls="conversion" aria-selected="false" tabindex="-1">単位換算</button></div><section id="forward" role="tabpanel" aria-labelledby="tab-forward" tabindex="0"><h3>通常計算（順算）</h3><p>文字サイズ・行送り・文字数から版面を求め、余白を天地・左右それぞれ均等に配分します。</p><div class="calc-layout"><div><form id="forward-form" novalidate><div class="fields"><div class="field"><label for="forward-paper">用紙サイズ</label><select id="forward-paper" name="paper"><option>A4</option><option>A5</option><option>A3</option><option>A6</option><option value="B5">B5（JIS）</option><option value="B4">B4（JIS）</option><option value="B6">B6（JIS）</option><option value="custom">カスタム</option></select></div><div class="field"><label for="forward-orientation">用紙の向き</label><select id="forward-orientation" name="orientation"><option value="portrait">縦</option><option value="landscape">横</option></select></div><div class="field"><label for="forward-width">用紙幅（mm）</label><input id="forward-width" name="width" type="number" value="210" min="0.01" max="1000000" step="any" required></div><div class="field"><label for="forward-height">用紙高さ（mm）</label><input id="forward-height" name="height" type="number" value="297" min="0.01" max="1000000" step="any" required></div><div class="field"><label for="forward-q">文字サイズ（Q）</label><input id="forward-q" name="q" type="number" value="12" min="0.01" max="1000000" step="any" required aria-describedby="forward-q-pt"><small class="sub" id="forward-q-pt">— pt</small></div><div class="field"><label for="forward-h">行送り（H）</label><input id="forward-h" name="h" type="number" value="20" min="0.01" max="1000000" step="any" required aria-describedby="forward-h-pt"><small class="sub" id="forward-h-pt">— pt</small></div><div class="field"><label for="forward-chars">1行の文字数（1段あたり）</label><input id="forward-chars" name="chars" type="number" value="29" min="1" max="1000000" step="1" required></div><div class="field"><label for="forward-lines">行数（1段あたり）</label><input id="forward-lines" name="lines" type="number" value="48" min="1" max="1000000" step="1" required></div><div class="field"><label for="forward-columns">段数</label><input id="forward-columns" name="columns" type="number" value="2" min="1" max="100" step="1" required></div><div class="field"><label for="forward-gap">段間（mm）</label><input id="forward-gap" name="gap" type="number" value="12" min="0" max="1000000" step="any" required></div></div><p class="sub">用紙幅・高さを直接編集するとカスタムサイズになります。縦／横の変更で幅と高さを入れ替えます。</p></form><p class="warning" id="forward-warning" role="status" aria-live="polite"></p></div><div><div class="result" id="forward-result" aria-live="polite" aria-atomic="true"></div><figure class="preview" id="forward-preview"></figure></div></div></section><section id="reverse" role="tabpanel" aria-labelledby="tab-reverse" tabindex="0" hidden><h3>逆算</h3><p>用紙とマージンから、1段に入る文字数・行数を整数で求めます。</p><div class="calc-layout"><div><form id="reverse-form" novalidate><div class="fields"><div class="field"><label for="reverse-paper">用紙サイズ</label><select id="reverse-paper" name="paper"><option>A4</option><option>A5</option><option>A3</option><option>A6</option><option value="B5">B5（JIS）</option><option value="B4">B4（JIS）</option><option value="B6">B6（JIS）</option><option value="custom">カスタム</option></select></div><div class="field"><label for="reverse-orientation">用紙の向き</label><select id="reverse-orientation" name="orientation"><option value="portrait">縦</option><option value="landscape">横</option></select></div><div class="field"><label for="reverse-width">用紙幅（mm）</label><input id="reverse-width" name="width" type="number" value="210" min="0.01" max="1000000" step="any" required></div><div class="field"><label for="reverse-height">用紙高さ（mm）</label><input id="reverse-height" name="height" type="number" value="297" min="0.01" max="1000000" step="any" required></div><div class="field"><label for="reverse-top">天マージン（mm）</label><input id="reverse-top" name="top" type="number" value="20" min="0" max="1000000" step="any" required></div><div class="field"><label for="reverse-bottom">地マージン（mm）</label><input id="reverse-bottom" name="bottom" type="number" value="20" min="0" max="1000000" step="any" required></div><div class="field"><label for="reverse-left">左マージン（mm）</label><input id="reverse-left" name="left" type="number" value="20" min="0" max="1000000" step="any" required></div><div class="field"><label for="reverse-right">右マージン（mm）</label><input id="reverse-right" name="right" type="number" value="20" min="0" max="1000000" step="any" required></div><div class="field"><label for="reverse-q">文字サイズ（Q）</label><input id="reverse-q" name="q" type="number" value="12" min="0.01" max="1000000" step="any" required aria-describedby="reverse-q-pt"><small class="sub" id="reverse-q-pt">— pt</small></div><div class="field"><label for="reverse-h">行送り（H）</label><input id="reverse-h" name="h" type="number" value="20" min="0.01" max="1000000" step="any" required aria-describedby="reverse-h-pt"><small class="sub" id="reverse-h-pt">— pt</small></div><div class="field"><label for="reverse-columns">段数</label><input id="reverse-columns" name="columns" type="number" value="1" min="1" max="100" step="1" required></div><div class="field"><label for="reverse-gap">段間（mm）</label><input id="reverse-gap" name="gap" type="number" value="0" min="0" max="1000000" step="any" required></div></div><p class="sub">用紙幅・高さを直接編集するとカスタムサイズになります。縦／横の変更で幅と高さを入れ替えます。</p></form><p class="warning" id="reverse-warning" role="status" aria-live="polite"></p></div><div><div class="result" id="reverse-result" aria-live="polite" aria-atomic="true"></div><figure class="preview" id="reverse-preview"></figure></div></div></section><section id="conversion" role="tabpanel" aria-labelledby="tab-conversion" tabindex="0" hidden><h3>Q・H・ポイント換算</h3><p>Qは文字サイズ、Hは行送りの単位です。どちらも1単位 = 0.25mmです。</p><div class="converter-grid"><section><h4>Q → pt</h4><label for="convert-q">文字サイズ（Q）</label><input id="convert-q" type="number" min="0" max="1000000" step="any" value="13" required><div class="result"><output id="convert-q-result" for="convert-q" aria-live="polite"></output></div></section><section><h4>pt → Q</h4><label for="convert-pt">文字サイズ（pt）</label><input id="convert-pt" type="number" min="0" max="1000000" step="any" value="9" required><div class="result"><output id="convert-pt-result" for="convert-pt" aria-live="polite"></output></div></section><section><h4>H → pt</h4><label for="convert-h">行送り（H）</label><input id="convert-h" type="number" min="0" max="1000000" step="any" value="20" required><div class="result"><output id="convert-h-result" for="convert-h" aria-live="polite"></output></div></section></div><p class="sub">1pt = 25.4 ÷ 72mm。表示は原則小数第2位まで、mmは換算確認用に小数第3位まで表示します。</p></section>
+<p class="caution-note">※縦の版面は「行送り × 行数」で求める簡易計算です。文字サイズを加味した最初と最後の行の外接寸法とは異なります。禁則処理・約物・段落・見出しなどにより実際の文字数は変わるため、設計上の目安として使用してください。</p>
+<details class="formula"><summary>計算式と余り寸法について</summary><p>版面幅 = Q × 0.25 × 1行の文字数 × 段数 + 段間 ×（段数 − 1）<br>版面高さ = H × 0.25 × 行数<br>均等マージン =（用紙寸法 − 版面寸法）÷ 2</p><p>逆算：1段の幅 =（使用可能幅 − 段間 ×（段数 − 1））÷ 段数。文字数・行数は切り捨てます。横方向の余りは全段の合計です。プレビューでは使用版面を使用可能範囲の左上に配置し、余りを右と下に残します。</p><p>Q / H → pt：値 × 0.25 ÷（25.4 ÷ 72）<br>pt → Q：値 ×（25.4 ÷ 72）÷ 0.25</p></details></div></section>
+<div class="reference-grid">
+<section class="card wide" id="units"><h2>文字組の基本・文字単位</h2><div class="card-body"><p>文字サイズをざっくり知りたいときは、定規で<strong>等幅の和字4文字分</strong>の幅を測ります。そのミリ数が、おおよそのQ数です。行送りも<strong>4行送り分（1行目から5行目までの同じ位置の間隔）</strong>を測ると、ミリ数とH数が一致します。</p><p>「4Q = 1mm」なので、4文字分を測ると、測ったmm数とQ数が一致するという考え方です。字間を詰めたり広げたりしている場合は目安になりません。</p><ul><li>1Q = 0.25mm = 1/4mm = Quarter</li><li>4Q = 1mm（行送りのHも同じサイズ）</li><li>1pt ≒ 0.35278mm</li><li>9pt ≒ 12.70Q（実務上ざっくり13Q）</li></ul><div class="example"><h3>20Qの文字を測る例</h3><p>1文字 = 5mm → 4文字 = 20mm。定規で4文字分を測って20mmなら、おおよそ20Qです。</p><h3>A4の場合の設計例</h3><p>12Q = 3mm。左右マージン各12mm、段間12mm、1段が12Q × 29文字 = 87mmの2段組なら、87 × 2 + 12 = <strong>版面幅186mm</strong>。20H × 48行で高さ240mm、天地マージンは各28.5mmになります。</p></div></div></section>
+<section class="card wide" id="spacing"><h2>文字詰め機能基礎</h2><div class="card-body"><h3>カーニング</h3><div class="compare"><section><h4>和文等幅</h4><p>和文は等幅、英語はメトリクスの詰めになります。</p><h4>メトリクス</h4><p>OpenTypeフォントが持っているツメ情報をONにします。ツメ組ではOpenTypeの「プロポーショナルメトリクス」もONにします。</p></section><section><h4>オプティカル</h4><p>詰め情報がないフォントでも見た目で詰めてくれます。文字サイズによって詰め量が変動します。</p><p>英文用機能なので、縦組では使用しません。</p></section></div><div class="example"><h3>トラッキング</h3><p>文字間を1/1000 em単位で調整します。入力値1000が1文字分（1em）に相当し、−1000でちょうど1文字分詰まります。</p><h3>文字ツメ</h3><p>1文字のもつスペース（仮想ボディ）を%で詰めます。行頭部分も詰まります。</p></div></div></section>
+<section class="card" id="adjustment"><h2>メトリクスなどより詰めたい時の処理手順</h2><div class="card-body"><p class="flow">文字ツメ100%<br>↓<br>手動でツメ調整<br>↓<br>トラッキングで全体を広げる</p><p>文字ツメ100%で仮想ボディの空きを詰めると、行頭も詰まります。その状態から必要な部分を手動で調整し、最後にトラッキングで全体を広げます。</p><p class="caution-note"><strong>※この方法に加えて、メトリクスやオプティカルなどを併用しないでください。</strong></p></div></section>
+<section class="card" id="kinsoku"><h2>禁則処理</h2><div class="card-body"><p>案件によりますが、<strong>弱い禁則をベース</strong>にします。</p><p>文字数の少ない箱組で「強い禁則」にすると、テキストがパラパラになりやすいためです。</p></div></section>
+<section class="card wide" id="illustrator"><h2>Illustrator 2025以降の理想の文字組設定</h2><div class="card-body"><div class="compare"><section><h3>ツメ組</h3><ul><li>カーニング：「メトリクス」</li><li>文字組：「ツメ組み用」</li><li>「プロポーショナルメトリクス」をON</li></ul></section><section><h3>ベタ組</h3><ul><li>カーニング：「和文等幅」</li><li>文字組：「ベタ組み用」</li><li>ボックスサイズを文字サイズの整数倍で計算</li></ul></section></div><div class="example"><h3>ボックスサイズの計算</h3><p><strong>書式 ＞ エリア内文字オプション</strong>を開き、幅のところに直接計算式を入力できます。</p><p><code>20Q*15</code> と入力すると、20Qで15文字分のボックス幅（75mm）をIllustrator側で計算してくれます。</p></div><div class="example"><h3>OpenTypeについての注意</h3><p><strong>A-OTFから始まるモリサワフォントは対象外。</strong></p><p class="sub">この設定についての運用メモです。</p></div></div></section>
+</div></main><a class="home-btn back-to-top" href="#page-top">↑ 上に戻る</a>
+<!-- Calculation model is independent of the DOM; extend here for additional solvers. -->
+<script id="calculation-model">
+const TypesettingMath = (() => {
+  const mmPerPt = 25.4 / 72;
+  const units = (value, unit) => { const mm = value * (unit === 'pt' ? mmPerPt : 0.25); return {mm, q:mm / 0.25, pt:mm / mmPerPt}; };
+  const forward = v => {
+    const width = v.q * .25 * v.chars * v.columns + v.gap * (v.columns - 1);
+    const height = v.h * .25 * v.lines;
+    return {width,height,left:(v.width-width)/2,right:(v.width-width)/2,top:(v.height-height)/2,bottom:(v.height-height)/2,overflow:width>v.width || height>v.height};
+  };
+  // Small tolerance only compensates floating-point error at exact integer boundaries.
+  const floor = n => Math.floor(n + Number.EPSILON * Math.max(1,Math.abs(n)) * 4);
+  const reverse = v => {
+    const availableWidth = v.width-v.left-v.right, availableHeight = v.height-v.top-v.bottom;
+    const textWidth = availableWidth-v.gap*(v.columns-1);
+    if (availableWidth<=0 || availableHeight<=0 || textWidth<=0) return {invalid:true};
+    const chars = floor(textWidth/v.columns/(v.q*.25)), lines = floor(availableHeight/(v.h*.25));
+    const width = chars*v.q*.25*v.columns + v.gap*(v.columns-1), height=lines*v.h*.25;
+    const total=chars*lines*v.columns;
+    return {availableWidth,availableHeight,chars,lines,total,width,height,extraWidth:Math.max(0,availableWidth-width),extraHeight:Math.max(0,availableHeight-height),...Object.fromEntries(['left','right','top','bottom'].map(k=>[k,v[k]])),unsafe:!Number.isSafeInteger(total)};
+  };
+  return {units,forward,reverse};
+})();
+</script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const fmt = (n,digits=2) => new Intl.NumberFormat('ja-JP',{maximumFractionDigits:digits}).format(Object.is(n,-0)?0:n);
+  const papers = {A4:[210,297],A5:[148,210],A3:[297,420],A6:[105,148],B5:[182,257],B4:[257,364],B6:[128,182]};
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  function activate(id) {
+    tabs.forEach(tab => { const active=tab.id==='tab-'+id; tab.setAttribute('aria-selected',String(active)); tab.tabIndex=active?0:-1; $(tab.getAttribute('aria-controls')).hidden=!active; });
+  }
+  tabs.forEach(tab=>tab.addEventListener('click',()=>{
+    const id=tab.getAttribute('aria-controls'); activate(id);
+    try { history.pushState(null,'','#'+id); } catch { location.hash=id; }
+  }));
+  document.querySelector('.tabs').addEventListener('keydown',e=>{
+    const index=tabs.indexOf(e.target); if(index<0)return;
+    const moves={ArrowRight:(index+1)%3,ArrowLeft:(index+2)%3,Home:0,End:2};
+    if(e.key in moves){ e.preventDefault(); tabs[moves[e.key]].click(); tabs[moves[e.key]].focus(); }
+  });
+  function syncHash(){ if(location.hash==='#conversion') activate('conversion'); else if(['#calculator','#forward','#reverse'].includes(location.hash)) activate(location.hash==='#reverse'?'reverse':'forward'); }
+  document.querySelectorAll('.section-nav a').forEach(link=>link.addEventListener('click',()=>{ if(link.hash==='#conversion')activate('conversion'); else if(link.hash==='#calculator')activate('forward'); }));
+  window.addEventListener('hashchange',syncHash); window.addEventListener('popstate',syncHash); syncHash();
+  function results(mode,rows){ $(mode+'-result').innerHTML='<dl>'+rows.map(([label,value],i)=>`<div class="${i===0?'primary':''}"><dt>${label}</dt><dd class="number">${value}</dd></div>`).join('')+'</dl>'; }
+  function preview(mode,v,r) {
+    const node=$(mode+'-preview');
+    // Fit both paper and overflowing type area without changing their relative proportions.
+    const minX=Math.min(0,r.left), minY=Math.min(0,r.top), maxX=Math.max(v.width,r.left+r.width), maxY=Math.max(v.height,r.top+r.height);
+    const scale=Math.min(270/(maxX-minX),220/(maxY-minY));
+    const x=(360-(maxX-minX)*scale)/2-minX*scale,y=(280-(maxY-minY)*scale)/2-minY*scale,w=v.width*scale,h=v.height*scale;
+    const bx=x+r.left*scale,by=y+r.top*scale,bw=r.width*scale,bh=r.height*scale;
+    const colWidth=Math.max(0,(r.width-v.gap*(v.columns-1))/v.columns)*scale;
+    let shapes='';
+    for(let i=0;i<v.columns;i++) shapes+=`<rect x="${bx+i*(colWidth+v.gap*scale)}" y="${by}" width="${colWidth}" height="${bh}" fill="#00d7e6" fill-opacity=".25" stroke="#13818a" stroke-width=".7"/>`;
+    const available=mode==='reverse'?`<rect x="${bx}" y="${by}" width="${r.availableWidth*scale}" height="${r.availableHeight*scale}" fill="none" stroke="#ff5281" stroke-dasharray="4 3"/>`:'';
+    node.innerHTML=`<svg viewBox="0 0 360 280" role="img" aria-label="用紙${fmt(v.width)}×${fmt(v.height)}mm、版面${fmt(r.width)}×${fmt(r.height)}mm、${v.columns}段、段間${fmt(v.gap)}mm"><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="white" stroke="#92979c"/>${available}${shapes}<g font-size="11" fill="#303030" text-anchor="middle"><text x="${x+w/2}" y="16">天 ${fmt(r.top)}mm</text><text x="${x+w/2}" y="274">地 ${fmt(r.bottom)}mm</text><text x="22" y="140">左</text><text x="22" y="154">${fmt(r.left)}</text><text x="337" y="140">右</text><text x="337" y="154">${fmt(r.right)}</text></g></svg><figcaption>白：用紙 ／ シアン：版面・各段 ／ 段間：${fmt(v.gap)}mm${mode==='reverse'?' ／ ピンク破線：使用可能範囲':''}<br>左右の単位：mm。図は比率表示です。${mode==='reverse'?'余りは右・下に配置（指定マージンに加算）。':''}</figcaption>`;
+  }
+  function update(mode) {
+    const form=$(mode+'-form'), v={}; let valid=true;
+    for(const input of form.querySelectorAll('input')){v[input.name]=input.valueAsNumber; const ok=input.checkValidity()&&Number.isFinite(v[input.name]); input.setAttribute('aria-invalid',String(!ok)); if(!ok)valid=false;}
+    for(const key of ['q','h']) $(mode+'-'+key+'-pt').textContent=Number.isFinite(v[key])&&v[key]>0?'≒ '+fmt(TypesettingMath.units(v[key],key).pt)+' pt':'— pt';
+    const warning=$(mode+'-warning'); warning.textContent='';
+    if(!valid){warning.textContent='入力値を確認してください。寸法・Q・Hは正の数、段間・マージンは0以上、文字数・行数・段数は整数で入力してください（段数は100まで、その他は1,000,000まで）。'; $(mode+'-result').textContent='入力を確認してください'; $(mode+'-preview').replaceChildren();return;}
+    const r=TypesettingMath[mode](v);
+    if(r.invalid||r.unsafe){warning.textContent=r.invalid?'マージン・段間を除いた使用可能範囲がありません。':'文字数が計算可能な範囲を超えています。入力値を小さくしてください。';$(mode+'-result').textContent='計算できません';$(mode+'-preview').replaceChildren();return;}
+    const size=(w,h)=>`${fmt(w)} × ${fmt(h)} mm`;
+    if(mode==='forward'){
+      results(mode,[['版面サイズ',size(r.width,r.height)],['左右マージン',`各 ${fmt(r.left)} mm`],['天地マージン',`各 ${fmt(r.top)} mm`],['文字サイズ',`${fmt(v.q)} Q <small class="sub">≒ ${fmt(TypesettingMath.units(v.q,'q').pt)} pt</small>`],['行送り',`${fmt(v.h)} H <small class="sub">≒ ${fmt(TypesettingMath.units(v.h,'h').pt)} pt</small>`]]);
+      if(r.overflow) warning.textContent='版面が用紙サイズを超えています';
+    }else{
+      results(mode,[['1ページの最大文字数（目安）',`約 ${fmt(r.total)} 文字`],['1行（1段あたり）',`${fmt(r.chars)} 文字`],['行数（1段あたり）',`${fmt(r.lines)} 行`],['使用可能範囲',size(r.availableWidth,r.availableHeight)],['実際に使用される版面',size(r.width,r.height)],['横方向の余り（全段合計）',`${fmt(r.extraWidth)} mm`],['縦方向の余り',`${fmt(r.extraHeight)} mm`]]);
+      if(!r.chars||!r.lines)warning.textContent='指定の範囲に1文字以上・1行以上を配置できません。';
+    }
+    preview(mode,v,r);
+  }
+  for(const mode of ['forward','reverse']){
+    const form=$(mode+'-form'); form.addEventListener('submit',e=>e.preventDefault());
+    form.addEventListener('input',e=>{
+      const name=e.target.name;
+      if(name==='paper'&&papers[e.target.value]){let [w,h]=papers[e.target.value];if(form.elements.orientation.value==='landscape')[w,h]=[h,w];form.elements.width.value=w;form.elements.height.value=h;}
+      if(name==='orientation'){const w=form.elements.width.value,h=form.elements.height.value; form.elements.width.value=h;form.elements.height.value=w;}
+      if(name==='width'||name==='height'){form.elements.paper.value='custom';form.elements.orientation.value=Number(form.elements.width.value)>Number(form.elements.height.value)?'landscape':'portrait';}
+      update(mode);
+    }); update(mode);
+  }
+  for(const unit of ['q','pt','h']){
+    const input=$('convert-'+unit),output=$('convert-'+unit+'-result');
+    function convert(){const valid=input.checkValidity()&&Number.isFinite(input.valueAsNumber);input.setAttribute('aria-invalid',String(!valid));if(!valid){output.textContent='0以上の有効な数値を入力してください';return;}const r=TypesettingMath.units(input.valueAsNumber,unit);output.textContent=`${fmt(r.mm,3)} mm → 約 ${fmt(unit==='pt'?r.q:r.pt)} ${unit==='pt'?'Q':'pt'}`;}
+    input.addEventListener('input',convert);convert();
+  }
+})();
+</script></body></html>
