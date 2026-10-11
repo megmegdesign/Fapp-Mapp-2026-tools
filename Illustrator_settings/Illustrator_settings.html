@@ -34,17 +34,160 @@ a:hover { text-decoration:underline; }
 .home-btn:hover, .app-nav a:hover { text-decoration:none; }
 @media(max-width:760px) { .layout { grid-template-columns:minmax(0,1fr); } aside { position:static; grid-row:1; } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+
+ .generation-nav {margin:16px 0;font-size:12px;line-height:2;}
+/* 生成メモ：既存カードの配色・サイズを継承 */
+.generation h3 {font-size:13px;color:var(--accent);margin:0 0 12px;}
+.gen-part + .gen-part {margin-top:24px;padding-top:20px;border-top:1px solid var(--border);}
+.generation ol {padding-left:22px;margin:10px 0;}
+.model-table-wrap {max-width:100%;overflow-x:auto;margin-bottom:12px;}
+.model-table {border-collapse:collapse;width:100%;font-size:12px;table-layout:fixed;}
+.model-table caption {text-align:left;font-weight:700;margin-bottom:8px;}
+.model-table th,.model-table td {padding:10px;border:1px solid var(--border);vertical-align:top;text-align:left;}
+.model-table th {background:var(--surface2);}
+.gen-tip {border:1px solid var(--border);border-radius:5px;margin:12px 0;}
+.gen-tip summary {cursor:pointer;font-weight:700;padding:10px 12px;}
+.gen-tip > div {padding:0 12px 12px;}
+.prompt {border:1px solid var(--border);border-radius:5px;background:var(--surface2);padding:10px 12px;margin:10px 0;}
+.prompt-label {font-size:11px;color:var(--message-color);}
+.prompt-text {white-space:pre-wrap;user-select:text;margin:4px 0 8px;}
+.copy-prompt {font:inherit;font-size:12px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:4px 10px;cursor:pointer;}
+.copy-prompt:hover {border-color:var(--accent);}
+.copy-status {font-size:12px;color:var(--message-color);}
+@media(max-width:480px) {.model-table {table-layout:auto;min-width:510px;}}
 </style></head><body>
 <header class="page-header"><h1>Illustrator 設定・使い方メモ</h1><a class="home-btn" href="../index.html">トップへ</a></header>
 <nav class="app-nav" aria-label="アプリ別メモ"><a href="../InDesign_settings/InDesign_settings.html">InDesign</a><a href="../Illustrator_settings/Illustrator_settings.html" aria-current="page">Illustrator</a><a href="../Photoshop_settings/Photoshop_settings.html">Photoshop</a></nav>
 <div class="layout"><main class="content"><!-- 最初に変えておきたい設定：下のリストへ項目を追記 -->
 <section class="card" id="section-1"><h2>最初に変えておきたい設定</h2><div class="card-body"><ul><li>Creative Cloud 環境設定<ul><li>以前のバージョンを残す設定に変更。自動更新（アップデート）はオフにしておく。</li><li>バージョンを新規インストールするときは、「以前のバージョンを削除」を必ずオフにする。</li></ul></li><li>環境設定<ul><li>「バックグラウンドで保存」「バックグラウンドで書き出し」の項目はチェックをオフにする。</li><li>ブラックのアピアランス<ul><li><strong>スクリーン</strong>：すべてのブラックを正確に表示</li><li><strong>プリント／書き出し</strong>：すべてのブラックを正確に出力</li></ul></li></ul></li></ul></div></section><!-- よく使うショートカット一覧：下のリストへ項目を追記 -->
-<section class="card" id="section-2"><h2>よく使うショートカット一覧</h2><div class="card-body"><ul><li>⌘ + Option + Return：カラー値のいずれかを変更したあとに押すと、他のカラー値も同じ割合で変更される。<ul><li>例：C100 / M50 / Y60 / K20 の状態でCを50に変更して⌘ + Option + Returnを押すと、50%の比率が適用されM25 / Y30 / K10に変更される。</li></ul></li></ul></div></section></main>
-<aside aria-label="目次と参考資料"><nav class="card" aria-label="ページ内目次"><h2>目次</h2><div class="card-body"><ul class="toc"><li><a href="#section-1">最初に変えておきたい設定</a></li><li><a href="#section-2">よく使うショートカット一覧</a></li></ul></div></nav>
+<section class="card" id="section-2"><h2>よく使うショートカット一覧</h2><div class="card-body"><ul><li>⌘ + Option + Return：カラー値のいずれかを変更したあとに押すと、他のカラー値も同じ割合で変更される。<ul><li>例：C100 / M50 / Y60 / K20 の状態でCを50に変更して⌘ + Option + Returnを押すと、50%の比率が適用されM25 / Y30 / K10に変更される。</li></ul></li></ul></div></section><section class="card generation" id="generation">
+<h2>生成</h2>
+<div class="card-body">
+<p>機能説明・操作手順と、提供された制作Tipsをまとめています。</p>
+<p class="caution-note">※オリジナル素材でも権利の安全は自動的に保証されません。入力素材の権利、利用条件、生成物を確認してください。</p>
+<nav class="generation-nav" aria-label="生成の項目">
+<a href="#generate-pattern">生成パターン（Text to Pattern）</a> · <a href="#generate-shape-fill">生成塗りつぶし（Generative Shape Fill）</a> · <a href="#concept-vector">コンセプトからベクター生成（Concept to Vector）</a> · <a href="#turntable">ターンテーブル（Turntable）</a> · <a href="#generation-sources">公式情報・確認日</a>
+</nav>
+<section class="gen-part" id="generate-pattern">
+<h3>生成パターン（Text to Pattern）</h3>
+<p>プロンプトから繰り返しのベクターパターンを生成。背景、イラスト内の布のパターン、文字の塗りなどに使う。</p>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">花柄、ピンク、春</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<ol>
+<li>パターンを適用するオブジェクトの塗りまたは線を選択する。</li>
+<li>「オブジェクト → パターン → パターンを生成」などから生成パネルを開き、プロンプトを入力する。</li>
+<li>密度（Density）を調整し、生成候補から選ぶ。</li>
+</ol>
+<p class="caution-note">※元メモの「ND値」は公式の設定名として確認できませんでした。密度を調整する項目は「Density（密度）」として整理しています。</p>
+</section>
+<section class="gen-part" id="generate-shape-fill">
+<h3>生成塗りつぶし（Generative Shape Fill）</h3>
+<p>ベクターで作った形に沿って、編集可能なベクターグラフィックを生成する。</p>
+<details class="gen-tip" open>
+<summary>Tips｜文字を入れる花のフレーム</summary>
+<div>
+<ol>
+<li>四角の中に楕円を描く。</li>
+<li>楕円部分をくり抜いて、中央に文字を入れる空間がある形を作る。</li>
+<li>形を選択し、生成シェイプ塗りつぶしで花のフレームを生成する。</li>
+</ol>
+<p class="caution-note">※生成後も中央の空間や形状が意図どおりか確認してください。</p>
+</div>
+</details>
+</section>
+<section class="gen-part" id="concept-vector">
+<h3>コンセプトからベクター生成（Concept to Vector）</h3>
+<p>写真やスケッチから、プロンプトで編集可能なベクター表現を生成する。Nano Banana 2の正式表記は「Gemini 3.1（Nano Banana 2）」。写真の一部をイラスト化し、写真とイラストを混ぜる表現に使う。</p>
+<ol>
+<li>写真を選び「コンセプトからベクター」を開く。</li>
+<li>パートナーモデルとプロンプトを指定する。ベクターで編集したい場合はラスター出力を選ばない。</li>
+<li>生成候補を確認し、元写真と合成する。</li>
+</ol>
+<details class="gen-tip" open>
+<summary>Tips｜洋服・バッグ・サングラスだけイラスト化</summary>
+<div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">写真の一部の要素をポップなイラストに変換。変換する要素以外は白背景。人物の肌部分も白背景。太い黒線。デフォルメされたポップな表現。白い落書き風ラインや星、キラキラを追加。イラスト化する要素：洋服、バッグ、サングラス。</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<ol>
+<li>生成したベクターを元画像の上に重ねる。</li>
+<li>ベクターが編集可能な状態か確認し、必要なパスを選択する。</li>
+<li>シェイプ形成ツールでOption（WindowsはAlt）を押しながら不要な部分を削除する。</li>
+</ol>
+<p class="caution-note">※ラスター出力のままではシェイプ形成ツールでパスを削除できません。白背景や肌部分が独立した形になっているか確認してください。</p>
+</div>
+</details>
+<details class="gen-tip" open>
+<summary>Tips｜人物の写真＋線画の背景</summary>
+<div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">モノクロの落書き風の線画。人物は消す。</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<ol>
+<li>元写真から、人物のいない線画の背景を生成する。</li>
+<li>写真の「背景を削除」で人物を切り抜く。</li>
+<li>切り抜いた人物をイラスト背景の上に置く。</li>
+</ol>
+</div>
+</details>
+</section>
+<section class="gen-part" id="turntable">
+<h3>ターンテーブル（Turntable）</h3>
+<p>ベクターアートワークから回転したビューを生成し、別の角度の構図を探索する。編集可能なベクターとして角度展開できる。</p>
+<p class="caution-note">※実物の正確な形状や見えない部分の再現を保証する機能ではありません。生成された角度ごとの形・細部を確認してください。</p>
+</section>
+<section class="gen-part" id="generation-sources">
+<h3>公式情報・確認日</h3>
+<p>確認日：2026年10月11日。機能・モデルの利用可否はアプリのバージョン、契約、地域、管理者設定により異なります。</p>
+<ul>
+<li>
+<a href="https://helpx.adobe.com/uk/illustrator/desktop/use-generative-ai/generate-patterns.html" target="_blank" rel="noopener noreferrer">生成パターン・密度 ↗</a>
+</li>
+<li>
+<a href="https://helpx.adobe.com/uk/illustrator/desktop/use-generative-ai/generate-shape-fills.html" target="_blank" rel="noopener noreferrer">生成シェイプ塗りつぶし ↗</a>
+</li>
+<li>
+<a href="https://helpx.adobe.com/ca/illustrator/desktop/use-generative-ai/generate-vector-artwork-from-images.html" target="_blank" rel="noopener noreferrer">コンセプトからベクター ↗</a>
+</li>
+<li>
+<a href="https://helpx.adobe.com/in/illustrator/desktop/use-generative-ai/partner-models-overview.html" target="_blank" rel="noopener noreferrer">対応するパートナーモデル ↗</a>
+</li>
+<li>
+<a href="https://helpx.adobe.com/illustrator/desktop/use-generative-ai/view-artwork-from-any-angle.html" target="_blank" rel="noopener noreferrer">ターンテーブル ↗</a>
+</li>
+<li>
+<a href="https://helpx.adobe.com/uk/creative-cloud/apps/generative-ai/non-adobe-models-in-adobe-products.html" target="_blank" rel="noopener noreferrer">Adobe：パートナーモデルと利用条件 ↗</a>
+</li>
+<li>
+<a href="https://www.adobe.com/ai/overview/firefly/gen-ai-approach.html" target="_blank" rel="noopener noreferrer">Adobe：生成AIと商用利用の考え方 ↗</a>
+</li>
+</ul>
+</section>
+<p id="copy-status" class="copy-status" role="status" aria-live="polite">
+</p>
+</div>
+</section></main>
+<aside aria-label="目次と参考資料"><nav class="card" aria-label="ページ内目次"><h2>目次</h2><div class="card-body"><ul class="toc"><li><a href="#section-1">最初に変えておきたい設定</a></li><li><a href="#section-2">よく使うショートカット一覧</a></li><li><a href="#generation">生成</a></li></ul></div></nav>
 <section class="card" id="references"><h2>参考資料</h2><div class="card-body"><p>参考PDF</p><p class="pending">共有リンク設定待ち</p>
 <!-- 制限付きGoogle Driveの共有URL取得後、上の設定待ち表示を次のリンクに置き換える。
 <a href="共有URL" target="_blank" rel="noopener noreferrer">参考PDFを開く（新しいタブ）</a>
 PDF本体はリポジトリへ配置しない。 -->
 <p class="caution-note">※参考PDFは本人だけがアクセスできるGoogle Driveに保存します。</p></div></section>
 <p class="caution-note">※現在のメモをまとめた初期版です。</p></aside></div>
-</body></html>
+<script>
+document.querySelectorAll('.copy-prompt').forEach(button => {
+ button.addEventListener('click', async () => {
+  const text = button.parentElement.querySelector('.prompt-text').textContent;
+  const status = document.getElementById('copy-status');
+  try { await navigator.clipboard.writeText(text); status.textContent = 'プロンプトをコピーしました。'; }
+  catch { const range = document.createRange(); range.selectNodeContents(button.parentElement.querySelector('.prompt-text')); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); status.textContent = 'コピーできなかったため本文を選択しました。⌘C（WindowsはCtrl+C）でコピーしてください。'; }
+ });
+});
+</script></body></html>

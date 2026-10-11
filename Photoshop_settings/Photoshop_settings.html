@@ -41,6 +41,27 @@ a:hover { text-decoration:underline; }
 .home-btn:hover, .app-nav a:hover { text-decoration:none; }
 @media(max-width:760px) { .layout { grid-template-columns:minmax(0,1fr); } aside { position:static; grid-row:1; } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+
+ .generation-nav {margin:16px 0;font-size:12px;line-height:2;}
+/* 生成メモ：既存カードの配色・サイズを継承 */
+.generation h3 {font-size:13px;color:var(--accent);margin:0 0 12px;}
+.gen-part + .gen-part {margin-top:24px;padding-top:20px;border-top:1px solid var(--border);}
+.generation ol {padding-left:22px;margin:10px 0;}
+.model-table-wrap {max-width:100%;overflow-x:auto;margin-bottom:12px;}
+.model-table {border-collapse:collapse;width:100%;font-size:12px;table-layout:fixed;}
+.model-table caption {text-align:left;font-weight:700;margin-bottom:8px;}
+.model-table th,.model-table td {padding:10px;border:1px solid var(--border);vertical-align:top;text-align:left;}
+.model-table th {background:var(--surface2);}
+.gen-tip {border:1px solid var(--border);border-radius:5px;margin:12px 0;}
+.gen-tip summary {cursor:pointer;font-weight:700;padding:10px 12px;}
+.gen-tip > div {padding:0 12px 12px;}
+.prompt {border:1px solid var(--border);border-radius:5px;background:var(--surface2);padding:10px 12px;margin:10px 0;}
+.prompt-label {font-size:11px;color:var(--message-color);}
+.prompt-text {white-space:pre-wrap;user-select:text;margin:4px 0 8px;}
+.copy-prompt {font:inherit;font-size:12px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:4px 10px;cursor:pointer;}
+.copy-prompt:hover {border-color:var(--accent);}
+.copy-status {font-size:12px;color:var(--message-color);}
+@media(max-width:480px) {.model-table {table-layout:auto;min-width:510px;}}
 </style></head><body>
 <header class="page-header"><h1>Photoshop 設定・使い方メモ</h1><a class="home-btn" href="../index.html">トップへ</a></header>
 <nav class="app-nav" aria-label="アプリ別メモ"><a href="../InDesign_settings/InDesign_settings.html">InDesign</a><a href="../Illustrator_settings/Illustrator_settings.html">Illustrator</a><a href="../Photoshop_settings/Photoshop_settings.html" aria-current="page">Photoshop</a></nav>
@@ -99,10 +120,369 @@ a:hover { text-decoration:underline; }
 <p>大きめの柔らかいブラシを使い、ふちに沿って自然になじませていく。</p></li>
 </ol>
 </li>
-</ul></div></section></main>
-<aside aria-label="目次と参考資料"><nav class="card" aria-label="ページ内目次"><h2>目次</h2><div class="card-body"><ul class="toc"><li><a href="#section-1">最初に変えておきたい設定</a></li><li><a href="#profile-warnings">プロファイル警告と処理方法</a></li><li><a href="#section-4">入稿準備</a></li><li><a href="#section-5">レタッチTips</a></li></ul></div></nav>
+</ul></div></section><section class="card generation" id="generation">
+<h2>生成</h2>
+<div class="card-body">
+<section class="gen-part" id="generation-models">
+<h3>生成モデル一覧・特徴・注意点</h3>
+<div class="model-table-wrap">
+<table class="model-table">
+<caption>今回のメモに登場したモデル</caption>
+<thead>
+<tr>
+<th scope="col">モデル</th>
+<th scope="col">特徴・用途</th>
+<th scope="col">注意点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Adobe Firefly Image 5</td>
+<td>画像の生成・編集。元画像への忠実度を重視したい場合に試す候補。</td>
+<td>「忠実」「追加生成で劣化しづらい」は提供メモの使用感。細部保持の保証ではない。</td>
+</tr>
+<tr>
+<td>Gemini 3.1（Nano Banana 2）</td>
+<td>Googleのパートナーモデル。プロンプト編集やスタイル変更に使用。提供メモでは季節変更や大胆な表現に推奨。</td>
+<td>元メモの nanobanana 2 を正式表記へ整理。被写体・文字・商品形状が変わる可能性がある。</td>
+</tr>
+<tr>
+<td>Topaz Gigapixel</td>
+<td>元の写真の特徴を保ちながら鮮明さや細部を改善するアップスケール。</td>
+<td>失われた情報を正確に復元できるとは限らない。</td>
+</tr>
+<tr>
+<td>Topaz Bloom</td>
+<td>新しい創造的な細部や質感を加えるアップスケール。生成画像の補完にも。</td>
+<td>元画像にない細部が加わる場合がある。</td>
+</tr>
+<tr>
+<td>Firefly Upscaler</td>
+<td>元の写真の特徴を保ちながら鮮明さや細部を改善するアップスケール。</td>
+<td>「きれいな画像の拡大に向く・劣化復元は弱い」は提供メモの使用感。公式も細部改善を案内している。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="caution-note">※モデル名と対応機能は公式資料で確認。得意分野の比較は提供された制作メモであり、同一条件での性能検証ではありません。</p>
+<p class="caution-note">※オリジナルデザインを入力しても、著作権面が自動的にクリアになるとは限りません。入力素材の権利、適用される利用規約・商用利用条件、生成物の第三者権利を確認してください。</p>
+</section>
+<nav class="generation-nav" aria-label="生成の項目">
+<a href="#generate-image">画像を生成｜構図とスタイルの参照</a> · <a href="#prompt-edit">プロンプトで編集｜ブラシマークアップ</a> · <a href="#upscale">生成アップスケール</a> · <a href="#generate-background">背景を生成｜3つの合成方法</a> · <a href="#harmonize">調和（Harmonize）</a> · <a href="#rotate-object">オブジェクトを回転（Rotate Object）</a> · <a href="#generation-tips">実践Tips</a> · <a href="#generation-sources">公式情報・確認日</a>
+</nav>
+<section class="gen-part" id="generate-image">
+<h3>画像を生成｜構図とスタイルの参照</h3>
+<p>
+<strong>コンポジション参照</strong>：手描き、フォント、3D画像などを使い、ポーズや構図を誘導。<strong>スタイル参照</strong>：雰囲気や見た目を誘導。</p>
+<ol>
+<li>「画像を生成」の参照画像で「スタイル」または「コンポジション」を選ぶ。</li>
+<li>参照画像を指定し、生成したい内容を入力して生成する。</li>
+</ol>
+<p>制作例：スタイルに水滴の画像、コンポジションにフォント文字を参照し、水滴のような透明の文字を目指す。</p>
+<p class="caution-note">※参照方法や併用可否は使用中の画面で確認してください。参照画像そのものを正確に再現する機能ではありません。</p>
+</section>
+<section class="gen-part" id="prompt-edit">
+<h3>プロンプトで編集｜ブラシマークアップ</h3>
+<p>「プロンプトで編集（Prompt to Edit）」でGeminiモデルを選び、コンテキストタスクバーのマークアップのブラシで形やライン、配置を描く。文字の指示も組み合わせられる。</p>
+<ol>
+<li>編集するピクセルレイヤーまたは生成レイヤーを選択する。</li>
+<li>Geminiモデルを選び、ブラシで生成する形や位置を指定する。</li>
+<li>プロンプトを入力して生成し、元画像と比較する。</li>
+</ol>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">タイポグラフィを白いリボンの形状のように綺麗に繋げる</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">ゴールドの音符と楽譜</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">バラと葉っぱ</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">ドリンクの周りに飛び散る液体のキャラメルと生クリーム</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">バットのスイングの光の軌道</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">テニスボールの残像</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">クーラーから出てくる青く冷たい風</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">可愛いポップな線と星やハートの装飾の落書き</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">女性の周りにポップでカラフルな風のイラスト</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">白い石鹸の泡</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<p>石鹸の泡は、泡を置くエリアをブラシで描画して指定する。</p>
+</section>
+<section class="gen-part" id="upscale">
+<h3>生成アップスケール</h3>
+<p>劣化した画像を改善する候補はTopaz Gigapixel（元画像の特徴を保つ方向）とTopaz Bloom（創造的な細部の補完を許容する方向）。Firefly Upscalerも元画像の特徴を保ちながら拡大・細部改善を行う。</p>
+<p>提供メモではFireflyは元からある程度きれいな画像の拡大に向き、劣化画像の復元ではTopazを試す使い分け。生成を繰り返してにじんだ画像の改善にも使う。</p>
+<p class="caution-note">※拡大後は小さい文字、ロゴ、商品の細部など、変えてはいけないところを等倍で比較してください。完全な復元は保証されません。</p>
+</section>
+<section class="gen-part" id="generate-background">
+<h3>背景を生成｜3つの合成方法</h3>
+<ol>
+<li>
+<strong>背景を削除 → 背景を生成 → 調和</strong>：被写体を別レイヤーで保持し、背景だけを作る。調和を使う前後は被写体の変化を確認。</li>
+<li>
+<strong>プロンプトで背景を生成・編集</strong>：被写体と背景をまとめてなじませる用途。被写体が変わっていないか確認。提供メモではFirefly Image 5は元画像に忠実な方向、Nano Banana 2は変更が強くドラマチックな方向という使用感。</li>
+<li>
+<strong>背景を用意 → 切り抜き画像を合成 → 調整</strong>：ドリンク正面画像にスプラッシュを追加し、オブジェクト回転で角度を調整、調和で背景になじませる。</li>
+</ol>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">スプラッシュを追加</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<p class="caution-note">※元画像を別に保持すると比較・修正しやすくなります。調和や生成編集で被写体の外観が完全に保持されるとは限りません。</p>
+</section>
+<section class="gen-part" id="harmonize">
+<h3>調和（Harmonize）</h3>
+<p>被写体を背景になじませる。色、照明、影、トーンを背景に合わせる機能。合成した被写体をピクセルレイヤーにして選び、調和を適用して結果を確認する。スマートオブジェクト・文字・調整レイヤーには直接適用できない。</p>
+</section>
+<section class="gen-part" id="rotate-object">
+<h3>オブジェクトを回転（Rotate Object）</h3>
+<p>ピクセルレイヤーやスマートオブジェクトの被写体を選び、「編集 → オブジェクトを回転」などから角度を調整する。</p>
+<p class="caution-note">※商品に実在しないディテールが加わる可能性があります。見えない部分を生成させない角度を選ぶ、または必要な角度の実写を用意し、商品画像と照合してください。</p>
+</section>
+<section class="gen-part" id="generation-tips">
+<h3>実践Tips</h3>
+<details class="gen-tip" open>
+<summary>Tips｜紙のテクスチャにイラストをなじませる</summary>
+<div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">白い紙 テクスチャー</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<ol>
+<li>生成した紙の上にイラストを置き、イラストレイヤーを「乗算」にする。</li>
+<li>レイヤースタイルの「ブレンド条件」で「下になっているレイヤー」の黒・白のスライダーを動かす。Option（WindowsはAlt）を押しながらハンドルを半分に分離し、中間領域のなじみを調整する。</li>
+<li>最後にイラストレイヤーの不透明度を調整する。</li>
+</ol>
+</div>
+</details>
+<details class="gen-tip" open>
+<summary>Tips｜コンクリートのひび割れをイラストのマスクに使う</summary>
+<div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">ひび割れたコンクリート</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<ol>
+<li>テクスチャ画像に「調整レイヤー → 2階調化」を追加。直下の画像だけにクリッピングして、プロパティで白黒の比率を調整する。</li>
+<li>2階調化レイヤーと画像レイヤーをひとつのスマートオブジェクトにまとめる。</li>
+<li>イラストレイヤーに白いレイヤーマスクを設定する。</li>
+<li>テクスチャの白黒の見た目をピクセルとしてコピーする。スマートオブジェクト自体をマスクに配置するのではなく、必要に応じて全選択して結合部分をコピーする。</li>
+<li>Option（WindowsはAlt）を押しながらイラストのマスクをクリックし、マスク表示へ切り替えてペーストする。</li>
+</ol>
+<p class="caution-note">※白は表示、黒は非表示。逆のひび割れ表現にしたい場合はマスクを反転し、位置・大きさを合わせてください。</p>
+</div>
+</details>
+<details class="gen-tip" open>
+<summary>Tips｜グレー背景で切り抜きや反射色補正を試す</summary>
+<div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">グレーの背景に変更</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<p>白飛びしたTシャツなどは、背景をグレーへ変更してから「背景を削除」すると境界を取りやすくなる場合がある。周囲の色が反射した服を切り抜いて使う場合も、グレー背景への生成編集で反射色が補正される場合がある。</p>
+<p class="caution-note">※白飛びで失われた情報の正確な復元や反射色補正は保証されません。服の形・色・質感が変わっていないか確認してください。</p>
+</div>
+</details>
+<details class="gen-tip" open>
+<summary>Tips｜文字・反射・ロゴの合成</summary>
+<div>
+<p>画像内の刺繍やネオンなど複雑な文字を変更する。メガネの反射を消す。イメージ画像にテキストやイラストを配置して合成する。</p>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">刺繍の文字を◯◯に変更</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">ネオンの文字を◯◯に変更</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">メガネの反射を消す</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">ロゴの形にリンゴの皮を剥く</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">ロゴの形に編み込み</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<p>リンゴ画像＋ロゴ、編み物＋ロゴなど、素材の表現にロゴをなじませる。</p>
+</div>
+</details>
+<details class="gen-tip" open>
+<summary>Tips｜モックアップを作成</summary>
+<div>
+<p>別レイヤーに置いたイラストやデザインを合成する。奥・手前のピントのぼけ、前にある物や人、布のシワにも合わせる表現を試せる。</p>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">ラベルデザインを２つの紙コップに合成</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">ポスターに合成</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">参照のデザインをスカーフに合成</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<p class="caution-note">※ロゴや文字が正しい形で残っているか確認してください。</p>
+</div>
+</details>
+<details class="gen-tip" open>
+<summary>Tips｜まとめて生成して選ぶ</summary>
+<div>
+<p>複数の丸を描いてから生成し、異なる円形素材をまとめて作る。バナーやチラシの訴求ポイントを載せるベースなどに使える。</p>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">デザインの装飾に使う水滴やジェルの円形素材、ひとつひとつデザインを変える。</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+</div>
+</details>
+<details class="gen-tip" open>
+<summary>Tips｜構図を先に決める</summary>
+<div>
+<p>切り抜いたコスメボトルの周りにピンクの丸を配置し、丸の位置に泡を生成する。葉の位置は丸、チェーンはライン、雲はその形を描いて指定する。</p>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">ピンクの透明な泡とコスメボトル、背景は淡いピンクの水面</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">水面に浮かぶCICAの葉とボトル、美しい水面</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">チェーンに縛られた香水瓶</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">白い綿の雲の上に埋もれた香水瓶、淡いピンクの空</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+</div>
+</details>
+<details class="gen-tip" open>
+<summary>Tips｜構図を保ってスタイルを変える</summary>
+<div>
+<p>提供メモではNano Banana 2を推奨。作成したデザインをベースに、変えたい素材と「構図は変えない」を指定する。</p>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">ニット生地のデザイン 構図は変えない</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<p>ほかに試す素材・表現：クレイアート、クレヨンアート、バルーンアート、ビーズアート、リソグラフ、グリッター、ホログラム、レトロな金属板 エンボス、立体的なクロームメタル シルバーをベースにシアン・紫・ピンクの反射、レース生地 黒背景。</p>
+<p class="caution-note">※構図の完全保持や権利上の安全を保証する指示ではありません。生成モデル一覧の注意点を確認してください。</p>
+</div>
+</details>
+<details class="gen-tip" open>
+<summary>Tips｜春の広告を夏仕様へ編集</summary>
+<div>
+<p>手動で作った春用広告デザインに、色味・文字・服装など変更したい要素を指定する。提供メモではNano Banana 2を推奨。</p>
+<div class="prompt">
+<span class="prompt-label">プロンプト例</span>
+<p class="prompt-text">夏用セールの広告に変更、色味、文字、服装</p>
+<button type="button" class="copy-prompt">コピー</button>
+</div>
+<p>元デザインがレイヤー分けされている場合は、文字など再生成させたくない要素を非表示にしてから生成し、後で元のレイヤーを戻す方法も使える。</p>
+</div>
+</details>
+</section>
+<section class="gen-part" id="generation-sources">
+<h3>公式情報・確認日</h3>
+<p>確認日：2026年10月11日。機能・モデルの利用可否はアプリのバージョン、契約、地域、管理者設定により異なります。</p>
+<ul>
+<li>
+<a href="https://helpx.adobe.com/uk/photoshop/desktop/create-open-import-images/create-images/edit-images-with-generative-fill.html" target="_blank" rel="noopener noreferrer">生成塗りつぶし・モデル一覧 ↗</a>
+</li>
+<li>
+<a href="https://helpx.adobe.com/ca/photoshop/desktop/create-open-import-images/create-images/generate-images-using-reference-image.html" target="_blank" rel="noopener noreferrer">画像を生成：構図・スタイル参照 ↗</a>
+</li>
+<li>
+<a href="https://helpx.adobe.com/photoshop/desktop/create-open-import-images/create-images/use-markup-for-ai-image-generation.html" target="_blank" rel="noopener noreferrer">マークアップ ↗</a>
+</li>
+<li>
+<a href="https://helpx.adobe.com/in/photoshop/web/edit-images/retouch/enhance-image-quality-with-generative-upscale.html" target="_blank" rel="noopener noreferrer">生成アップスケール（Web版の公式モデル説明） ↗</a>
+</li>
+<li>
+<a href="https://helpx.adobe.com/au/photoshop/desktop/repair-retouch/remove-objects-fill-space/blend-subjects-with-harmonize.html" target="_blank" rel="noopener noreferrer">調和 ↗</a>
+</li>
+<li>
+<a href="https://helpx.adobe.com/uk/photoshop/desktop/crop-resize-transform/transform-manipulate-reshape/rotate-objects.html" target="_blank" rel="noopener noreferrer">オブジェクトを回転 ↗</a>
+</li>
+<li>
+<a href="https://helpx.adobe.com/uk/creative-cloud/apps/generative-ai/non-adobe-models-in-adobe-products.html" target="_blank" rel="noopener noreferrer">Adobe：パートナーモデルと利用条件 ↗</a>
+</li>
+<li>
+<a href="https://www.adobe.com/ai/overview/firefly/gen-ai-approach.html" target="_blank" rel="noopener noreferrer">Adobe：生成AIと商用利用の考え方 ↗</a>
+</li>
+</ul>
+</section>
+<p id="copy-status" class="copy-status" role="status" aria-live="polite">
+</p>
+</div>
+</section></main>
+<aside aria-label="目次と参考資料"><nav class="card" aria-label="ページ内目次"><h2>目次</h2><div class="card-body"><ul class="toc"><li><a href="#section-1">最初に変えておきたい設定</a></li><li><a href="#profile-warnings">プロファイル警告と処理方法</a></li><li><a href="#section-4">入稿準備</a></li><li><a href="#section-5">レタッチTips</a></li><li><a href="#generation">生成</a></li></ul></div></nav>
 <section class="card" id="references"><h2>参考資料</h2><div class="card-body"><p>Photoshop Retouch</p><p><a href="https://drive.google.com/file/d/1ivcY3dBdY6P-AsSp4y2SqdXdKZfkN3Ct/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">Photoshop Retouchを開く（新しいタブ）</a></p>
 
 <p class="caution-note">※参考PDFは本人だけがアクセスできるGoogle Driveに保存しています。</p></div></section>
 <p class="caution-note">※現在のメモをまとめた初期版です。</p></aside></div>
-</body></html>
+<script>
+document.querySelectorAll('.copy-prompt').forEach(button => {
+ button.addEventListener('click', async () => {
+  const text = button.parentElement.querySelector('.prompt-text').textContent;
+  const status = document.getElementById('copy-status');
+  try { await navigator.clipboard.writeText(text); status.textContent = 'プロンプトをコピーしました。'; }
+  catch { const range = document.createRange(); range.selectNodeContents(button.parentElement.querySelector('.prompt-text')); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); status.textContent = 'コピーできなかったため本文を選択しました。⌘C（WindowsはCtrl+C）でコピーしてください。'; }
+ });
+});
+</script></body></html>
