@@ -49,11 +49,9 @@ a:hover { text-decoration:underline; }
 .gen-tip summary {cursor:pointer;font-weight:700;padding:10px 12px;}
 .gen-tip > div {padding:0 12px 12px;}
 .prompt {border:1px solid var(--border);border-radius:5px;background:var(--surface2);padding:10px 12px;margin:10px 0;}
+.prompt-list {margin:4px 0 0;padding-left:20px;user-select:text;}
+.prompt-list li + li {margin-top:4px;}
 .prompt-label {font-size:11px;color:var(--message-color);}
-.prompt-text {white-space:pre-wrap;user-select:text;margin:4px 0 8px;}
-.copy-prompt {font:inherit;font-size:12px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:4px 10px;cursor:pointer;}
-.copy-prompt:hover {border-color:var(--accent);}
-.copy-status {font-size:12px;color:var(--message-color);}
 @media(max-width:480px) {.model-table {table-layout:auto;min-width:510px;}}
 </style></head><body>
 <header class="page-header"><h1>Illustrator 設定・使い方メモ</h1><a class="home-btn" href="../index.html">トップへ</a></header>
@@ -73,8 +71,9 @@ a:hover { text-decoration:underline; }
 <p>プロンプトから繰り返しのベクターパターンを生成。背景、イラスト内の布のパターン、文字の塗りなどに使う。</p>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">花柄、ピンク、春</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>花柄、ピンク、春</li>
+</ul>
 </div>
 <ol>
 <li>パターンを適用するオブジェクトの塗りまたは線を選択する。</li>
@@ -111,8 +110,9 @@ a:hover { text-decoration:underline; }
 <div>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">写真の一部の要素をポップなイラストに変換。変換する要素以外は白背景。人物の肌部分も白背景。太い黒線。デフォルメされたポップな表現。白い落書き風ラインや星、キラキラを追加。イラスト化する要素：洋服、バッグ、サングラス。</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>写真の一部の要素をポップなイラストに変換。変換する要素以外は白背景。人物の肌部分も白背景。太い黒線。デフォルメされたポップな表現。白い落書き風ラインや星、キラキラを追加。イラスト化する要素：洋服、バッグ、サングラス。</li>
+</ul>
 </div>
 <ol>
 <li>生成したベクターを元画像の上に重ねる。</li>
@@ -127,8 +127,9 @@ a:hover { text-decoration:underline; }
 <div>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">モノクロの落書き風の線画。人物は消す。</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>モノクロの落書き風の線画。人物は消す。</li>
+</ul>
 </div>
 <ol>
 <li>元写真から、人物のいない線画の背景を生成する。</li>
@@ -170,8 +171,6 @@ a:hover { text-decoration:underline; }
 </li>
 </ul>
 </section>
-<p id="copy-status" class="copy-status" role="status" aria-live="polite">
-</p>
 </div>
 </section></main>
 <aside aria-label="目次と参考資料"><nav class="card" aria-label="ページ内目次"><h2>目次</h2><div class="card-body"><ul class="toc"><li><a href="#section-1">最初に変えておきたい設定</a></li><li><a href="#section-2">よく使うショートカット一覧</a></li><li><a href="#generation">生成</a></li></ul></div></nav>
@@ -182,12 +181,9 @@ PDF本体はリポジトリへ配置しない。 -->
 <p class="caution-note">※参考PDFは本人だけがアクセスできるGoogle Driveに保存します。</p></div></section>
 <p class="caution-note">※現在のメモをまとめた初期版です。</p></aside></div>
 <script>
-document.querySelectorAll('.copy-prompt').forEach(button => {
- button.addEventListener('click', async () => {
-  const text = button.parentElement.querySelector('.prompt-text').textContent;
-  const status = document.getElementById('copy-status');
+document.querySelectorAll(' button.addEventListener('click', async () => {
+  const text = button.parentElement.querySelector('  const status = document.getElementById('copy-status');
   try { await navigator.clipboard.writeText(text); status.textContent = 'プロンプトをコピーしました。'; }
-  catch { const range = document.createRange(); range.selectNodeContents(button.parentElement.querySelector('.prompt-text')); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); status.textContent = 'コピーできなかったため本文を選択しました。⌘C（WindowsはCtrl+C）でコピーしてください。'; }
- });
+  catch { const range = document.createRange(); range.selectNodeContents(button.parentElement.querySelector(' });
 });
 </script></body></html>

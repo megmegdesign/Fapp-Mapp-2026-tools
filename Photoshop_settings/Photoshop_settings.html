@@ -56,11 +56,9 @@ a:hover { text-decoration:underline; }
 .gen-tip summary {cursor:pointer;font-weight:700;padding:10px 12px;}
 .gen-tip > div {padding:0 12px 12px;}
 .prompt {border:1px solid var(--border);border-radius:5px;background:var(--surface2);padding:10px 12px;margin:10px 0;}
+.prompt-list {margin:4px 0 0;padding-left:20px;user-select:text;}
+.prompt-list li + li {margin-top:4px;}
 .prompt-label {font-size:11px;color:var(--message-color);}
-.prompt-text {white-space:pre-wrap;user-select:text;margin:4px 0 8px;}
-.copy-prompt {font:inherit;font-size:12px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:4px 10px;cursor:pointer;}
-.copy-prompt:hover {border-color:var(--accent);}
-.copy-status {font-size:12px;color:var(--message-color);}
 @media(max-width:480px) {.model-table {table-layout:auto;min-width:510px;}}
 </style></head><body>
 <header class="page-header"><h1>Photoshop 設定・使い方メモ</h1><a class="home-btn" href="../index.html">トップへ</a></header>
@@ -191,53 +189,18 @@ a:hover { text-decoration:underline; }
 </ol>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">タイポグラフィを白いリボンの形状のように綺麗に繋げる</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">ゴールドの音符と楽譜</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">バラと葉っぱ</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">ドリンクの周りに飛び散る液体のキャラメルと生クリーム</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">バットのスイングの光の軌道</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">テニスボールの残像</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">クーラーから出てくる青く冷たい風</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">可愛いポップな線と星やハートの装飾の落書き</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">女性の周りにポップでカラフルな風のイラスト</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">白い石鹸の泡</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>タイポグラフィを白いリボンの形状のように綺麗に繋げる</li>
+<li>ゴールドの音符と楽譜</li>
+<li>バラと葉っぱ</li>
+<li>ドリンクの周りに飛び散る液体のキャラメルと生クリーム</li>
+<li>バットのスイングの光の軌道</li>
+<li>テニスボールの残像</li>
+<li>クーラーから出てくる青く冷たい風</li>
+<li>可愛いポップな線と星やハートの装飾の落書き</li>
+<li>女性の周りにポップでカラフルな風のイラスト</li>
+<li>白い石鹸の泡</li>
+</ul>
 </div>
 <p>石鹸の泡は、泡を置くエリアをブラシで描画して指定する。</p>
 </section>
@@ -259,8 +222,9 @@ a:hover { text-decoration:underline; }
 </ol>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">スプラッシュを追加</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>スプラッシュを追加</li>
+</ul>
 </div>
 <p class="caution-note">※元画像を別に保持すると比較・修正しやすくなります。調和や生成編集で被写体の外観が完全に保持されるとは限りません。</p>
 </section>
@@ -280,8 +244,9 @@ a:hover { text-decoration:underline; }
 <div>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">白い紙 テクスチャー</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>白い紙 テクスチャー</li>
+</ul>
 </div>
 <ol>
 <li>生成した紙の上にイラストを置き、イラストレイヤーを「乗算」にする。</li>
@@ -295,8 +260,9 @@ a:hover { text-decoration:underline; }
 <div>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">ひび割れたコンクリート</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>ひび割れたコンクリート</li>
+</ul>
 </div>
 <ol>
 <li>テクスチャ画像に「調整レイヤー → 2階調化」を追加。直下の画像だけにクリッピングして、プロパティで白黒の比率を調整する。</li>
@@ -313,8 +279,9 @@ a:hover { text-decoration:underline; }
 <div>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">グレーの背景に変更</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>グレーの背景に変更</li>
+</ul>
 </div>
 <p>白飛びしたTシャツなどは、背景をグレーへ変更してから「背景を削除」すると境界を取りやすくなる場合がある。周囲の色が反射した服を切り抜いて使う場合も、グレー背景への生成編集で反射色が補正される場合がある。</p>
 <p class="caution-note">※白飛びで失われた情報の正確な復元や反射色補正は保証されません。服の形・色・質感が変わっていないか確認してください。</p>
@@ -326,28 +293,13 @@ a:hover { text-decoration:underline; }
 <p>画像内の刺繍やネオンなど複雑な文字を変更する。メガネの反射を消す。イメージ画像にテキストやイラストを配置して合成する。</p>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">刺繍の文字を◯◯に変更</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">ネオンの文字を◯◯に変更</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">メガネの反射を消す</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">ロゴの形にリンゴの皮を剥く</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">ロゴの形に編み込み</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>刺繍の文字を◯◯に変更</li>
+<li>ネオンの文字を◯◯に変更</li>
+<li>メガネの反射を消す</li>
+<li>ロゴの形にリンゴの皮を剥く</li>
+<li>ロゴの形に編み込み</li>
+</ul>
 </div>
 <p>リンゴ画像＋ロゴ、編み物＋ロゴなど、素材の表現にロゴをなじませる。</p>
 </div>
@@ -358,18 +310,11 @@ a:hover { text-decoration:underline; }
 <p>別レイヤーに置いたイラストやデザインを合成する。奥・手前のピントのぼけ、前にある物や人、布のシワにも合わせる表現を試せる。</p>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">ラベルデザインを２つの紙コップに合成</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">ポスターに合成</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">参照のデザインをスカーフに合成</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>ラベルデザインを２つの紙コップに合成</li>
+<li>ポスターに合成</li>
+<li>参照のデザインをスカーフに合成</li>
+</ul>
 </div>
 <p class="caution-note">※ロゴや文字が正しい形で残っているか確認してください。</p>
 </div>
@@ -380,8 +325,9 @@ a:hover { text-decoration:underline; }
 <p>複数の丸を描いてから生成し、異なる円形素材をまとめて作る。バナーやチラシの訴求ポイントを載せるベースなどに使える。</p>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">デザインの装飾に使う水滴やジェルの円形素材、ひとつひとつデザインを変える。</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>デザインの装飾に使う水滴やジェルの円形素材、ひとつひとつデザインを変える。</li>
+</ul>
 </div>
 </div>
 </details>
@@ -391,23 +337,12 @@ a:hover { text-decoration:underline; }
 <p>切り抜いたコスメボトルの周りにピンクの丸を配置し、丸の位置に泡を生成する。葉の位置は丸、チェーンはライン、雲はその形を描いて指定する。</p>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">ピンクの透明な泡とコスメボトル、背景は淡いピンクの水面</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">水面に浮かぶCICAの葉とボトル、美しい水面</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">チェーンに縛られた香水瓶</p>
-<button type="button" class="copy-prompt">コピー</button>
-</div>
-<div class="prompt">
-<span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">白い綿の雲の上に埋もれた香水瓶、淡いピンクの空</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>ピンクの透明な泡とコスメボトル、背景は淡いピンクの水面</li>
+<li>水面に浮かぶCICAの葉とボトル、美しい水面</li>
+<li>チェーンに縛られた香水瓶</li>
+<li>白い綿の雲の上に埋もれた香水瓶、淡いピンクの空</li>
+</ul>
 </div>
 </div>
 </details>
@@ -417,8 +352,9 @@ a:hover { text-decoration:underline; }
 <p>提供メモではNano Banana 2を推奨。作成したデザインをベースに、変えたい素材と「構図は変えない」を指定する。</p>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">ニット生地のデザイン 構図は変えない</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>ニット生地のデザイン 構図は変えない</li>
+</ul>
 </div>
 <p>ほかに試す素材・表現：クレイアート、クレヨンアート、バルーンアート、ビーズアート、リソグラフ、グリッター、ホログラム、レトロな金属板 エンボス、立体的なクロームメタル シルバーをベースにシアン・紫・ピンクの反射、レース生地 黒背景。</p>
 <p class="caution-note">※構図の完全保持や権利上の安全を保証する指示ではありません。生成モデル一覧の注意点を確認してください。</p>
@@ -430,8 +366,9 @@ a:hover { text-decoration:underline; }
 <p>手動で作った春用広告デザインに、色味・文字・服装など変更したい要素を指定する。提供メモではNano Banana 2を推奨。</p>
 <div class="prompt">
 <span class="prompt-label">プロンプト例</span>
-<p class="prompt-text">夏用セールの広告に変更、色味、文字、服装</p>
-<button type="button" class="copy-prompt">コピー</button>
+<ul class="prompt-list">
+<li>夏用セールの広告に変更、色味、文字、服装</li>
+</ul>
 </div>
 <p>元デザインがレイヤー分けされている場合は、文字など再生成させたくない要素を非表示にしてから生成し、後で元のレイヤーを戻す方法も使える。</p>
 </div>
@@ -467,8 +404,6 @@ a:hover { text-decoration:underline; }
 </li>
 </ul>
 </section>
-<p id="copy-status" class="copy-status" role="status" aria-live="polite">
-</p>
 </div>
 </section></main>
 <aside aria-label="目次と参考資料"><nav class="card" aria-label="ページ内目次"><h2>目次</h2><div class="card-body"><ul class="toc"><li><a href="#section-1">最初に変えておきたい設定</a></li><li><a href="#profile-warnings">プロファイル警告と処理方法</a></li><li><a href="#section-4">入稿準備</a></li><li><a href="#section-5">レタッチTips</a></li><li><a href="#generation">生成</a></li></ul></div></nav>
@@ -477,12 +412,9 @@ a:hover { text-decoration:underline; }
 <p class="caution-note">※参考PDFは本人だけがアクセスできるGoogle Driveに保存しています。</p></div></section>
 <p class="caution-note">※現在のメモをまとめた初期版です。</p></aside></div>
 <script>
-document.querySelectorAll('.copy-prompt').forEach(button => {
- button.addEventListener('click', async () => {
-  const text = button.parentElement.querySelector('.prompt-text').textContent;
-  const status = document.getElementById('copy-status');
+document.querySelectorAll(' button.addEventListener('click', async () => {
+  const text = button.parentElement.querySelector('  const status = document.getElementById('copy-status');
   try { await navigator.clipboard.writeText(text); status.textContent = 'プロンプトをコピーしました。'; }
-  catch { const range = document.createRange(); range.selectNodeContents(button.parentElement.querySelector('.prompt-text')); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); status.textContent = 'コピーできなかったため本文を選択しました。⌘C（WindowsはCtrl+C）でコピーしてください。'; }
- });
+  catch { const range = document.createRange(); range.selectNodeContents(button.parentElement.querySelector(' });
 });
 </script></body></html>
