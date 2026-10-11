@@ -60,7 +60,10 @@ a:hover { text-decoration:underline; }
 .prompt-list li + li {margin-top:4px;}
 .prompt-label {font-size:11px;color:var(--message-color);}
 @media(max-width:480px) {.model-table {table-layout:auto;min-width:510px;}}
-</style></head><body>
+
+.back-to-top { position:fixed; right:max(16px, env(safe-area-inset-right)); bottom:max(16px, env(safe-area-inset-bottom)); z-index:10; }
+@media print { .back-to-top { display:none; } }
+</style></head><body id="page-top">
 <header class="page-header"><h1>Photoshop 設定・使い方メモ</h1><a class="home-btn" href="../index.html">トップへ</a></header>
 <nav class="app-nav" aria-label="アプリ別メモ"><a href="../InDesign_settings/InDesign_settings.html">InDesign</a><a href="../Illustrator_settings/Illustrator_settings.html">Illustrator</a><a href="../Photoshop_settings/Photoshop_settings.html" aria-current="page">Photoshop</a></nav>
 <div class="layout"><main class="content"><!-- 最初に変えておきたい設定：下のリストへ項目を追記 -->
@@ -199,10 +202,9 @@ a:hover { text-decoration:underline; }
 <li>クーラーから出てくる青く冷たい風</li>
 <li>可愛いポップな線と星やハートの装飾の落書き</li>
 <li>女性の周りにポップでカラフルな風のイラスト</li>
-<li>白い石鹸の泡</li>
+<li>白い石鹸の泡（泡を置くエリアをブラシで描画して指定する）</li>
 </ul>
 </div>
-<p>石鹸の泡は、泡を置くエリアをブラシで描画して指定する。</p>
 </section>
 <section class="gen-part" id="upscale">
 <h3>生成アップスケール</h3>
@@ -417,4 +419,5 @@ document.querySelectorAll(' button.addEventListener('click', async () => {
   try { await navigator.clipboard.writeText(text); status.textContent = 'プロンプトをコピーしました。'; }
   catch { const range = document.createRange(); range.selectNodeContents(button.parentElement.querySelector(' });
 });
-</script></body></html>
+</script><a class="home-btn back-to-top" href="#page-top" aria-label="ページの上に戻る">↑ 上に戻る</a>
+</body></html>

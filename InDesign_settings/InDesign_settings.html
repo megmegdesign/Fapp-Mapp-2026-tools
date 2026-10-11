@@ -34,7 +34,10 @@ a:hover { text-decoration:underline; }
 .home-btn:hover, .app-nav a:hover { text-decoration:none; }
 @media(max-width:760px) { .layout { grid-template-columns:minmax(0,1fr); } aside { position:static; grid-row:1; } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
-</style></head><body>
+
+.back-to-top { position:fixed; right:max(16px, env(safe-area-inset-right)); bottom:max(16px, env(safe-area-inset-bottom)); z-index:10; }
+@media print { .back-to-top { display:none; } }
+</style></head><body id="page-top">
 <header class="page-header"><h1>InDesign 設定・使い方メモ</h1><a class="home-btn" href="../index.html">トップへ</a></header>
 <nav class="app-nav" aria-label="アプリ別メモ"><a href="../InDesign_settings/InDesign_settings.html" aria-current="page">InDesign</a><a href="../Illustrator_settings/Illustrator_settings.html">Illustrator</a><a href="../Photoshop_settings/Photoshop_settings.html">Photoshop</a></nav>
 <div class="layout"><main class="content"><!-- 最初に変えておきたい設定：下のリストへ項目を追記 -->
@@ -60,4 +63,5 @@ a:hover { text-decoration:underline; }
 
 <p class="caution-note">※参考PDFは本人だけがアクセスできるGoogle Driveに保存しています。</p></div></section>
 <p class="caution-note">※現在のメモをまとめた初期版です。</p></aside></div>
+<a class="home-btn back-to-top" href="#page-top" aria-label="ページの上に戻る">↑ 上に戻る</a>
 </body></html>

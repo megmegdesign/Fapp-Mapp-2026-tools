@@ -41,9 +41,12 @@ section { scroll-margin-top:20px; }
 @media(max-width:760px) { .layout { grid-template-columns:minmax(0,1fr); } aside { position:static; grid-row:1; } }
 @media(max-width:600px) { .compare { grid-template-columns:minmax(0,1fr); } .compare section + section { border-top:1px solid var(--border); padding-top:16px; } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+
+.back-to-top { position:fixed; right:max(16px, env(safe-area-inset-right)); bottom:max(16px, env(safe-area-inset-bottom)); z-index:10; }
+@media print { .back-to-top { display:none; } }
 </style>
 </head>
-<body>
+<body id="page-top">
 <header class="page-header"><h1>印刷物制作について</h1><a class="home-btn" href="../index.html">トップへ</a></header>
 <div class="layout">
 <main>
@@ -85,5 +88,6 @@ section { scroll-margin-top:20px; }
 </main>
 <aside><nav class="card" aria-label="ページ内目次"><h2>目次</h2><div class="card-body"><ul class="toc"><li><a href="#overprint-multiply">「オーバープリント」と「乗算」の違い</a></li><li><a href="#avoid-auto-overprint">自動スミノセを回避するには？</a></li><li><a href="#three-blacks">3種類の「黒」を使い分ける</a></li><li><a href="#practical-examples">実案件での「黒」の設定例</a></li></ul></div></nav></aside>
 </div>
+<a class="home-btn back-to-top" href="#page-top" aria-label="ページの上に戻る">↑ 上に戻る</a>
 </body>
 </html>
